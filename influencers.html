@@ -127,6 +127,38 @@
     .footer-l { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); }
     .footer-r { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--dim); }
 
+    /* MOST VIEWED VIDEO */
+    .top-video-wrap { margin: 0 0 2.5rem; }
+    .top-video-section-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 0.8rem; }
+    .top-video-card { display: grid; grid-template-columns: 280px 1fr; border: 1px solid var(--border); background: var(--surface); text-decoration: none; transition: border-color 0.2s; overflow: hidden; }
+    .top-video-card:hover { border-color: var(--creator-color, var(--text)); }
+    .top-video-thumb-wrap { position: relative; aspect-ratio: 16/9; background: var(--surface2); overflow: hidden; }
+    .top-video-thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .top-video-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.28); opacity: 0; transition: opacity 0.2s; }
+    .top-video-play-icon { width: 44px; height: 44px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-size: 1rem; padding-left: 3px; }
+    .top-video-card:hover .top-video-play { opacity: 1; }
+    .top-video-info { padding: 1.5rem 1.8rem; display: flex; flex-direction: column; gap: 0.6rem; }
+    .top-video-title { font-family: 'Spectral', serif; font-size: 1rem; font-weight: 600; color: var(--text); line-height: 1.5; }
+    .top-video-views { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.04em; color: var(--creator-color, var(--text)); line-height: 1; }
+    .top-video-cta { font-family: 'DM Mono', monospace; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-top: auto; }
+
+    /* CROSS-PLATFORM ROW */
+    .xplat-row { display: flex; gap: 2px; margin: 0 0 2.5rem; flex-wrap: wrap; }
+    .xplat-item { background: var(--surface); border: 1px solid var(--border); padding: 1rem 1.4rem; min-width: 160px; }
+    .xplat-platform { font-family: 'DM Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem; }
+    .xplat-handle { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--text); }
+    .xplat-note { font-family: 'DM Mono', monospace; font-size: 0.55rem; color: var(--dim); margin-top: 0.15rem; }
+    .xplat-item a { color: var(--creator-color, var(--text)); text-decoration: none; }
+    .xplat-item a:hover { text-decoration: underline; }
+
+    /* GOOGLE TRENDS SECTION */
+    .trends-section { border-top: 2px solid var(--border); padding: 4rem 3.5rem; }
+    .trends-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+    .trends-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: 0.03em; line-height: 0.95; margin-bottom: 0.8rem; }
+    .trends-sub { font-size: 0.9rem; color: var(--muted); margin-bottom: 2rem; max-width: 560px; line-height: 1.65; }
+    .trends-embed-wrap { border: 1px solid var(--border); overflow: hidden; background: var(--surface); }
+    .trends-embed-wrap iframe { width: 100%; height: 420px; border: none; display: block; }
+
     @media (max-width: 1000px) {
       .stat-grid { grid-template-columns: repeat(2,1fr); }
       .concept-grid { grid-template-columns: 1fr; }
@@ -140,6 +172,8 @@
       .creator-body { padding: 0 1.5rem; }
       .page-header { padding: 3rem 1.5rem 2rem; grid-template-columns: 1fr; }
       .sift-row { grid-template-columns: 100px 1fr; }
+      .top-video-card { grid-template-columns: 1fr; }
+      .trends-section { padding: 3rem 1.5rem; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
     }
   </style>
@@ -201,8 +235,30 @@
       <div class="stat-cell"><div class="stat-val" id="jeff-stat-like-rate">—</div><div class="stat-key">Like Rate</div><div class="stat-note">Likes ÷ views · last 50 videos</div></div>
       <div class="stat-cell"><div class="stat-val" id="jeff-stat-vids">617</div><div class="stat-key">Videos Published</div></div>
       <div class="stat-cell"><div class="stat-val" id="jeff-stat-started">2014</div><div class="stat-key">Channel Started</div></div>
-      <div class="stat-cell"><div class="stat-val" id="jeff-stat-vpm">—</div><div class="stat-key">Videos / Month</div></div>
+      <div class="stat-cell"><div class="stat-val" id="jeff-stat-vpm">—</div><div class="stat-key">Videos / Month</div><div class="stat-note" id="jeff-stat-consistency">—</div></div>
       <div class="stat-cell"><div class="stat-val" id="jeff-stat-duration">—</div><div class="stat-key">Avg Video Length</div><div class="stat-note">Last 50 videos</div></div>
+    </div>
+
+    <div class="top-video-wrap">
+      <p class="top-video-section-label">Most Viewed Video — All Time</p>
+      <a class="top-video-card" id="jeff-top-link" href="https://youtube.com/@jeffnippard" target="_blank" rel="noopener">
+        <div class="top-video-thumb-wrap">
+          <img class="top-video-thumb" id="jeff-top-thumb" src="" alt="Jeff Nippard most viewed video">
+          <div class="top-video-play"><div class="top-video-play-icon">▶</div></div>
+        </div>
+        <div class="top-video-info">
+          <div class="top-video-title" id="jeff-top-title">Loading&hellip;</div>
+          <div class="top-video-views" id="jeff-top-views">—</div>
+          <div class="top-video-cta">Watch on YouTube ↗</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="xplat-row">
+      <div class="xplat-item"><div class="xplat-platform">Instagram</div><div class="xplat-handle"><a href="https://instagram.com/jeffnippard" target="_blank" rel="noopener">@jeffnippard ↗</a></div><div class="xplat-note">Public profile</div></div>
+      <div class="xplat-item"><div class="xplat-platform">Twitter / X</div><div class="xplat-handle"><a href="https://x.com/jeffnippard" target="_blank" rel="noopener">@jeffnippard ↗</a></div><div class="xplat-note">Public profile</div></div>
+      <div class="xplat-item"><div class="xplat-platform">MacroFactor App</div><div class="xplat-handle"><a href="https://macrofactorapp.com" target="_blank" rel="noopener">macrofactorapp.com ↗</a></div><div class="xplat-note">Co-created with Eric Helms · 4.9★ App Store</div></div>
+      <div class="xplat-item"><div class="xplat-platform">Reddit Discussion</div><div class="xplat-handle"><a href="https://www.reddit.com/search/?q=Jeff+Nippard&type=link" target="_blank" rel="noopener">Search r/fitness ↗</a></div><div class="xplat-note">Community coverage — SIFT step F</div></div>
     </div>
 
     <div class="concept-grid">
@@ -339,8 +395,28 @@
       <div class="stat-cell"><div class="stat-val" id="togi-stat-like-rate">—</div><div class="stat-key">Like Rate</div><div class="stat-note">Likes ÷ views · last 50 videos</div></div>
       <div class="stat-cell"><div class="stat-val" id="togi-stat-vids">312</div><div class="stat-key">Videos Published</div></div>
       <div class="stat-cell"><div class="stat-val" id="togi-stat-started">—</div><div class="stat-key">Channel Started</div></div>
-      <div class="stat-cell"><div class="stat-val" id="togi-stat-vpm">—</div><div class="stat-key">Videos / Month</div></div>
+      <div class="stat-cell"><div class="stat-val" id="togi-stat-vpm">—</div><div class="stat-key">Videos / Month</div><div class="stat-note" id="togi-stat-consistency">—</div></div>
       <div class="stat-cell"><div class="stat-val" id="togi-stat-duration">—</div><div class="stat-key">Avg Video Length</div><div class="stat-note">Last 50 videos</div></div>
+    </div>
+
+    <div class="top-video-wrap">
+      <p class="top-video-section-label">Most Viewed Video — All Time</p>
+      <a class="top-video-card" id="togi-top-link" href="https://youtube.com/@shanestoffer" target="_blank" rel="noopener">
+        <div class="top-video-thumb-wrap">
+          <img class="top-video-thumb" id="togi-top-thumb" src="" alt="Togi most viewed video">
+          <div class="top-video-play"><div class="top-video-play-icon">▶</div></div>
+        </div>
+        <div class="top-video-info">
+          <div class="top-video-title" id="togi-top-title">Loading&hellip;</div>
+          <div class="top-video-views" id="togi-top-views">—</div>
+          <div class="top-video-cta">Watch on YouTube ↗</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="xplat-row">
+      <div class="xplat-item"><div class="xplat-platform">Instagram</div><div class="xplat-handle"><a href="https://instagram.com/stoffer__" target="_blank" rel="noopener">@stoffer__ ↗</a></div><div class="xplat-note">Public profile</div></div>
+      <div class="xplat-item"><div class="xplat-platform">Reddit Discussion</div><div class="xplat-handle"><a href="https://www.reddit.com/search/?q=Shane+Stoffer+Togi&type=link" target="_blank" rel="noopener">Search Reddit ↗</a></div><div class="xplat-note">Community coverage — SIFT step F</div></div>
     </div>
 
     <div class="concept-grid">
@@ -489,8 +565,29 @@
       <div class="stat-cell"><div class="stat-val" id="bro-stat-like-rate">—</div><div class="stat-key">Like Rate</div><div class="stat-note">Likes ÷ views · last 50 videos</div></div>
       <div class="stat-cell"><div class="stat-val" id="bro-stat-vids">356</div><div class="stat-key">Videos Published</div></div>
       <div class="stat-cell"><div class="stat-val" id="bro-stat-started">2012</div><div class="stat-key">Channel Started</div></div>
-      <div class="stat-cell"><div class="stat-val" id="bro-stat-vpm">—</div><div class="stat-key">Videos / Month</div></div>
+      <div class="stat-cell"><div class="stat-val" id="bro-stat-vpm">—</div><div class="stat-key">Videos / Month</div><div class="stat-note" id="bro-stat-consistency">—</div></div>
       <div class="stat-cell"><div class="stat-val" id="bro-stat-duration">—</div><div class="stat-key">Avg Video Length</div><div class="stat-note">Last 50 videos</div></div>
+    </div>
+
+    <div class="top-video-wrap">
+      <p class="top-video-section-label">Most Viewed Video — All Time</p>
+      <a class="top-video-card" id="bro-top-link" href="https://youtube.com/@BroScienceLife" target="_blank" rel="noopener">
+        <div class="top-video-thumb-wrap">
+          <img class="top-video-thumb" id="bro-top-thumb" src="" alt="Bro Science most viewed video">
+          <div class="top-video-play"><div class="top-video-play-icon">▶</div></div>
+        </div>
+        <div class="top-video-info">
+          <div class="top-video-title" id="bro-top-title">Loading&hellip;</div>
+          <div class="top-video-views" id="bro-top-views">—</div>
+          <div class="top-video-cta">Watch on YouTube ↗</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="xplat-row">
+      <div class="xplat-item"><div class="xplat-platform">Instagram</div><div class="xplat-handle"><a href="https://instagram.com/broscience.life" target="_blank" rel="noopener">@broscience.life ↗</a></div><div class="xplat-note">Public profile</div></div>
+      <div class="xplat-item"><div class="xplat-platform">The Swoly Bible</div><div class="xplat-handle"><a href="https://www.amazon.com/Swoly-Bible-Dom-Mazzetti/dp/1101905476" target="_blank" rel="noopener">Amazon ↗</a></div><div class="xplat-note">Published 2016 · public reviews</div></div>
+      <div class="xplat-item"><div class="xplat-platform">Reddit Discussion</div><div class="xplat-handle"><a href="https://www.reddit.com/search/?q=Bro+Science+Life+Dom+Mazzetti&type=link" target="_blank" rel="noopener">Search Reddit ↗</a></div><div class="xplat-note">Community coverage — SIFT step F</div></div>
     </div>
 
     <div class="concept-grid">
@@ -655,6 +752,13 @@
       </div>
     </div>
 
+    <div class="xplat-row">
+      <div class="xplat-item"><div class="xplat-platform">TikTok</div><div class="xplat-handle"><a href="https://tiktok.com/@jpgcoaching" target="_blank" rel="noopener">@jpgcoaching ↗</a></div><div class="xplat-note">Primary platform · public profile</div></div>
+      <div class="xplat-item"><div class="xplat-platform">Instagram</div><div class="xplat-handle"><a href="https://instagram.com/jpgcoaching" target="_blank" rel="noopener">@jpgcoaching ↗</a></div><div class="xplat-note">Public profile</div></div>
+      <div class="xplat-item"><div class="xplat-platform">Coaching Website</div><div class="xplat-handle"><a href="https://jpgcoaching.com" target="_blank" rel="noopener">jpgcoaching.com ↗</a></div><div class="xplat-note">Programs and online coaching</div></div>
+      <div class="xplat-item"><div class="xplat-platform">Reddit Discussion</div><div class="xplat-handle"><a href="https://www.reddit.com/search/?q=JPG+Coaching&type=link" target="_blank" rel="noopener">Search Reddit ↗</a></div><div class="xplat-note">Community coverage — SIFT step F</div></div>
+    </div>
+
     <div class="concept-grid">
       <div class="concept-panel">
         <div class="concept-panel-title">Source Credibility</div>
@@ -762,9 +866,18 @@
 </div>
 
 
+<section class="trends-section">
+  <p class="trends-label">Google Trends — YouTube Search</p>
+  <h2 class="trends-title">Search Interest Over Time</h2>
+  <p class="trends-sub">Relative YouTube search volume. 100 = peak popularity in the period. Shows public perception shifts — relevant to how perceived expertise rises and falls over time (Source Credibility Theory).</p>
+  <div class="trends-embed-wrap">
+    <iframe src="https://trends.google.com/trends/embed/explore/TIMESERIES?req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22Jeff%20Nippard%22%2C%22geo%22%3A%22%22%2C%22time%22%3A%22today%2012-m%22%7D%2C%7B%22keyword%22%3A%22Shane%20Stoffer%22%2C%22geo%22%3A%22%22%2C%22time%22%3A%22today%2012-m%22%7D%2C%7B%22keyword%22%3A%22Bro%20Science%20Life%22%2C%22geo%22%3A%22%22%2C%22time%22%3A%22today%2012-m%22%7D%2C%7B%22keyword%22%3A%22JPG%20Coaching%22%2C%22geo%22%3A%22%22%2C%22time%22%3A%22today%2012-m%22%7D%5D%2C%22category%22%3A0%2C%22property%22%3A%22youtube%22%7D&tz=300&hl=en" scrolling="no" frameborder="0" loading="lazy" title="Google Trends — YouTube search interest comparison"></iframe>
+  </div>
+</section>
+
 <footer>
   <div class="footer-l">Who Do You Trust. Media Studies 2026</div>
-  <div class="footer-r">YouTube subscriber counts via YouTube Data API v3</div>
+  <div class="footer-r">YouTube Data API v3 · Google Trends · manually verified public sources</div>
 </footer>
 
 <script src="live-data.js"></script>
@@ -775,6 +888,9 @@
     const creators = {
       jeff: {
         bigId: 'jeff-subs-big', dotId: 'jeff-dot', badgeId: 'jeff-badge-text',
+        consistencyId: 'jeff-stat-consistency',
+        topLinkId: 'jeff-top-link', topThumbId: 'jeff-top-thumb',
+        topTitleId: 'jeff-top-title', topViewsId: 'jeff-top-views',
         cells: {
           'jeff-stat-subs':      'subscribers',
           'jeff-stat-views':     'totalViews',
@@ -788,6 +904,9 @@
       },
       togi: {
         bigId: 'togi-subs-big', dotId: 'togi-dot', badgeId: 'togi-badge-text',
+        consistencyId: 'togi-stat-consistency',
+        topLinkId: 'togi-top-link', topThumbId: 'togi-top-thumb',
+        topTitleId: 'togi-top-title', topViewsId: 'togi-top-views',
         cells: {
           'togi-stat-subs':      'subscribers',
           'togi-stat-views':     'totalViews',
@@ -801,6 +920,9 @@
       },
       bro: {
         bigId: 'bro-subs-big', dotId: 'bro-dot', badgeId: 'bro-badge-text',
+        consistencyId: 'bro-stat-consistency',
+        topLinkId: 'bro-top-link', topThumbId: 'bro-top-thumb',
+        topTitleId: 'bro-top-title', topViewsId: 'bro-top-views',
         cells: {
           'bro-stat-subs':      'subscribers',
           'bro-stat-views':     'totalViews',
@@ -817,18 +939,39 @@
     Object.entries(creators).forEach(([k, cfg]) => {
       const d = L[k];
       if (!d) return;
+
+      // subscribers + live badge
       const big   = document.getElementById(cfg.bigId);
       const dot   = document.getElementById(cfg.dotId);
       const badge = document.getElementById(cfg.badgeId);
-      if (big)   big.textContent = d.subscribers;
+      if (big) big.textContent = d.subscribers;
       if (d.liveLoaded) {
         if (dot)   dot.classList.add('on');
         if (badge) badge.textContent = 'Live';
       }
+
+      // stat cells
       Object.entries(cfg.cells).forEach(([id, key]) => {
         const el = document.getElementById(id);
         if (el && d[key]) el.textContent = d[key];
       });
+
+      // posting consistency note
+      const cons = document.getElementById(cfg.consistencyId);
+      if (cons && d.postingConsistency) cons.textContent = d.postingConsistency;
+
+      // most viewed video
+      if (d.topVideo) {
+        const tv = d.topVideo;
+        const link  = document.getElementById(cfg.topLinkId);
+        const thumb = document.getElementById(cfg.topThumbId);
+        const title = document.getElementById(cfg.topTitleId);
+        const views = document.getElementById(cfg.topViewsId);
+        if (link)  link.href = tv.url;
+        if (thumb) { thumb.src = tv.thumbnail; thumb.alt = tv.title; }
+        if (title) title.textContent = tv.title;
+        if (views) views.textContent = tv.views;
+      }
     });
 
     const st = document.getElementById('page-status-text');
