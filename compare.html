@@ -64,6 +64,22 @@
     .page-header-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 6vw, 5rem); letter-spacing: 0.03em; line-height: 0.95; }
     .page-header-sub { font-size: 1rem; color: var(--muted); margin-top: 1rem; max-width: 560px; line-height: 1.65; }
 
+    /* SPECTRUMS */
+    .spectrums-section { padding: 3rem 3.5rem; border-bottom: 1px solid var(--border); background: var(--surface); }
+    .spectrums-header { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2.5rem; }
+    .spectrum-wrap { margin-bottom: 2.5rem; }
+    .spectrum-wrap:last-child { margin-bottom: 0; }
+    .spectrum-title { font-family: 'DM Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text); margin-bottom: 1rem; }
+    .spectrum-track-wrap { position: relative; }
+    .spectrum-line { height: 2px; background: var(--border); position: relative; }
+    .spectrum-endpoints { display: flex; justify-content: space-between; margin-top: 0.5rem; }
+    .spec-end { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; }
+    .spectrum-pips { position: relative; height: 44px; }
+    .spectrum-pip { position: absolute; display: flex; flex-direction: column; align-items: center; transform: translateX(-50%); top: 0; }
+    .pip-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: -5px; }
+    .pip-name { font-family: 'DM Mono', monospace; font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 6px; white-space: nowrap; }
+
+    /* COMPARE ARENA */
     .compare-arena { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); min-height: 600px; }
     .compare-panel { padding: 3rem; border-right: 1px solid var(--border); }
     .compare-panel:last-child { border-right: none; }
@@ -72,28 +88,32 @@
     .panel-handle { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); margin-bottom: 0.3rem; letter-spacing: 0.06em; }
     .panel-platform { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
     .panel-quote { font-style: italic; font-size: 1rem; color: var(--muted); border-left: 2px solid var(--border); padding-left: 1rem; margin-bottom: 2rem; line-height: 1.68; }
-    .panel-section-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.08em; margin-bottom: 1rem; }
-    .panel-section-cite { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted); margin-bottom: 1rem; letter-spacing: 0.06em; display: block; }
-    .score-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.85rem; }
-    .score-row:last-child { margin-bottom: 0; }
-    .score-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); width: 100px; flex-shrink: 0; }
-    .score-track { flex: 1; height: 5px; background: var(--surface2); border: 1px solid var(--border); overflow: hidden; }
-    .score-fill { height: 100%; transition: width 0.7s cubic-bezier(.4,0,.2,1); }
-    .score-num { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; width: 32px; text-align: right; color: var(--text); line-height: 1; }
+
+    /* TRUST SIGNALS */
+    .trust-strategy { font-family: 'DM Mono', monospace; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 0.5rem; margin-top: 1.5rem; }
+    .strategy-headline { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.05em; margin-bottom: 1.2rem; }
+    .signal-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+    .signal-tag { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.06em; padding: 0.25rem 0.55rem; border: 1px solid; }
+    .signal-pos { color: #16a34a; border-color: rgba(22,163,74,0.3); background: rgba(22,163,74,0.07); }
+    .signal-warn { color: #d97706; border-color: rgba(217,119,6,0.3); background: rgba(217,119,6,0.07); }
+
     .panel-divider { height: 1px; background: var(--border); margin: 1.8rem 0; }
     .meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
     .meta-cell { background: var(--surface); border: 1px solid var(--border); padding: 1rem 1.1rem; }
     .meta-key { font-family: 'DM Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.4rem; }
     .meta-val { font-size: 0.9rem; color: var(--text); line-height: 1.58; }
-    .risk-row { display: flex; align-items: center; gap: 0.75rem; margin-top: 1.5rem; }
-    .risk-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: #f87171; width: 100px; flex-shrink: 0; }
-    .risk-track { flex: 1; height: 8px; background: var(--surface2); border: 1px solid var(--border); overflow: hidden; }
-    .risk-fill { height: 100%; background: #f87171; transition: width 0.7s cubic-bezier(.4,0,.2,1); }
-    .risk-num { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; width: 32px; text-align: right; color: #f87171; line-height: 1; }
 
     .empty-state { display: flex; align-items: center; justify-content: center; min-height: 400px; flex-direction: column; gap: 1rem; }
     .empty-num { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; color: var(--dim); line-height: 1; }
     .empty-msg { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* THESIS / CONCLUSION */
+    .thesis-section { border-top: 2px solid var(--border); padding: 5rem 3.5rem; background: var(--surface); }
+    .thesis-inner { max-width: 720px; }
+    .thesis-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; }
+    .thesis-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: 0.02em; line-height: 1.05; margin-bottom: 2rem; }
+    .thesis-body { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 1rem; max-width: 640px; }
+    .thesis-body em { color: var(--text); font-style: italic; }
 
     footer { border-top: 1px solid var(--border); padding: 2rem 3.5rem; display: flex; justify-content: space-between; align-items: center; }
     .footer-l { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); }
@@ -110,6 +130,8 @@
       .stats-strip { grid-template-columns: repeat(2,1fr); }
       .ss-cell:nth-child(2) { border-right: none; }
       .page-header { padding: 3rem 1.5rem; }
+      .spectrums-section { padding: 2.5rem 1.5rem; }
+      .thesis-section { padding: 3.5rem 1.5rem; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
     }
   </style>
@@ -152,15 +174,122 @@
 
 <div class="stats-strip">
   <div class="ss-cell" style="color:var(--jeff)"><div class="ss-dot" id="sd-jeff"></div><span class="ss-name">Jeff</span><span class="ss-subs" id="ss-jeff">8.35M</span></div>
-  <div class="ss-cell" style="color:var(--togi)"><div class="ss-dot" id="sd-togi"></div><span class="ss-name">Togi</span><span class="ss-subs" id="ss-togi">740K</span></div>
+  <div class="ss-cell" style="color:var(--togi)"><div class="ss-dot" id="sd-togi"></div><span class="ss-name">Togi</span><span class="ss-subs" id="ss-togi">1.03M</span></div>
   <div class="ss-cell" style="color:var(--bro)"><div class="ss-dot" id="sd-bro"></div><span class="ss-name">Bro Science</span><span class="ss-subs" id="ss-bro">2.5M</span></div>
   <div class="ss-cell" style="color:var(--jpg)"><div class="ss-dot" id="sd-jpg"></div><span class="ss-name">JPG</span><span class="ss-subs" id="ss-jpg">450K+</span></div>
 </div>
 
 <div class="page-header">
   <p class="page-header-label">03 — Compare</p>
-  <h1 class="page-header-title">Pick Two. Compare Them.</h1>
-  <p class="page-header-sub">Pick two creators. Compare their scores, revenue, audience, and content risk.</p>
+  <h1 class="page-header-title">How Trust Gets Built</h1>
+  <p class="page-header-sub">These creators use completely different strategies to earn credibility. Compare any two.</p>
+</div>
+
+<!-- SPECTRUMS SECTION -->
+<div class="spectrums-section">
+  <p class="spectrums-header">Where each creator sits — three dimensions</p>
+
+  <!-- Spectrum 1: Claim Basis -->
+  <div class="spectrum-wrap">
+    <div class="spectrum-title">Claim Basis</div>
+    <div class="spectrum-track-wrap">
+      <div class="spectrum-line"></div>
+      <div class="spectrum-pips">
+        <!-- Jeff ~5% -->
+        <div class="spectrum-pip" style="left:5%">
+          <div class="pip-dot" style="background:var(--jeff)"></div>
+          <span class="pip-name" style="color:var(--jeff)">Jeff</span>
+        </div>
+        <!-- Bro ~50% -->
+        <div class="spectrum-pip" style="left:50%">
+          <div class="pip-dot" style="background:var(--bro)"></div>
+          <span class="pip-name" style="color:var(--bro)">Bro</span>
+        </div>
+        <!-- JPG ~65% -->
+        <div class="spectrum-pip" style="left:65%">
+          <div class="pip-dot" style="background:var(--jpg)"></div>
+          <span class="pip-name" style="color:var(--jpg)">JPG</span>
+        </div>
+        <!-- Togi ~92% -->
+        <div class="spectrum-pip" style="left:92%">
+          <div class="pip-dot" style="background:var(--togi)"></div>
+          <span class="pip-name" style="color:var(--togi)">Togi</span>
+        </div>
+      </div>
+      <div class="spectrum-endpoints">
+        <span class="spec-end">Evidence-Based</span>
+        <span class="spec-end">Personal Experience</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Spectrum 2: Content Style -->
+  <div class="spectrum-wrap">
+    <div class="spectrum-title">Content Style</div>
+    <div class="spectrum-track-wrap">
+      <div class="spectrum-line"></div>
+      <div class="spectrum-pips">
+        <!-- Jeff ~15% -->
+        <div class="spectrum-pip" style="left:15%">
+          <div class="pip-dot" style="background:var(--jeff)"></div>
+          <span class="pip-name" style="color:var(--jeff)">Jeff</span>
+        </div>
+        <!-- JPG ~50% -->
+        <div class="spectrum-pip" style="left:50%">
+          <div class="pip-dot" style="background:var(--jpg)"></div>
+          <span class="pip-name" style="color:var(--jpg)">JPG</span>
+        </div>
+        <!-- Bro ~72% -->
+        <div class="spectrum-pip" style="left:72%">
+          <div class="pip-dot" style="background:var(--bro)"></div>
+          <span class="pip-name" style="color:var(--bro)">Bro</span>
+        </div>
+        <!-- Togi ~88% -->
+        <div class="spectrum-pip" style="left:88%">
+          <div class="pip-dot" style="background:var(--togi)"></div>
+          <span class="pip-name" style="color:var(--togi)">Togi</span>
+        </div>
+      </div>
+      <div class="spectrum-endpoints">
+        <span class="spec-end">Educational</span>
+        <span class="spec-end">Entertainment</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Spectrum 3: Transparency -->
+  <div class="spectrum-wrap">
+    <div class="spectrum-title">Transparency</div>
+    <div class="spectrum-track-wrap">
+      <div class="spectrum-line"></div>
+      <div class="spectrum-pips">
+        <!-- Jeff ~10% -->
+        <div class="spectrum-pip" style="left:10%">
+          <div class="pip-dot" style="background:var(--jeff)"></div>
+          <span class="pip-name" style="color:var(--jeff)">Jeff</span>
+        </div>
+        <!-- Bro ~40% -->
+        <div class="spectrum-pip" style="left:40%">
+          <div class="pip-dot" style="background:var(--bro)"></div>
+          <span class="pip-name" style="color:var(--bro)">Bro</span>
+        </div>
+        <!-- JPG ~60% -->
+        <div class="spectrum-pip" style="left:60%">
+          <div class="pip-dot" style="background:var(--jpg)"></div>
+          <span class="pip-name" style="color:var(--jpg)">JPG</span>
+        </div>
+        <!-- Togi ~85% -->
+        <div class="spectrum-pip" style="left:85%">
+          <div class="pip-dot" style="background:var(--togi)"></div>
+          <span class="pip-name" style="color:var(--togi)">Togi</span>
+        </div>
+      </div>
+      <div class="spectrum-endpoints">
+        <span class="spec-end">Disclosed</span>
+        <span class="spec-end">Undisclosed</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="compare-arena" id="compare-arena">
@@ -168,104 +297,135 @@
   <div class="compare-panel" id="panel-b"><div class="empty-state"><div class="empty-num">B</div><div class="empty-msg">Pick Creator B above</div></div></div>
 </div>
 
+<!-- CONCLUSION / THESIS -->
+<div class="thesis-section">
+  <div class="thesis-inner">
+    <p class="thesis-label">Central Argument</p>
+    <h2 class="thesis-headline">Trust is built differently for each creator. But the feeling of trust is the same.</h2>
+    <p class="thesis-body">Jeff earns it through credentials and citations. Togi earns it through vulnerability and openness. Bro Science earns it through humor and cultural recognition. JPG earns it through confidence and consistency. Four completely different approaches. One identical result: an audience that believes what they are told.</p>
+    <p class="thesis-body">The question is not who to trust. It is what kind of trust each creator is asking for — and whether that kind of trust can be verified.</p>
+  </div>
+</div>
+
 <footer>
-  <div class="footer-l">WHO DO YOU TRUST? Media Studies Final Project 2026. Scores are analytical estimates.</div>
+  <div class="footer-l">Who Do You Trust. Media Studies 2026</div>
+  <div class="footer-r">Comparison is analytical. Trust signals based on documented public information.</div>
 </footer>
 
 <script src="live-data.js"></script>
 <script>
   const CREATORS = {
     jeff: {
-      name: 'Jeff Nippard', handle: '@jeffnippard', platform: 'YouTube. Science-Based',
-      color: '#38bdf8',
+      name: 'Jeff Nippard', handle: '@jeffnippard', platform: 'YouTube. Long-form educational.',
+      color: 'var(--jeff)',
       quote: '"The research should speak for itself. My job is to translate it accurately."',
-      claimBasis: 'Research papers, cited on screen and in video descriptions. Claims can be traced to original sources.',
-      audience: '84.5% male. 26% US. Mostly intermediate-to-advanced lifters seeking research-based content.',
-      revenue: 'MacroFactor app (co-created, earns commission). Training programs. Selective disclosed sponsorships.',
-      healthism: 'Health as something to optimize with science. With the right information and consistency, you can fix your body.',
-      scores: { expertise: 90, trust: 85, appeal: 65 },
-      sift: { stop: 80, investigate: 88, coverage: 85, trace: 90 },
-      risk: 10
+      strategy: 'Science and Citations',
+      signalsPos: [
+        'Biochemistry degree (verified)',
+        'Peer-reviewed studies cited on screen',
+        'Publicly reversed past positions when evidence changed',
+        'Sponsorships disclosed'
+      ],
+      signalsWarn: [
+        'Financially tied to MacroFactor app and training programs'
+      ],
+      claimBasis: 'Research papers cited on screen and in descriptions. Claims can be traced to original sources.',
+      revenue: 'MacroFactor app (co-created with Eric Helms). Training programs. Disclosed brand sponsorships.',
+      healthism: 'Science-optimized body. Right information + right habits = results.',
+      platform: 'YouTube. Long-form educational.'
     },
     togi: {
-      name: 'Togi', handle: '@stoffer__', platform: 'YouTube. Instagram. Kick.',
-      color: '#f87171',
+      name: 'Togi', handle: '@stoffer__', platform: 'YouTube. Instagram. Lifestyle and bodybuilding.',
+      color: 'var(--togi)',
       quote: '"I\'m not going to lie to you. Everything I do, I put it out there."',
-      claimBasis: 'Personal experience only. No external sources or verification. "This happened to me" is the whole argument.',
-      audience: 'Mostly male, 18 to 25. High risk tolerance. Strong personal connection to Shane.',
-      revenue: 'Roobet affiliate (crypto casino, main income). evoir.com supplements. YouTube. Merchandise.',
-      healthism: 'The body is still a personal project. Authenticity and transformation have replaced health as the goal.',
-      scores: { expertise: 22, trust: 28, appeal: 88 },
-      sift: { stop: 8, investigate: 14, coverage: 10, trace: 12 },
-      risk: 91
+      strategy: 'Authenticity and Parasocial Bond',
+      signalsPos: [
+        'Shares personal experiences openly',
+        'Strong audience loyalty through vulnerability'
+      ],
+      signalsWarn: [
+        'No verifiable credentials',
+        'Gambling sponsorships (Roobet)',
+        'Claims based entirely on personal experience — cannot be verified'
+      ],
+      claimBasis: 'Personal experience only. \'This happened to me\' is the entire argument. Nothing to trace.',
+      revenue: 'Roobet gambling affiliate (primary). Supplement brand deals. YouTube ad revenue.',
+      healthism: 'Body as personal project. Authenticity replaced wellness as the goal.',
+      platform: 'YouTube. Instagram. Lifestyle and bodybuilding.'
     },
     bro: {
-      name: 'Bro Science', handle: '@BroScienceLife', platform: 'YouTube. Satire. Comedy.',
-      color: '#fbbf24',
+      name: 'Bro Science', handle: '@BroScienceLife', platform: 'YouTube. Long-form comedy and satire.',
+      color: 'var(--bro)',
       quote: '"Dom Mazzetti is every gym bro you\'ve ever met. The joke only works if the observation is accurate."',
-      claimBasis: 'Satirical character work. Observations wrapped in parody. Some accurate, none sourced.',
-      audience: 'Male 18 to 35. Gym-goers of all levels. Comedy comes first, fitness second.',
-      revenue: 'YouTube ads. DomMerch.com. David Protein sponsorship. The Swoly Bible (2016).',
-      healthism: 'Mocks the gym-bro obsession while being completely part of it. The joke only works if you already share the values.',
-      scores: { expertise: 38, trust: 62, appeal: 82 },
-      sift: { stop: 72, investigate: 55, coverage: 60, trace: 50 },
-      risk: 33
+      strategy: 'Satire and Cultural Recognition',
+      signalsPos: [
+        'NYU graduate (public record)',
+        'Satire clearly signaled — not meant as fitness advice',
+        'Gym culture observations widely recognized as accurate'
+      ],
+      signalsWarn: [
+        'Sponsorships embedded in comedy format',
+        'New viewers may not immediately recognize satire'
+      ],
+      claimBasis: 'Satirical character work. Parody of gym culture — observations, not instructions.',
+      revenue: 'YouTube ad revenue. DomMerch.com. David Protein sponsorship. The Swoly Bible (2016).',
+      healthism: 'Mocks gym obsession from inside it. The joke requires the audience to already share the values.',
+      platform: 'YouTube. Long-form comedy and satire.'
     },
     jpg: {
-      name: 'JPG', handle: '@jpgcoaching', platform: 'TikTok. Cosmic Wellness.',
-      color: '#c084fc',
-      quote: '"Your body is in conversation with the universe. Fitness is just one channel."',
-      claimBasis: 'Spiritual framework. Energy, alignment, frequency. No empirical basis. Claims are not designed to be verified.',
-      audience: 'Mostly female, 18 to 30. Wellness-oriented. Discovered through TikTok algorithm.',
-      revenue: 'Coaching programs. TikTok Creator Fund. Likely wellness brand partnerships.',
-      healthism: 'Health as cosmic alignment. Not reaching your fitness goals becomes a sign of spiritual misalignment.',
-      scores: { expertise: 28, trust: 44, appeal: 80 },
-      sift: { stop: 22, investigate: 28, coverage: 18, trace: 15 },
-      risk: 54
+      name: 'JPG', handle: '@jpgcoaching', platform: 'TikTok. Short-form instructional. GymTok.',
+      color: 'var(--jpg)',
+      quote: '"Good technique is non-negotiable. The details are what separate progress from injury."',
+      strategy: 'Confidence and Instructional Authority',
+      signalsPos: [
+        'Public coaching business (jpgcoaching.com)',
+        'Hypertrophy content consistent with bodybuilding research',
+        'Instructional format — exercise form and selection focus'
+      ],
+      signalsWarn: [
+        'No academic credentials cited',
+        'No source citations in content'
+      ],
+      claimBasis: 'Coaching experience and biomechanics reasoning. No peer-reviewed citations.',
+      revenue: 'JPG Coaching online programs. Legion supplement affiliate. TikTok brand deals.',
+      healthism: 'Technical body optimization. Correct exercise selection and volume as the answer.',
+      platform: 'TikTok. Short-form instructional. GymTok.'
     }
   };
 
   function buildPanel(key) {
     const c = CREATORS[key];
-    const subs = (window.LIVE && window.LIVE[key]) ? window.LIVE[key].subscribers : '—';
+    const colorVar = c.color;
+
+    const posTagsHTML = c.signalsPos.map(s =>
+      `<span class="signal-tag signal-pos">${s}</span>`
+    ).join('');
+    const warnTagsHTML = c.signalsWarn.map(s =>
+      `<span class="signal-tag signal-warn">${s}</span>`
+    ).join('');
+
     return `
-      <div class="compare-panel-accent" style="background:${c.color}"></div>
-      <div class="panel-name" style="color:${c.color}">${c.name}</div>
+      <div class="compare-panel-accent" style="background:${colorVar}"></div>
+      <div class="panel-name" style="color:${colorVar}">${c.name}</div>
       <div class="panel-handle">${c.handle}</div>
       <div class="panel-platform">${c.platform}</div>
       <blockquote class="panel-quote">${c.quote}</blockquote>
 
-      <div class="panel-section-title">Source Credibility</div>
-      ${row('Expertise',       c.scores.expertise, c.color)}
-      ${row('Trustworthiness', c.scores.trust,     c.color)}
-      ${row('Appeal',          c.scores.appeal,    c.color)}
-
-      <div class="panel-divider"></div>
-      <div class="panel-section-title">SIFT Analysis</div>
-      ${row('Stop',          c.sift.stop,       c.color)}
-      ${row('Investigate',   c.sift.investigate,c.color)}
-      ${row('Find Coverage', c.sift.coverage,   c.color)}
-      ${row('Trace Claims',  c.sift.trace,      c.color)}
-
-      <div class="risk-row">
-        <span class="risk-label">Content Risk</span>
-        <div class="risk-track"><div class="risk-fill" style="width:${c.risk}%"></div></div>
-        <span class="risk-num">${c.risk}</span>
+      <p class="trust-strategy">Trust Strategy</p>
+      <div class="strategy-headline" style="color:${colorVar}">${c.strategy}</div>
+      <div class="signal-tags">
+        ${posTagsHTML}
+        ${warnTagsHTML}
       </div>
 
       <div class="panel-divider"></div>
       <div class="meta-row">
-        <div class="meta-cell"><div class="meta-key">Subscribers / Followers</div><div class="meta-val">${subs}</div></div>
-        <div class="meta-cell"><div class="meta-key">How claims are backed</div><div class="meta-val">${c.claimBasis}</div></div>
-        <div class="meta-cell"><div class="meta-key">Audience</div><div class="meta-val">${c.audience}</div></div>
-        <div class="meta-cell"><div class="meta-key">How they make money</div><div class="meta-val">${c.revenue}</div></div>
+        <div class="meta-cell"><div class="meta-key">Claim Basis</div><div class="meta-val">${c.claimBasis}</div></div>
+        <div class="meta-cell"><div class="meta-key">Revenue</div><div class="meta-val">${c.revenue}</div></div>
+        <div class="meta-cell"><div class="meta-key">Health Framing</div><div class="meta-val">${c.healthism}</div></div>
+        <div class="meta-cell"><div class="meta-key">Platform</div><div class="meta-val">${c.platform}</div></div>
       </div>
-      <div class="meta-cell"><div class="meta-key">How they frame health</div><div class="meta-val">${c.healthism}</div></div>
     `;
-  }
-
-  function row(label, val, color) {
-    return `<div class="score-row"><span class="score-label">${label}</span><div class="score-track"><div class="score-fill" style="width:${val}%;background:${color}"></div></div><span class="score-num">${val}</span></div>`;
   }
 
   function render() {
