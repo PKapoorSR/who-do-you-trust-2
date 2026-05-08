@@ -40,6 +40,19 @@
     }
   };
 
+  async function fetchWithTimeout(url, ms = 8000) {
+    const ctrl = new AbortController();
+    const id   = setTimeout(() => ctrl.abort(), ms);
+    try {
+      const res = await fetch(url, { signal: ctrl.signal });
+      clearTimeout(id);
+      return res;
+    } catch (e) {
+      clearTimeout(id);
+      throw e;
+    }
+  }
+
   function fmt(n) {
     if (n >= 1e9) return (n / 1e9).toFixed(2).replace(/\.?0+$/, '') + 'B';
     if (n >= 1e6) return (n / 1e6).toFixed(2).replace(/\.?0+$/, '') + 'M';
@@ -67,7 +80,7 @@
 
   async function fetchChannelStats(channelId) {
     // channel stats + snippet (publishedAt) + contentDetails (uploads playlist)
-    const chanRes = await fetch(
+    const chanRes = await fetchWithTimeout(
       `https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet,contentDetails&id=${channelId}&key=${API_KEY}`
     );
     if (!chanRes.ok) throw new Error(`HTTP ${chanRes.status}`);
@@ -83,7 +96,7 @@
     const vids  = parseInt(stats.videoCount, 10);
 
     // recent 50 videos — need snippet for publishedAt (posting consistency)
-    const plRes = await fetch(
+    const plRes = await fetchWithTimeout(
       `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails,snippet&playlistId=${uploadsPlaylistId}&maxResults=50&key=${API_KEY}`
     );
     if (!plRes.ok) throw new Error(`Playlist HTTP ${plRes.status}`);
@@ -95,7 +108,7 @@
     // batch video stats + duration
     let likeRate = '—', avgDurationMin = '—';
     if (videoIds.length > 0) {
-      const vidRes = await fetch(
+      const vidRes = await fetchWithTimeout(
         `https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=${videoIds.join(',')}&key=${API_KEY}`
       );
       if (vidRes.ok) {
@@ -129,7 +142,7 @@
 
   async function fetchTopVideo(channelId) {
     // search is 100 quota units — returns all-time most-viewed video
-    const searchRes = await fetch(
+    const searchRes = await fetchWithTimeout(
       `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&order=viewCount&type=video&maxResults=1&key=${API_KEY}`
     );
     if (!searchRes.ok) throw new Error(`Search HTTP ${searchRes.status}`);
@@ -142,7 +155,7 @@
     const thumbnail = hit.snippet.thumbnails.medium?.url || hit.snippet.thumbnails.default?.url;
 
     // get exact view count
-    const statsRes  = await fetch(
+    const statsRes  = await fetchWithTimeout(
       `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${API_KEY}`
     );
     let views = '—';
