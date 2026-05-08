@@ -160,7 +160,7 @@
 <div class="page-header">
   <p class="page-header-label">03 — Compare</p>
   <h1 class="page-header-title">Pick Two. Compare Them.</h1>
-  <p class="page-header-sub">Select a creator in each dropdown. You'll see their scores, what they make money from, who their audience is, and how their content holds up to scrutiny.</p>
+  <p class="page-header-sub">Pick two creators. Compare their scores, revenue, audience, and content risk.</p>
 </div>
 
 <div class="compare-arena" id="compare-arena">
@@ -169,56 +169,55 @@
 </div>
 
 <footer>
-  <div class="footer-l">WHO DO YOU TRUST? — Media Studies Final Project — 2026</div>
-  <div class="footer-r">Scores are analytical estimates — see Concepts page for methodology</div>
+  <div class="footer-l">WHO DO YOU TRUST? Media Studies Final Project 2026. Scores are analytical estimates.</div>
 </footer>
 
 <script src="live-data.js"></script>
 <script>
   const CREATORS = {
     jeff: {
-      name: 'Jeff Nippard', handle: '@jeffnippard', platform: 'YouTube · Science-Based',
+      name: 'Jeff Nippard', handle: '@jeffnippard', platform: 'YouTube. Science-Based',
       color: '#38bdf8',
       quote: '"The research should speak for itself. My job is to translate it accurately."',
       claimBasis: 'Research papers, cited on screen and in video descriptions. Claims can be traced to original sources.',
-      audience: '84.5% male · 26% US · mostly intermediate-to-advanced lifters who actively seek out research-based content',
-      revenue: 'MacroFactor app (co-created, earns commission) · training programs · selective disclosed sponsorships',
-      healthism: 'Health as something to optimize with science. The message: with the right information and consistency, you can fix your body.',
+      audience: '84.5% male. 26% US. Mostly intermediate-to-advanced lifters seeking research-based content.',
+      revenue: 'MacroFactor app (co-created, earns commission). Training programs. Selective disclosed sponsorships.',
+      healthism: 'Health as something to optimize with science. With the right information and consistency, you can fix your body.',
       scores: { expertise: 90, trust: 85, appeal: 65 },
       sift: { stop: 80, investigate: 88, coverage: 85, trace: 90 },
       risk: 10
     },
     togi: {
-      name: 'Togi', handle: '@stoffer__ / @ShaneStoffer', platform: 'YouTube + Instagram + Kick',
+      name: 'Togi', handle: '@stoffer__', platform: 'YouTube. Instagram. Kick.',
       color: '#f87171',
       quote: '"I\'m not going to lie to you. Everything I do, I put it out there."',
       claimBasis: 'Personal experience only. No external sources or verification. "This happened to me" is the whole argument.',
-      audience: 'Mostly male, 18–25 · bodybuilding-adjacent · high risk tolerance · strong personal connection to Shane',
-      revenue: 'Roobet affiliate (crypto casino, main income) · evoir.com supplements · YouTube · merchandise',
-      healthism: 'The body is still a personal project — but authenticity and transformation have replaced health as the goal.',
+      audience: 'Mostly male, 18 to 25. High risk tolerance. Strong personal connection to Shane.',
+      revenue: 'Roobet affiliate (crypto casino, main income). evoir.com supplements. YouTube. Merchandise.',
+      healthism: 'The body is still a personal project. Authenticity and transformation have replaced health as the goal.',
       scores: { expertise: 22, trust: 28, appeal: 88 },
       sift: { stop: 8, investigate: 14, coverage: 10, trace: 12 },
       risk: 91
     },
     bro: {
-      name: 'Bro Science', handle: '@BroScienceLife', platform: 'YouTube · Satire / Comedy',
+      name: 'Bro Science', handle: '@BroScienceLife', platform: 'YouTube. Satire. Comedy.',
       color: '#fbbf24',
       quote: '"Dom Mazzetti is every gym bro you\'ve ever met. The joke only works if the observation is accurate."',
-      claimBasis: 'Satirical character work. Observations wrapped in parody — some accurate, none sourced.',
-      audience: 'Male 18–35 · gym-goers of all levels · comedy comes first, fitness second',
-      revenue: 'YouTube ads · DomMerch.com · David Protein sponsorship · The Swoly Bible (2016)',
-      healthism: 'Mocks the gym-bro obsession with the body while being completely part of it. The joke only works if you already share the values.',
+      claimBasis: 'Satirical character work. Observations wrapped in parody. Some accurate, none sourced.',
+      audience: 'Male 18 to 35. Gym-goers of all levels. Comedy comes first, fitness second.',
+      revenue: 'YouTube ads. DomMerch.com. David Protein sponsorship. The Swoly Bible (2016).',
+      healthism: 'Mocks the gym-bro obsession while being completely part of it. The joke only works if you already share the values.',
       scores: { expertise: 38, trust: 62, appeal: 82 },
       sift: { stop: 72, investigate: 55, coverage: 60, trace: 50 },
       risk: 33
     },
     jpg: {
-      name: 'JPG', handle: '@jpgcoaching', platform: 'TikTok · Cosmic Wellness',
+      name: 'JPG', handle: '@jpgcoaching', platform: 'TikTok. Cosmic Wellness.',
       color: '#c084fc',
       quote: '"Your body is in conversation with the universe. Fitness is just one channel."',
-      claimBasis: 'Spiritual framework — energy, alignment, frequency. No empirical basis. Claims aren\'t designed to be verified.',
-      audience: 'Mostly female, 18–30 · wellness-oriented · spiritually engaged · discovered through TikTok algorithm, not actively searched',
-      revenue: 'Coaching programs · TikTok Creator Fund · likely wellness brand partnerships',
+      claimBasis: 'Spiritual framework. Energy, alignment, frequency. No empirical basis. Claims are not designed to be verified.',
+      audience: 'Mostly female, 18 to 30. Wellness-oriented. Discovered through TikTok algorithm.',
+      revenue: 'Coaching programs. TikTok Creator Fund. Likely wellness brand partnerships.',
       healthism: 'Health as cosmic alignment. Not reaching your fitness goals becomes a sign of spiritual misalignment.',
       scores: { expertise: 28, trust: 44, appeal: 80 },
       sift: { stop: 22, investigate: 28, coverage: 18, trace: 15 },
@@ -237,14 +236,12 @@
       <blockquote class="panel-quote">${c.quote}</blockquote>
 
       <div class="panel-section-title">Source Credibility</div>
-      <span class="panel-section-cite">Hovland, Janis &amp; Kelley (1953) — how trustworthy does this creator appear?</span>
       ${row('Expertise',       c.scores.expertise, c.color)}
       ${row('Trustworthiness', c.scores.trust,     c.color)}
       ${row('Appeal',          c.scores.appeal,    c.color)}
 
       <div class="panel-divider"></div>
       <div class="panel-section-title">SIFT Analysis</div>
-      <span class="panel-section-cite">Caulfield (2019) — how verifiable is this creator's content?</span>
       ${row('Stop',          c.sift.stop,       c.color)}
       ${row('Investigate',   c.sift.investigate,c.color)}
       ${row('Find Coverage', c.sift.coverage,   c.color)}
