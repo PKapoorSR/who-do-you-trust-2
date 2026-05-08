@@ -728,13 +728,13 @@
     </div>
 
     <div class="creator-header-right">
-      <div class="live-subs-big">3.6M</div>
+      <div class="live-subs-big" id="jpg-subs-big">3.6M</div>
 
       <div class="live-subs-label">TikTok Followers</div>
 
       <div class="live-badge">
-        <span class="live-badge-dot"></span>
-        <span>Estimated Public Count</span>
+        <span class="live-badge-dot" id="jpg-dot"></span>
+        <span id="jpg-badge-text">Loading</span>
       </div>
     </div>
   </div>
@@ -742,19 +742,18 @@
   <div class="creator-body">
     <div class="stat-grid">
       <div class="stat-cell">
-        <div class="stat-val">3.6M</div>
+        <div class="stat-val" id="jpg-stat-subs">3.6M</div>
         <div class="stat-key">TikTok Followers</div>
-        <div class="stat-note">Estimated from public tracking sites because TikTok has limited public data access.</div>
       </div>
 
       <div class="stat-cell">
-        <div class="stat-val">161M+</div>
-        <div class="stat-key">TikTok Likes</div>
+        <div class="stat-val" id="jpg-stat-likes">161M+</div>
+        <div class="stat-key">Total Likes</div>
       </div>
 
       <div class="stat-cell">
-        <div class="stat-val">Fitness Coach</div>
-        <div class="stat-key">Primary Content</div>
+        <div class="stat-val" id="jpg-stat-vids">—</div>
+        <div class="stat-key">Videos Posted</div>
       </div>
 
       <div class="stat-cell">
@@ -952,6 +951,14 @@
           'bro-stat-started':   'channelStarted',
           'bro-stat-vpm':       'videosPerMonth',
           'bro-stat-duration':  'avgDurationMin',
+        }
+      },
+      jpg: {
+        bigId: 'jpg-subs-big', dotId: 'jpg-dot', badgeId: 'jpg-badge-text',
+        cells: {
+          'jpg-stat-subs':   'subscribers',
+          'jpg-stat-likes':  'totalViews',
+          'jpg-stat-vids':   'videoCount',
         }
       },
     };

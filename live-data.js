@@ -178,17 +178,41 @@
     return { ...STATIC[key], ...base, topVideo };
   }
 
+  async function fetchTikTokStats() {
+    const res = await fetchWithTimeout(
+      'https://countik.com/api/userinfo/name/jpgcoaching'
+    );
+    if (!res.ok) throw new Error(`countik HTTP ${res.status}`);
+    const j = await res.json();
+    const fans  = parseInt(j.fans  || 0, 10);
+    const heart = parseInt(j.heart || 0, 10);
+    const video = parseInt(j.video || 0, 10);
+    if (!fans) throw new Error('No follower data returned');
+    return {
+      subscribers: fmt(fans),
+      totalViews:  fmt(heart),
+      videoCount:  video ? String(video) : '—',
+      liveLoaded:  true,
+      raw: { subscribers: fans, views: heart, videos: video }
+    };
+  }
+
   async function init() {
     window.LIVE = JSON.parse(JSON.stringify(STATIC));
 
-    const keys    = Object.keys(CHANNELS);
-    const results = await Promise.allSettled(
-      keys.map(k => fetchCreator(k, CHANNELS[k]))
-    );
+    const ytKeys = Object.keys(CHANNELS);
+    const [ytResults, [ttResult]] = await Promise.all([
+      Promise.allSettled(ytKeys.map(k => fetchCreator(k, CHANNELS[k]))),
+      Promise.allSettled([fetchTikTokStats()])
+    ]);
 
-    results.forEach((r, i) => {
-      if (r.status === 'fulfilled') window.LIVE[keys[i]] = r.value;
+    ytResults.forEach((r, i) => {
+      if (r.status === 'fulfilled') window.LIVE[ytKeys[i]] = r.value;
     });
+
+    if (ttResult.status === 'fulfilled') {
+      window.LIVE.jpg = { ...window.LIVE.jpg, ...ttResult.value };
+    }
 
     document.dispatchEvent(new Event('liveDataReady'));
   }
