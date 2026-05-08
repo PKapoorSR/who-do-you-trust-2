@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Influencers — Who Do You Trust?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Spectral:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f7f7f5; --surface: #ffffff; --surface2: #f0efed;
+      --border: #e0dfd8; --text: #111118; --muted: #6b6b7a; --dim: #c0bfba;
+      --jeff: #0369a1; --togi: #be123c; --bro: #b45309; --jpg: #7c3aed;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Spectral', serif; font-size: 1.05rem; line-height: 1.72; }
+    a { color: inherit; text-decoration: none; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(247,247,245,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 3.5rem;
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; letter-spacing: 0.12em; }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: 'DM Mono', monospace; font-size: 0.75rem;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+    .quick-nav {
+      position: sticky; top: 58px; z-index: 90;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+    }
+    .quick-nav-label {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+      padding: 0.9rem 1.5rem; border-right: 1px solid var(--border); flex-shrink: 0;
+    }
+    .quick-nav a {
+      font-family: 'DM Mono', monospace; font-size: 0.75rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.9rem 1.6rem; border-right: 1px solid var(--border);
+      transition: background 0.2s; color: var(--muted);
+    }
+    .quick-nav a:hover { background: var(--surface2); color: var(--text); }
+    .quick-nav a.jeff { color: var(--jeff); }
+    .quick-nav a.togi { color: var(--togi); }
+    .quick-nav a.bro  { color: var(--bro); }
+    .quick-nav a.jpg  { color: var(--jpg); }
+
+    .page-header {
+      padding: 5rem 3.5rem 3rem; border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 2rem;
+    }
+    .page-header-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+    .page-header-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 6vw, 5rem); letter-spacing: 0.03em; line-height: 0.95; }
+    .page-header-sub { font-size: 1rem; color: var(--muted); margin-top: 1rem; max-width: 560px; line-height: 1.7; }
+    .status-text { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); }
+    .status-text .ok { color: #4ade80; }
+    .status-text .err { color: #f87171; }
+
+    /* CREATOR SECTION SHELL */
+    .creator-section { border-bottom: 2px solid var(--border); }
+    .creator-accent-bar { height: 4px; width: 100%; }
+
+    .creator-header {
+      padding: 4rem 3.5rem 2rem;
+      display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: start;
+      border-bottom: 1px solid var(--border);
+    }
+    .creator-eyebrow {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem;
+    }
+    .creator-name-big {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 6rem); letter-spacing: 0.02em; line-height: 0.92;
+      color: var(--creator-color, var(--text));
+    }
+    .creator-handle-big {
+      font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--muted);
+      margin-top: 0.6rem; letter-spacing: 0.06em;
+    }
+    .creator-bio { margin-top: 1.5rem; font-size: 1rem; color: var(--muted); max-width: 600px; line-height: 1.75; }
+    .creator-bio em { font-style: italic; color: var(--text); }
+    .creator-header-right { text-align: right; flex-shrink: 0; }
+    .live-subs-big {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem; color: var(--creator-color, var(--text));
+      letter-spacing: 0.03em; line-height: 1;
+    }
+    .live-subs-label {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.2rem;
+    }
+    .live-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.5rem;
+      padding: 0.25rem 0.6rem; border: 1px solid var(--border); background: var(--surface);
+      font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted);
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .live-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--muted); }
+    .live-badge-dot.on { background: #4ade80; box-shadow: 0 0 5px #4ade80; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    .creator-body { padding: 0 3.5rem; }
+
+    /* STATS */
+    .stat-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 2px; margin: 2.5rem 0; }
+    .stat-cell { background: var(--surface); border: 1px solid var(--border); padding: 1.4rem 1.2rem; }
+    .stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.9rem; letter-spacing: 0.03em; line-height: 1; color: var(--text); margin-bottom: 0.3rem; }
+    .stat-key { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* KEY INSIGHT */
+    .key-insight {
+      margin: 0 0 2.5rem;
+      padding: 1.8rem 2rem;
+      border-left: 3px solid var(--creator-color, var(--muted));
+      background: var(--surface);
+    }
+    .key-insight-label {
+      font-family: 'DM Mono', monospace; font-size: 0.6rem; text-transform: uppercase;
+      letter-spacing: 0.16em; color: var(--muted); margin-bottom: 0.6rem;
+    }
+    .key-insight-text { font-size: 1.05rem; line-height: 1.72; color: var(--text); font-style: italic; }
+
+    /* CREDIBILITY SCORES + REVENUE */
+    .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 2.5rem; }
+    .analysis-panel { background: var(--surface); border: 1px solid var(--border); padding: 2rem; }
+    .analysis-panel-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+    .analysis-panel-cite { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); margin-bottom: 1.5rem; letter-spacing: 0.06em; }
+    .analysis-note { font-size: 0.93rem; color: var(--muted); line-height: 1.72; }
+    .analysis-note em { font-style: italic; color: var(--text); }
+    .score-row { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+    .score-row:last-child { margin-bottom: 0; }
+    .score-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); width: 110px; flex-shrink: 0; }
+    .score-track { flex: 1; height: 6px; background: var(--surface2); border: 1px solid var(--border); overflow: hidden; }
+    .score-fill { height: 100%; background: var(--creator-color, var(--muted)); }
+    .score-num { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; width: 36px; text-align: right; color: var(--text); line-height: 1; }
+    .score-why { font-family: 'DM Mono', monospace; font-size: 0.59rem; color: var(--dim); letter-spacing: 0.04em; line-height: 1.5; margin: 0.2rem 0 0.9rem; }
+    .score-row { margin-bottom: 0.3rem; }
+    .risk-verdict { margin-top: 1.5rem; padding: 1rem 1.2rem; background: var(--bg); border: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+    .risk-verdict strong { color: var(--text); font-weight: 600; }
+    .ranking-note { margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid var(--border); font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); line-height: 1.6; letter-spacing: 0.03em; }
+    .ranking-note em { font-style: italic; color: var(--text); }
+    .sift-key { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--dim); letter-spacing: 0.04em; margin-bottom: 0.6rem; }
+
+    /* TACTICS */
+    .tactics-section { margin-bottom: 2.5rem; }
+    .tactics-header { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+    .tactics-sub { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); margin-bottom: 1.5rem; letter-spacing: 0.06em; }
+    .tactics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+    .tactic-cell { background: var(--surface); border: 1px solid var(--border); padding: 1.5rem; }
+    .tactic-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: 0.06em; color: var(--creator-color, var(--text)); margin-bottom: 0.6rem; line-height: 1.1; }
+    .tactic-body { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+    .tactic-body em { font-style: italic; color: var(--text); }
+
+    /* SIFT */
+    .sift-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; margin-bottom: 2.5rem; grid-auto-rows: auto; }
+    .sift-cell { background: var(--surface); border: 1px solid var(--border); padding: 1.5rem; }
+    .sift-step-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 0.3rem; }
+    .sift-step-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.04em; color: var(--creator-color, var(--text)); margin-bottom: 0.8rem; line-height: 1; }
+    .sift-mini-bar { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem; }
+    .sift-track { flex: 1; height: 4px; background: var(--surface2); border: 1px solid var(--border); overflow: hidden; }
+    .sift-fill { height: 100%; background: var(--creator-color, var(--muted)); }
+    .sift-val { font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; color: var(--text); line-height: 1; }
+    .sift-note { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+    /* AUDIENCE */
+    .audience-section { margin-bottom: 2.5rem; }
+    .audience-header { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+    .audience-sub { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); margin-bottom: 1.5rem; letter-spacing: 0.06em; }
+    .audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .audience-panel { background: var(--surface); border: 1px solid var(--border); padding: 2rem; }
+    .audience-panel-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; letter-spacing: 0.06em; margin-bottom: 1rem; }
+    .audience-body { font-size: 0.95rem; color: var(--muted); line-height: 1.72; }
+    .audience-body em { font-style: italic; color: var(--text); }
+
+    /* COMPARISON CALLOUT */
+    .vs-callout {
+      margin-bottom: 2.5rem; padding: 1.5rem 2rem;
+      background: var(--bg); border: 1px solid var(--border);
+      border-left: 3px solid var(--creator-color, var(--muted));
+    }
+    .vs-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); margin-bottom: 0.5rem; }
+    .vs-text { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+    .vs-text em { font-style: italic; color: var(--text); }
+
+    /* CLAIMS */
+    .claims-section { margin-bottom: 4rem; }
+    .claims-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+    .claims-sub { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); margin-bottom: 1.5rem; letter-spacing: 0.06em; }
+    .claim-list { display: flex; flex-direction: column; gap: 1rem; }
+    .claim-item {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 1.1rem 1.4rem; display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .risk-tag { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.25rem 0.55rem; flex-shrink: 0; border: 1px solid; margin-top: 0.1rem; }
+    .risk-low  { color: #16a34a; border-color: rgba(22,163,74,0.3);   background: rgba(22,163,74,0.07); }
+    .risk-mod  { color: #d97706; border-color: rgba(217,119,6,0.3);   background: rgba(217,119,6,0.07); }
+    .risk-high { color: #dc2626; border-color: rgba(220,38,38,0.3);   background: rgba(220,38,38,0.07); }
+    .claim-text { font-size: 0.93rem; color: var(--muted); line-height: 1.62; }
+    .claim-text strong { color: var(--text); font-weight: 600; }
+
+    footer { border-top: 1px solid var(--border); padding: 2rem 3.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .footer-l { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); }
+    .footer-r { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--dim); }
+
+    @media (max-width: 1000px) {
+      .stat-grid { grid-template-columns: repeat(3,1fr); }
+      .sift-grid { grid-template-columns: repeat(2,1fr); }
+      .tactics-grid { grid-template-columns: repeat(2,1fr); }
+      .analysis-grid { grid-template-columns: 1fr; }
+      .audience-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .quick-nav { top: 50px; overflow-x: auto; }
+      .creator-header { grid-template-columns: 1fr; padding: 2.5rem 1.5rem 1.5rem; }
+      .creator-header-right { text-align: left; }
+      .creator-body { padding: 0 1.5rem; }
+      .stat-grid { grid-template-columns: repeat(2,1fr); }
+      .sift-grid { grid-template-columns: 1fr 1fr; }
+      .tactics-grid { grid-template-columns: 1fr; }
+      .page-header { padding: 3rem 1.5rem 2rem; grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">WHO DO YOU TRUST?</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="influencers.html" class="active">Influencers</a>
+    <a href="compare.html">Compare</a>
+    <a href="concepts.html">Concepts</a>
+  </div>
+</nav>
+
+<div class="quick-nav">
+  <span class="quick-nav-label">Jump to</span>
+  <a href="#jeff" class="jeff">Jeff Nippard</a>
+  <a href="#togi" class="togi">Togi</a>
+  <a href="#bro" class="bro">Bro Science</a>
+  <a href="#jpg" class="jpg">JPG</a>
+</div>
+
+<div class="page-header">
+  <div>
+    <p class="page-header-label">02 — Influencer Profiles</p>
+    <h1 class="page-header-title">The Four Creators</h1>
+    <p class="page-header-sub">For each creator: who they are, how they manufacture trust, credibility scores, audience psychology, and content risk.</p>
+  </div>
+  <div class="status-text" id="page-status-text"><span class="ok">◌</span> Loading&hellip;</div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     JEFF NIPPARD
+════════════════════════════════════════ -->
+<div class="creator-section" id="jeff" style="--creator-color: var(--jeff)">
+  <div class="creator-accent-bar" style="background: var(--jeff)"></div>
+  <div class="creator-header">
+    <div>
+      <p class="creator-eyebrow">Creator 01 · Science-Based Bodybuilding</p>
+      <h2 class="creator-name-big">Jeff Nippard</h2>
+      <div class="creator-handle-big">@jeffnippard · YouTube</div>
+      <p class="creator-bio">
+        Jeff has a biochemistry degree and competed in powerlifting at the national level. His channel started around 2014. Every video cites research papers on screen and explains the reasoning. He has updated his positions over time when the evidence changed — which is unusual in this space.
+      </p>
+    </div>
+    <div class="creator-header-right">
+      <div class="live-subs-big" id="jeff-subs-big">8.35M</div>
+      <div class="live-subs-label">YouTube Subscribers</div>
+      <div class="live-badge"><span class="live-badge-dot" id="jeff-dot"></span><span id="jeff-badge-text">Cached</span></div>
+    </div>
+  </div>
+  <div class="creator-body">
+    <div class="stat-grid">
+      <div class="stat-cell"><div class="stat-val" id="jeff-stat-subs">8.35M</div><div class="stat-key">YT Subscribers</div></div>
+      <div class="stat-cell"><div class="stat-val" id="jeff-stat-views">1.75B</div><div class="stat-key">Total Views</div></div>
+      <div class="stat-cell"><div class="stat-val">617</div><div class="stat-key">Videos</div></div>
+      <div class="stat-cell"><div class="stat-val">3.33%</div><div class="stat-key">YT Engagement</div></div>
+      <div class="stat-cell"><div class="stat-val">84.5%</div><div class="stat-key">Male Audience</div></div>
+      <div class="stat-cell"><div class="stat-val">26%</div><div class="stat-key">US Audience</div></div>
+    </div>
+
+    <div class="key-insight">
+      <div class="key-insight-label">Core analytical thesis</div>
+      <p class="key-insight-text">Jeff's credibility comes from doing exactly what academic credibility looks like — and building a 10-year track record of not contradicting himself. His authority is earned through accumulated consistency, not just credentials.</p>
+    </div>
+
+    <div class="analysis-grid">
+      <div class="analysis-panel">
+        <div class="analysis-panel-title">Source Credibility Scores</div>
+        <div class="analysis-panel-cite">Hovland, Janis &amp; Kelley (1953) · Higher = more credible on that dimension</div>
+        <div class="score-row"><span class="score-label">Expertise</span><div class="score-track"><div class="score-fill" style="width:90%"></div></div><span class="score-num">90</span></div>
+        <p class="score-why">#1 of 4 · Biochemistry degree + national powerlifting + 10 years citing research on screen</p>
+        <div class="score-row"><span class="score-label">Trustworthiness</span><div class="score-track"><div class="score-fill" style="width:85%"></div></div><span class="score-num">85</span></div>
+        <p class="score-why">#1 of 4 · Discloses all sponsors · turns down brands he doesn't use · has publicly reversed wrong positions</p>
+        <div class="score-row"><span class="score-label">Appeal</span><div class="score-track"><div class="score-fill" style="width:65%"></div></div><span class="score-num">65</span></div>
+        <p class="score-why">#4 of 4 · Respected but not beloved · audience follows for content, not personality · least parasocial of the four</p>
+        <div class="risk-verdict">
+          <strong style="color:#4ade80">Content Risk: 10/100 — Very Low.</strong> Claims are accurate, traceable, and conservatively stated. The MacroFactor conflict of interest is real but disclosed. Primary risk is over-reliance on one source, not misinformation.
+        </div>
+        <div class="ranking-note">Jeff is <em>#1 on Expertise and Trustworthiness</em> but <em>#4 on Appeal</em> — the only creator whose credibility is built on evidence rather than personality. That distribution is rare and tells you something important about fitness media.</div>
+      </div>
+      <div class="analysis-panel">
+        <div class="analysis-panel-title">How He Makes Money</div>
+        <div class="analysis-panel-cite">Disclosed relationships as of April 2026</div>
+        <p class="analysis-note">
+          MacroFactor app (he co-created it, earns referral income via code JEFF). Training programs. Selective sponsorships, all disclosed. He is notable for turning down brands he doesn't use personally. <em>The MacroFactor conflict of interest is real — he profits from recommending his own product</em> — but it is disclosed, and the app's methodology is defensible.
+        </p>
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
+          <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem">Audience data (StarNgage / HypeAuditor, April 2026)</div>
+          <p class="analysis-note">3.87M Instagram followers · 3.17% IG engagement · 4.7M avg monthly YT views · Top country: USA 26%</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tactics-section">
+      <div class="tactics-header">How Trust Is Manufactured</div>
+      <div class="tactics-sub">The specific psychological and visual mechanics that make audiences believe him</div>
+      <div class="tactics-grid">
+        <div class="tactic-cell">
+          <div class="tactic-name">The Scientific Visual Register</div>
+          <p class="tactic-body">White-background graphics, on-screen citations, comparison charts. These borrow the visual language of academic papers. Before he says a word, the aesthetic signals: <em>treat this like research, not a YouTube video.</em></p>
+        </div>
+        <div class="tactic-cell">
+          <div class="tactic-name">Citing Himself Correctly</div>
+          <p class="tactic-body">He shows the study on screen, links it in the description, and accurately represents what it says. This is rare enough in fitness content that it immediately separates him from the field.</p>
+        </div>
+        <div class="tactic-cell">
+          <div class="tactic-name">Updating His Positions</div>
+          <p class="tactic-body">Jeff has publicly reversed claims when the evidence changed. This is a trust multiplier — <em>it signals honesty over ego,</em> which is the hardest thing to fake over a 10-year career. Consistency is the credential.</p>
+        </div>
+        <div class="tactic-cell">
+          <div class="tactic-name">Controlled Disclosure</div>
+          <p class="tactic-body">He discloses all brand deals and actively turns down brands he doesn't personally use. The act of publicly declining sponsorships is itself a credibility signal — it implies the ones he accepts are genuine.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sift-grid">
+      <div class="sift-cell" style="grid-column: 1 / -1; background: var(--bg); padding: 0.8rem 1.2rem;">
+        <p class="sift-key">SIFT scores: higher = easier to verify / safer to trust · lower = harder to check / higher risk of misinformation · scores are relative to the other three creators</p>
+      </div>
+      <div class="sift-cell">
+        <div class="sift-step-label">S — Stop</div>
+        <div class="sift-step-name">Stop</div>
+        <div class="sift-mini-bar"><div class="sift-track"><div class="sift-fill" style="width:80%"></div></div><span class="sift-val">80</span></div>
+        <p class="sift-note">Content is slow and detailed. It's not built to trigger a quick reaction or be shared impulsively.</p>
+      </div>
+      <div class="sift-cell">
+        <div class="sift-step-label">I — Investigate</div>
+        <div class="sift-step-name">Investigate</div>
+        <div class="sift-mini-bar"><div class="sift-track"><div class="sift-fill" style="width:88%"></div></div><span class="sift-val">88</span></div>
+        <p class="sift-note">Easy to verify — biochemistry degree, national powerlifting history, long consistent track record.</p>
+      </div>
+      <div class="sift-cell">
+        <div class="sift-step-label">F — Find Coverage</div>
+        <div class="sift-step-name">Find Coverage</div>
+        <div class="sift-mini-bar"><div class="sift-track"><div class="sift-fill" style="width:85%"></div></div><span class="sift-val">85</span></div>
+        <p class="sift-note">Claims show up in sports science journals and are cited by other research-focused creators independently.</p>
+      </div>
+      <div class="sift-cell">
+        <div class="sift-step-label">T — Trace Claims</div>
+        <div class="sift-step-name">Trace Claims</div>
+        <div class="sift-mini-bar"><div class="sift-track"><div class="sift-fill" style="width:90%"></div></div><span class="sift-val">90</span></div>
+        <p class="sift-note">Research is shown on screen and linked in descriptions. The original studies are real and say what he claims they say.</p>
+      </div>
+    </div>
+
+    <div class="audience-section">
+      <div class="audience-header">Who Trusts Him &amp; Why</div>
+      <div class="audience-sub">Audience psychology — who follows Jeff, and what need the content meets</div>
+      <div class="audience-grid">
+        <div class="audience-panel">
+          <div class="audience-panel-title">Audience Profile</div>
+          <p class="audience-body">Jeff's core audience values credentials and has usually been burned by confident-sounding fitness advice before. They're skeptical of bro science and actively look for an alternative. Many are intermediate lifters — they know enough to be suspicious of bad claims, but not enough to evaluate all research themselves. Jeff gives them <em>a reason to trust that feels legitimate.</em> The risk is over-reliance: Jeff still profits from being trusted, even when he's being careful.</p>
+        </div>
+        <div class="audience-panel">
+          <div class="audience-panel-title">Psychological Appeal</div>
+          <p class="audience-body">The emotional draw is <em>being right.</em> Following Jeff makes the viewer feel like they're the kind of person who does research — which is an identity, not just a behavior. The content validates a self-image: "I'm not one of those people who falls for bro science." This is why engagement is high even on very technical content. The audience isn't just learning — they're reinforcing who they believe themselves to be.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="vs-callout">
+      <div class="vs-label">Compared to the others</div>
+      <p class="vs-text">Jeff is the only creator here whose claims can be verified externally. Togi, Bro Science, and JPG all rely on some form of personal authority — experience, authenticity, or charisma. <em>Jeff is the only one whose credibility survives the question: "What happens if I check this?"</em> His lowest score is Appeal — which is the dimension most disconnected from being right.</p>
+    </div>
+
+    <div class="claims-section">
+      <div class="claims-title">Key Claims &amp; Risk</div>
+      <div class="claims-sub">Risk = potential for harm if someone believes the claim without thinking critically about it.</div>
+      <div class="claim-list">
+        <div class="claim-item"><span class="risk-tag risk-low">Low Risk</span><span class="claim-text"><strong>"Training to failure isn't required to build muscle"</strong> — backed by multiple meta-analyses. Accurate representation of current research.</span></div>
+        <div class="claim-item"><span class="risk-tag risk-low">Low Risk</span><span class="claim-text"><strong>"Eat 0.7–1g of protein per pound of bodyweight"</strong> — in line with major sports nutrition guidelines. Broadly accurate for muscle-building goals.</span></div>
+        <div class="claim-item"><span class="risk-tag risk-mod">Moderate Risk</span><span class="claim-text"><strong>MacroFactor app recommendations.</strong> He co-created this product and earns referral income from it. The conflict is disclosed, but it's still a financial stake in the recommendation. The algorithm inside the app is not peer-reviewed.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     TOGI
+════════════════════════════════════════ -->
+<div class="creator-section" id="togi" style="--creator-color: var(--togi)">
+  <div class="creator-accent-bar" style="background: var(--togi)"></div>
+  <div class="creator-header">
+    <div>
+      <p class="creator-eyebrow">Creator 02 · Raw Lifestyle / PEDs / Gambling</p>
+      <h2 class="creator-name-big">Togi</h2>
+      <div class="creator-handle-big">@stoffer__ (IG) · @ShaneStoffer (YT) · Shane Stoffer, born July 20, 2002</div>
+      <p class="creator-bio">
+        Shane Stoffer is 23. He built his following by showing everything — steroid cycles, gambling wins and losses, and in November 2024, an overdose that put him in hospital (which he posted about himself). His brand is total openness. He doesn't claim to be an expert. In July 2024, fitness creator Greg Doucette publicly called him out for making steroid use look appealing to young viewers.
+      </p>
+    </div>
+    <div class="creator-header-right">
+      <div class="live-subs-big" id="togi-subs-big">740K</div>
+      <div class="live-subs-label">YouTube Subscribers</div>
+      <div class="live-badge"><span class="live-badge-dot" id="togi-dot"></span><span id="togi-badge-text">Cached</span></div>
+    </div>
+  </div>
+  <div class="creator-body">
+    <div class="stat-grid">
+      <div class="stat-cell"><div class="stat-val" id="togi-stat-subs">740K</div><div class="stat-key">YT Subscribers</div></div>
+      <div class="stat-cell"><div class="stat-val">1M+</div><div class="stat-key">IG Followers</div></div>
+      <div class="stat-cell"><div class="stat-val">195K</div><div class="stat-key">Kick Followers</div></div>
+      <div class="stat-cell"><div class="stat-val" id="togi-stat-views">85M</div><div class="stat-key">YT Total Views</div></div>
+      <div class="stat-cell"><div class="stat-val">18–25</div><div class="stat-key">Core Audience Age</div></div>
+      <div class="stat-cell"><div class="stat-val">Age 23</div><div class="stat-key">Creator Age</div></div>
+    </div>
+
+    <div class="key-insight">
+      <div class="key-insight-label">Core analytical thesis</div>
+      <p class="key-insight-text">Togi's appeal doesn't come from expertise — it comes from a feeling of access. His audience doesn't follow him because he knows things. They follow him because he seems to tell the truth. That's a completely different credibility mechanism, and it's harder to fact-check than a citation.</p>
+    </div>
+
+    <div class="analysis-grid">
+      <div class="analysis-panel">
+        <div class="analysis-panel-title">Source Credibility Scores</div>
+        <div class="analysis-panel-cite">Hovland, Janis &amp; Kelley (1953) · Higher = more credible on that dimension</div>
+        <div class="score-row"><span class="score-label">Expertise</span><div class="score-track"><div class="score-fill" style="width:22%; background:var(--togi)"></div></div><span class="score-num">22</span></div>
+        <p class="score-why">#4 of 4 · No credentials or professional background · authority comes entirely from personal experience</p>
+        <div class="score-row"><span class="score-label">Trustworthiness</span><div class="score-track"><div class="score-fill" style="width:28%; background:var(--togi)"></div></div><span class="score-num">28</span></div>
+        <p class="score-why">#4 of 4 · Roobet gambling deal inconsistently disclosed · overdose disclosure built trust while financial conflicts stayed hidden</p>
+        <div class="score-row"><span class="score-label">Appeal</span><div class="score-track"><div class="score-fill" style="width:88%; background:var(--togi)"></div></div><span class="score-num">88</span></div>
+        <p class="score-why">#1 of 4 · Highest parasocial loyalty of the four · audience feels like personal friends, not fans</p>
+        <div class="risk-verdict">
+          <strong style="color:#f87171">Content Risk: 91/100 — Very High.</strong> Normalizes steroid use with no safety context to an 18–25 male audience. Promotes crypto gambling via an undisclosed paid partnership. Personal-story framing cannot be fact-checked or challenged.
+        </div>
+        <div class="ranking-note">Togi is <em>#1 on Appeal</em> and <em>#4 on both Expertise and Trustworthiness</em> — the exact inverse of Jeff. This is the dataset's key finding: <em>the least verifiable creator has the most loyal audience.</em></div>
+      </div>
+      <div class="analysis-panel">
+        <div class="analysis-panel-title">How He Makes Money</div>
+        <div class="analysis-panel-cite">Documented relationships as of April 2026</div>
+        <p class="analysis-note">
+          Roobet (crypto casino affiliate) is his main income source. evoir.com supplement brand. YouTube ad revenue. Merchandise. <em>The Roobet deal creates a direct financial incentive to promote high-risk gambling to a young male audience.</em> Disclosure is inconsistent — the deal often appears inside candid, personal-seeming content where it's least visible.
+        </p>
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
+          <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem">Key incidents (self-reported / public record)</div>
+          <p class="analysis-note">Nov 2024: Hospitalized after overdose, disclosed on X · Jul 2024: Greg Doucette publicly criticized his PED content</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tactics-section">
+      <div class="tactics-header">How Trust Is Manufactured</div>
+      <div class="tactics-sub">The specific psychological and visual mechanics that make audiences believe him</div>
+      <div class="tactics-grid">
+        <div class="tactic-cell">
+          <div class="tactic-name">The Authenticity Aesthetic</div>
+          <p class="tactic-body">Raw, handheld footage. Unedited takes. Gym mirrors and direct camera address. This visual language signals "nothing is staged." <em>It takes as much craft as professional production</em> — the difference is it looks like it doesn't.</p>
+        </div>
+        <div class="tactic-cell">
+          <div class="tactic-name">Radical Disclosure</div>
+          <p class="tactic-body">Documenting the overdose, failed cycles, gambling losses. Each disclosure implies: if he tells us that, he's not hiding anything. But what disclosure reveals and what it obscures are separate questions. The format forecloses follow-up.</p>
+        </div>
+        <div class="tactic-cell">
+          <div class="tactic-name">Parasocial Intimacy</div>
+          <p class="tactic-body">The audience feels like personal friends, not fans. Comments feel like conversations. <em>This depth of connection makes viewers extend more trust than they would to a stranger with the same track record.</em> Trust flows from relationship, not evidence.</p>
+        </div>
+        <div class="tactic-cell">
+          <div class="tactic-name">Unfalsifiable Framing</div>
+          <p class="tactic-body">"This is what happened to me" is a credibility argument that can't be fact-checked. Personal experience doesn't have a source you can verify. Trust is earned on emotional grounds entirely — which means it can't be corrected by evidence either.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sift-grid">
+      <div class="sift-cell" style="grid-column: 1 / -1; background: var(--bg); padding: 0.8rem 1.2rem;">
+        <p class="sift-key">SIFT scores: higher = easier to verify / safer to trust · lower = harder to check / higher risk of misinformation · scores are relative to the other three creators</p>
+      </div>
+      <div class="sift-cell">
+        <div class="sift-step-label">S — Stop</div>
+        <div class="sift-step-name">Stop</div>
+        <div class="sift-mini-bar"><div class="sift-track"><div class="sift-fill" style="width:8%; background:var(--togi)"></div></div><span class="sift-val">8</span></div>
+        <p class="sift-note">Built for emotional moments — shock, concern, personal drama. Very hard to watch passively without reacting.</p>
+      </div>
+      <div class="sift-cell">
+        <div class="sift-step-label">I — Investigate</div>
+        <div class="sift-step-name">Investigate</div>
+        <div class="sift-mini-bar"><div class="sift-track"><div class="sift-fill" style="width:14%; background:var(--togi)"></div></div><span class="sift-val">14</span></div>
+        <p class="sift-note">Almost no verifiable background outside of what he posts himself. No credentials, no professional history.</p>
+      </div>
+      <div class="sift-cell">
+        <div class="sift-step-label">F — Find Coverage</div>
+        <div class="sift-step-name">Find Coverage</div>
+        <div class="sift-mini-bar"><div class="sift-track"><div class="sift-fill" style="width:10%; background:var(--togi)"></div></div><span class="sift-val">10</span></div>
+        <p class="sift-note">Very little third-party coverage. The main example is Greg Doucette's public criticism — a callout, not a validation.</p>
+      </div>
+      <div class="sift-cell">
+        <div class="sift-step-label">T — Trace Claims</div>
+        <div class="sift-step-name">Trace Claims</div>
+        <div class="sift-mini-bar"><div class="sift-track"><div class="sift-fill" style="width:12%; background:var(--togi)"></div></div><span class="sift-val">12</span></div>
+        <p class="sift-note">Claims are personal stories. "This happened to me" is the whole argument — and personal stories can't be verified or refuted.</p>
+      </div>
+    </div>
+
+    <div class="audience-section">
+      <div class="audience-header">Who Trusts Him &amp; Why</div>
+      <div class="audience-sub">Audience psychology — who follows Togi, and what need the content meets</div>
+      <div class="audience-grid">
+        <div class="audience-panel">
+          <div class="audience-panel-title">Audience Profile</div>
+          <p class="audience-body">Togi's audience is mostly male, 18–25, with high risk tolerance and a distrust of polished media. They feel fitness content is too sanitized — everyone has a sponsor, everyone looks too optimized, everything is on-brand. Togi feels like <em>the un-optimized version.</em> The emotional pull is identification: Shane is young, makes mistakes, and keeps going. His audience isn't following an expert. They're following someone who feels like them.</p>
+        </div>
+        <div class="audience-panel">
+          <div class="audience-panel-title">Psychological Appeal</div>
+          <p class="audience-body">The specific insecurity Togi targets is the feeling that mainstream fitness culture is fake. His content validates the viewer's skepticism: <em>"See? Even the 'experts' are hiding something. At least this guy is honest."</em> This creates strong loyalty — but it also makes the audience less likely to question him, because questioning him feels like falling back into the cynicism they rejected. Trust becomes immune to criticism.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="vs-callout">
+      <div class="vs-label">Compared to the others</div>
+      <p class="vs-text">Togi scores the lowest on SIFT across all four creators — almost no verifiability, almost no external coverage. He also has one of the most loyal audiences. <em>That inversion — lowest evidence, highest loyalty — is the clearest demonstration that trust in fitness content doesn't follow the same rules as trust in journalism.</em> Jeff's credibility survives scrutiny. Togi's is built specifically to not need it.</p>
+    </div>
+
+    <div class="claims-section">
+      <div class="claims-title">Key Claims &amp; Risk</div>
+      <div class="claims-sub">Risk = potential for harm if someone believes the claim without thinking critically about it.</div>
+      <div class="claim-list">
+        <div class="claim-item"><span class="risk-tag risk-high">High Risk</span><span class="claim-text"><strong>Detailed steroid cycle documentation with no medical context or warnings.</strong> His audience is mostly 18–25 year old males. No dosage warnings, no mention of individual variation or long-term risks.</span></div>
+        <div class="claim-item"><span class="risk-tag risk-high">High Risk</span><span class="claim-text"><strong>Roobet promotion embedded inside personal content.</strong> A paid crypto casino partnership, inconsistently disclosed, targeting a young audience with high risk tolerance and limited financial experience.</span></div>
+        <div class="claim-item"><span class="risk-tag risk-mod">Moderate Risk</span><span class="claim-text"><strong>"I don't hide anything"</strong> — this framing builds enormous trust. It also makes it harder to notice what is being left out, or what financial incentives are operating behind the candor.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     BRO SCIENCE
+════════════════════════════════════════ -->
+<div class="creator-section" id="bro" style="--creator-color: var(--bro)">
+  <div class="creator-accent-bar" style="background: var(--bro)"></div>
+  <div class="creator-header">
+    <div>
+      <p class="creator-eyebrow">Creator 03 · Satire / Comedy</p>
+      <h2 class="creator-name-big">Bro Science</h2>
+      <div class="creator-handle-big">@BroScienceLife · YouTube · Mike Tornabene as Dom Mazzetti</div>
+      <p class="creator-bio">
+        Mike Tornabene is a comedian and NYU graduate who has played "Dom Mazzetti" since December 2012. Dom is a fictional gym bro who gives confidently wrong advice. The jokes land because the observations underneath them are accurate. He collaborated with Dwayne Johnson's production company and published The Swoly Bible in 2016.
+      </p>
+    </div>
+    <div class="creator-header-right">
+      <div class="live-subs-big" id="bro-subs-big">2.5M</div>
+      <div class="live-subs-label">YouTube Subscribers</div>
+      <div class="live-badge"><span class="live-badge-dot" id="bro-dot"></span><span id="bro-badge-text">Cached</span></div>
+    </div>
+  </div>
+  <div class="creator-body">
+    <div class="stat-grid">
+      <div class="stat-cell"><div class="stat-val" id="bro-stat-subs">2.5M</div><div class="stat-key">YT Subscribers</div></div>
+      <div class="stat-cell"><div class="stat-val" id="bro-stat-views">~500M</div><div class="stat-key">Total Views</div></div>
+      <div class="stat-cell"><div class="stat-val" id="bro-stat-vids">356</div><div class="stat-key">Videos</div></div>
+      <div class="stat-cell"><div class="stat-val">Dec 2012</div><div class="stat-key">Channel Started</div></div>
+      <div class="stat-cell"><div class="stat-val">NYU</div><div class="stat-key">Creator's Degree</div></div>
+      <div class="stat-cell"><div class="stat-val">2016</div><div class="stat-key">Swoly Bible</div></div>
+    </div>
+
+    <div class="key-insight">
+      <div class="key-insight-label">Core analytical thesis</div>
+      <p class="key-insight-text">Dom Mazzetti's authority comes from being the person who already knows everything you're about to find out. The joke is always on the gym bro — but the joke only works if you're already one. Comedy is the most efficient trust vehicle on this list: it builds affinity before you've evaluated anything.</p>
+    </div>
+
+    <div class="analysis-grid">
+      <div class="analysis-panel">
+        <div class="analysis-panel-title">Source Credibility Scores</div>
+        <div class="analysis-panel-cite">Hovland, Janis &amp; Kelley (1953) · Higher = more credible on that dimension</div>
+        <div class="score-row"><span class="score-label">Expertise</span><div class="score-track"><div class="score-fill" style="width:38%; background:var(--bro)"></div></div><span class="score-num">38</span></div>
+        <p class="score-why">#2 of 4 · Comedian, not a trainer · Dom's "expertise" is intentionally performed and wrong by design</p>
+        <div class="score-row"><span class="score-label">Trustworthiness</span><div class="score-track"><div class="score-fill" style="width:62%; background:var(--bro)"></div></div><span class="score-num">62</span></div>
+        <p class="score-why">#2 of 4 · Satire signals honesty — Dom isn't pretending to be right · but brand deals are embedded inside comedy where they're hard to spot</p>
+        <div class="score-row"><span class="score-label">Appeal</span><div class="score-track"><div class="score-fill" style="width:82%; background:var(--bro)"></div></div><span class="score-num">82</span></div>
+        <p class="score-why">#2 of 4 · Comedy creates strong pre-trust · audience feels like insiders who are self-aware enough to get the joke</p>
+        <div class="risk-verdict">
+          <strong style="color:#a3e635">Content Risk: 33/100 — Low.</strong> Satire is clearly labeled; risk is low for viewers who recognize the format. Moderate risk for beginners who might take Dom's advice literally before building enough context. Sponsorships embedded inside jokes bypass normal ad skepticism.
+        </div>
+        <div class="ranking-note">Bro Science scores <em>#2 on Appeal and Trustworthiness</em>, <em>#2 on Expertise</em> — the most balanced profile, and the only one built on a format that openly acknowledges it isn't giving straight advice.</div>
+      </div>
+      <div class="analysis-panel">
+        <div class="analysis-panel-title">How He Makes Money</div>
+        <div class="analysis-panel-cite">Documented relationships as of April 2026</div>
+        <p class="analysis-note">
+          YouTube ad revenue. DomMerch.com. David Protein sponsorship — integrated inside comedy bits. Seven Bucks Studios (Dwayne Johnson's company) collaboration. The Swoly Bible (2016). <em>The satire format makes product placement harder to spot than a regular ad</em> — the recommendation arrives inside a joke, which makes it feel more like a friend's opinion than advertising.
+        </p>
+      </div>
+    </div>
+
+    <div class="tactics-section">
+      <div class="tactics-header">How Trust Is Manufactured</div>
+      <div class="tactics-sub">The specific psychological and visual mechanics that make audiences believe him</div>
+      <div class="tactics-grid">
+        <div class="tactic-cell">
+          <div class="tactic-name">Comedy as Pre-Trust</div>
+          <p class="tactic-body">Dom is likeable before he says anything. The comedy format creates affinity before any content lands. <em>You don't apply skepticism to things you're laughing at</em> — which means the critical evaluation that normally filters claims gets bypassed.</p>
+        </div>
+        <div class="tactic-cell">
+          <div class="tactic-name">Confidently Wrong</div>
+          <p class="tactic-body">Dom gives absurd advice with total conviction. This only works if the audience already knows the correct answer — which means every joke is <em>implicitly based on real knowledge the viewer already has.</em> The humor validates what you already believe.</p>
+        </div>
+        <div class="tactic-cell">
+          <div class="tactic-name">Joke-as-Deniability</div>
+          <p class="tactic-body">When Dom says something accurate, it can't be held against him — because it was a joke. When it's actually wrong, it was also a joke. This structure lets real observations live inside comedy with <em>no accountability in either direction.</em></p>
+        </div>
+        <div class="tactic-cell">
+          <div class="tactic-name">Brand Integration via Character</div>
+          <p class="tactic-body">The David Protein deal doesn't arrive as an ad — it arrives as Dom recommending something. <em>The comedy frame makes you trust the recommendation more, not less,</em> because it feels like a peer's opinion rather than paid content.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sift-grid">
+      <div class="sift-cell" style="grid-column: 1 / -1; background: var(--bg); padding: 0.8rem 1.2rem;">
+        <p class="sift-key">SIFT scores: higher = easier to verify / safer to trust · lower = harder to check / higher risk of misinformation · scores are relative to the other three creators</p>
+      </div>
+      <div class="sift-cell">
+        <div class="sift-step-label">S — Stop</div>
+        <div class="sift-step-name">Stop</div>
+        <div class="sift-mini-bar"><div class="sift-track"><div class="sift-fill" style="width:72%; background:var(--bro)"></div></div><span class="sift-val">72</span></div>
+        <p class="sift-note">The comedy format signals "don't take this literally" to most viewers. Newer viewers may not catch it right away.</p>
+      </div>
+      <div class="sift-cell">
+        <div class="sift-step-label">I — Investigate</div>
+        <div class="sift-step-name">Investigate</div>
+        <div class="sift-mini-bar"><div class="sift-track"><div class="sift-fill" style="width:55%; background:var(--bro)"></div></div><span class="sift-val">55</span></div>
+        <p class="sift-note">Background is documentable — NYU grad, professional comedian. But Dom the character has become more famous than the real person behind it.</p>
+      </div>
+      <div class="sift-cell">
+        <div class="sift-step-label">F — Find Coverage</div>
+        <div class="sift-step-name">Find Coverage</div>
+        <div class="sift-mini-bar"><div class="sift-track"><div class="sift-fill" style="width:60%; background:var(--bro)"></div></div><span class="sift-val">60</span></div>
+        <p class="sift-note">More mainstream press coverage than the other three — The Rock collaboration and his book both got real media attention.</p>
+      </div>
+      <div class="sift-cell">
+        <div class="sift-step-label">T — Trace Claims</div>
+        <div class="sift-step-name">Trace Claims</div>
+        <div class="sift-mini-bar"><div class="sift-track"><div class="sift-fill" style="width:50%; background:var(--bro)"></div></div><span class="sift-val">50</span></div>
+        <p class="sift-note">Satire makes this hard. The jokes are deliberately wrong but point at real observations. Neither fully traceable nor meaningless.</p>
+      </div>
+    </div>
+
+    <div class="audience-section">
+      <div class="audience-header">Who Trusts Him &amp; Why</div>
+      <div class="audience-sub">Audience psychology — who follows Bro Science, and what need the content meets</div>
+      <div class="audience-grid">
+        <div class="audience-panel">
+          <div class="audience-panel-title">Audience Profile</div>
+          <p class="audience-body">Bro Science's audience is already inside gym culture. The jokes only land if you recognize what's being parodied — which means you've already been socialized into the gym bro world. The core appeal is <em>shared identity:</em> laughing at the ridiculous parts of a culture you're deeply invested in. This audience doesn't follow Dom for advice. They follow him because he makes them feel like insiders who are self-aware enough to see the absurdity.</p>
+        </div>
+        <div class="audience-panel">
+          <div class="audience-panel-title">Psychological Appeal</div>
+          <p class="audience-body">The emotional function is <em>validation without information.</em> Dom's audience laughs at gym obsession while continuing to be obsessed with the gym. The humor provides a release valve — you can acknowledge how ridiculous this all is without stopping. That's why the parody reinforces the culture instead of undermining it. The satire is the most sophisticated position on this list, and also the most trapped.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="vs-callout">
+      <div class="vs-label">Compared to the others</div>
+      <p class="vs-text">Among the four creators, Bro Science is the only one that explicitly mocks fitness culture — and then re-invests in it anyway. Jeff teaches you to do it right. Togi shows you how it goes wrong. JPG makes it spiritual. Dom makes fun of all of it. <em>The satire is the most sophisticated credibility move here, and also the least separable from what it's critiquing.</em> The joke requires that you already believe in the thing it's joking about.</p>
+    </div>
+
+    <div class="claims-section">
+      <div class="claims-title">Key Claims &amp; Risk</div>
+      <div class="claims-sub">Note: Bro Science is satire. Risk here refers to the chance viewers take the content literally.</div>
+      <div class="claim-list">
+        <div class="claim-item"><span class="risk-tag risk-low">Low Risk</span><span class="claim-text"><strong>"The gym is a religion and Dom is its prophet"</strong> — clearly a joke. Works as social commentary on how seriously gym culture takes itself.</span></div>
+        <div class="claim-item"><span class="risk-tag risk-mod">Moderate Risk</span><span class="claim-text"><strong>Dom gives confidently wrong training advice.</strong> Media-literate viewers understand it's satire. Beginners might not — and could take bad advice at face value before they've built enough context to recognize the format.</span></div>
+        <div class="claim-item"><span class="risk-tag risk-mod">Moderate Risk</span><span class="claim-text"><strong>David Protein sponsorship inside comedy bits.</strong> Product promotion through humor is less obvious than a regular ad. It bypasses the skepticism people normally apply to advertising by disguising it as a character's genuine opinion.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     JPG
+════════════════════════════════════════ -->
+<div class="creator-section" id="jpg" style="--creator-color: var(--jpg)">
+  <div class="creator-accent-bar" style="background: var(--jpg)"></div>
+  <div class="creator-header">
+    <div>
+      <p class="creator-eyebrow">Creator 04 · Cosmic Wellness / Spiritual Fitness</p>
+      <h2 class="creator-name-big">JPG</h2>
+      <div class="creator-handle-big">@jpgcoaching · TikTok</div>
+      <p class="creator-bio">
+        JPG coaches on TikTok using spiritual language — energy alignment, frequency, and cosmic timing as fitness concepts. Very little public information exists about who they are. TikTok doesn't have a public API, so all follower data here is manually estimated from third-party tools.
+      </p>
+    </div>
+    <div class="creator-header-right">
+      <div class="live-subs-big">450K+</div>
+      <div class="live-subs-label">TikTok Followers</div>
+      <div class="live-badge"><span class="live-badge-dot"></span>No API (TikTok)</div>
+    </div>
+  </div>
+  <div class="creator-body">
+    <div class="stat-grid">
+      <div class="stat-cell"><div class="stat-val">450K+</div><div class="stat-key">TikTok Followers</div></div>
+      <div class="stat-cell"><div class="stat-val">Female</div><div class="stat-key">Core Audience</div></div>
+      <div class="stat-cell"><div class="stat-val">18–30</div><div class="stat-key">Audience Age</div></div>
+      <div class="stat-cell"><div class="stat-val">Spiritual</div><div class="stat-key">Content Style</div></div>
+      <div class="stat-cell"><div class="stat-val">None</div><div class="stat-key">Verifiable Creds</div></div>
+      <div class="stat-cell"><div class="stat-val">Manual</div><div class="stat-key">Data Source</div></div>
+    </div>
+
+    <div class="key-insight">
+      <div class="key-insight-label">Core analytical thesis</div>
+      <p class="key-insight-text">JPG doesn't make claims — they create feelings. The content doesn't tell you what's true; it makes you feel a certain way about your body and your potential. The credibility isn't based on being right. It's based on being resonant. That's harder to challenge than a factual error because there's nothing to refute.</p>
+    </div>
+
+    <div class="analysis-grid">
+      <div class="analysis-panel">
+        <div class="analysis-panel-title">Source Credibility Scores</div>
+        <div class="analysis-panel-cite">Hovland, Janis &amp; Kelley (1953) · Higher = more credible on that dimension</div>
+        <div class="score-row"><span class="score-label">Expertise</span><div class="score-track"><div class="score-fill" style="width:28%; background:var(--jpg)"></div></div><span class="score-num">28</span></div>
+        <p class="score-why">#3 of 4 · No credentials in any verifiable field · authority is spiritual, not professional or educational</p>
+        <div class="score-row"><span class="score-label">Trustworthiness</span><div class="score-track"><div class="score-fill" style="width:44%; background:var(--jpg)"></div></div><span class="score-num">44</span></div>
+        <p class="score-why">#3 of 4 · Not dishonest — doesn't make falsifiable claims · but monetizes beliefs that cannot be evaluated or disproven</p>
+        <div class="score-row"><span class="score-label">Appeal</span><div class="score-track"><div class="score-fill" style="width:80%; background:var(--jpg)"></div></div><span class="score-num">80</span></div>
+        <p class="score-why">#3 of 4 · Calm, resonant content fills an emotional gap that evidence-based fitness doesn't address</p>
+        <div class="risk-verdict">
+          <strong style="color:#fb923c">Content Risk: 54/100 — Medium.</strong> No immediate physical danger, but a non-scientific coaching methodology with no external accountability. Failure can be reframed as spiritual misalignment indefinitely, with no point at which the framework can be proven wrong.
+        </div>
+        <div class="ranking-note">JPG scores <em>#3 on all three dimensions</em> — not the worst on anything, but not strong on anything either. The medium risk score reflects that the harm is structural (no accountability) rather than immediate (no dangerous advice).</div>
+      </div>
+      <div class="analysis-panel">
+        <div class="analysis-panel-title">How They Make Money</div>
+        <div class="analysis-panel-cite">Estimated — no public API available for TikTok</div>
+        <p class="analysis-note">
+          Coaching programs are the main income source. TikTok Creator Fund. Likely wellness brand partnerships. Because TikTok has no public API, all numbers come from manual observation and HypeAuditor estimates — they are not live figures. The coaching program business model means <em>the less falsifiable the methodology, the harder it is for clients to demand accountability.</em>
+        </p>
+      </div>
+    </div>
+
+    <div class="tactics-section">
+      <div class="tactics-header">How Trust Is Manufactured</div>
+      <div class="tactics-sub">The specific psychological and visual mechanics that make audiences believe them</div>
+      <div class="tactics-grid">
+        <div class="tactic-cell">
+          <div class="tactic-name">The Spiritual Visual Register</div>
+          <p class="tactic-body">Soft focus, pastel tones, slow panning shots of nature and celestial imagery. This visual language signals: <em>this is a safe space, enter with openness.</em> It makes skepticism feel inappropriate before anything is said — the aesthetic disciplines the viewer's response.</p>
+        </div>
+        <div class="tactic-cell">
+          <div class="tactic-name">Non-Falsifiable Language</div>
+          <p class="tactic-body">"Energy alignment" and "frequency" can't be wrong because they don't assert anything testable. <em>You can't refute a claim that doesn't make a claim.</em> This isn't evasion — it's a structural feature of the content that makes critical evaluation irrelevant.</p>
+        </div>
+        <div class="tactic-cell">
+          <div class="tactic-name">Emotional Resonance Over Evidence</div>
+          <p class="tactic-body">The content connects to feelings of disconnection, purpose, and meaning that conventional fitness ignores. <em>It fills a gap that Jeff's citations can't.</em> People don't follow JPG instead of evidence — they follow JPG because evidence-based content doesn't address what they actually want.</p>
+        </div>
+        <div class="tactic-cell">
+          <div class="tactic-name">Identity Targeting</div>
+          <p class="tactic-body">The spiritual framework doesn't just tell you what to do. It tells you who you are. <em>"Your energy affects your results"</em> places the body inside a larger spiritual narrative. This is a much more complete purchase than a training plan — it sells self-understanding.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sift-grid">
+      <div class="sift-cell" style="grid-column: 1 / -1; background: var(--bg); padding: 0.8rem 1.2rem;">
+        <p class="sift-key">SIFT scores: higher = easier to verify / safer to trust · lower = harder to check / higher risk of misinformation · scores are relative to the other three creators</p>
+      </div>
+      <div class="sift-cell">
+        <div class="sift-step-label">S — Stop</div>
+        <div class="sift-step-name">Stop</div>
+        <div class="sift-mini-bar"><div class="sift-track"><div class="sift-fill" style="width:22%; background:var(--jpg)"></div></div><span class="sift-val">22</span></div>
+        <p class="sift-note">Spiritual content is designed to feel validating and calm. It's easy to absorb without questioning anything — that's part of what it's offering.</p>
+      </div>
+      <div class="sift-cell">
+        <div class="sift-step-label">I — Investigate</div>
+        <div class="sift-step-name">Investigate</div>
+        <div class="sift-mini-bar"><div class="sift-track"><div class="sift-fill" style="width:28%; background:var(--jpg)"></div></div><span class="sift-val">28</span></div>
+        <p class="sift-note">Almost no public background available. Highly curated brand. No verifiable credentials in any health or fitness field.</p>
+      </div>
+      <div class="sift-cell">
+        <div class="sift-step-label">F — Find Coverage</div>
+        <div class="sift-step-name">Find Coverage</div>
+        <div class="sift-mini-bar"><div class="sift-track"><div class="sift-fill" style="width:18%; background:var(--jpg)"></div></div><span class="sift-val">18</span></div>
+        <p class="sift-note">No third-party coverage. Everything exists inside TikTok's algorithm. There is no outside record to check against.</p>
+      </div>
+      <div class="sift-cell">
+        <div class="sift-step-label">T — Trace Claims</div>
+        <div class="sift-step-name">Trace Claims</div>
+        <div class="sift-mini-bar"><div class="sift-track"><div class="sift-fill" style="width:15%; background:var(--jpg)"></div></div><span class="sift-val">15</span></div>
+        <p class="sift-note">"Your energy alignment affects your results" has no original source — it's a belief, not a fact. There's nothing to trace because no factual claim is being made.</p>
+      </div>
+    </div>
+
+    <div class="audience-section">
+      <div class="audience-header">Who Trusts Them &amp; Why</div>
+      <div class="audience-sub">Audience psychology — who follows JPG, and what need the content meets</div>
+      <div class="audience-grid">
+        <div class="audience-panel">
+          <div class="audience-panel-title">Audience Profile</div>
+          <p class="audience-body">JPG's audience skews female, 18–30, and often disillusioned with conventional fitness culture's focus on metrics, calories, and performance benchmarks. The spiritual framing offers something the mainstream doesn't: <em>meaning.</em> The content addresses a real emotional gap — feeling like you're doing everything right and still not getting results, and wanting a reason for that beyond just "try harder." JPG provides the reason. It's just not a scientific one.</p>
+        </div>
+        <div class="audience-panel">
+          <div class="audience-panel-title">Psychological Appeal</div>
+          <p class="audience-body">The insecurities targeted are around <em>control and purpose.</em> Conventional fitness gives you a protocol. JPG gives you a worldview. For someone who feels like protocols haven't worked, a worldview is more appealing — it reframes failure as misalignment rather than inadequacy. This is genuinely comforting. It is also structurally designed to never be falsified — if the method doesn't work, the alignment just needs more time.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="vs-callout">
+      <div class="vs-label">Compared to the others</div>
+      <p class="vs-text">JPG is the hardest creator to analyze because the content doesn't make testable claims. With Jeff, you can check the study. With Togi, you can look at the incident. With Dom, you can identify the parody. <em>With JPG, there's no external reference point. The beliefs are self-contained.</em> That makes this the most complete form of credibility in the set — it requires no external verification because it's structurally designed to never need it.</p>
+    </div>
+
+    <div class="claims-section">
+      <div class="claims-title">Key Claims &amp; Risk</div>
+      <div class="claims-sub">Risk = potential for harm if someone believes the claim without thinking critically about it.</div>
+      <div class="claim-list">
+        <div class="claim-item"><span class="risk-tag risk-high">High Risk</span><span class="claim-text"><strong>"Your body's energy alignment affects your fitness results"</strong> — stated as fact. No scientific basis. Could lead people away from evidence-based health guidance when results don't improve.</span></div>
+        <div class="claim-item"><span class="risk-tag risk-high">High Risk</span><span class="claim-text"><strong>"Manifesting your physique through intention"</strong> — can reinforce harmful thinking about body image by framing appearance as a sign of spiritual success or failure. If you don't look how you want to, your energy is the problem.</span></div>
+        <div class="claim-item"><span class="risk-tag risk-mod">Moderate Risk</span><span class="claim-text"><strong>Coaching programs built on a non-scientific framework.</strong> Clients have no way to evaluate whether the approach works, because the methodology can't be measured against any external standard. Accountability is structurally impossible.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-l">WHO DO YOU TRUST? — Media Studies Final Project — 2026</div>
+  <div class="footer-r">Scores are analytical estimates · YouTube API v3 · HypeAuditor · StarNgage</div>
+</footer>
+
+<script src="live-data.js"></script>
+<script>
+  document.addEventListener('liveDataReady', () => {
+    const L = window.LIVE;
+    function updateCreator(key, subsId, viewsId, vidsId, bigId, dotId, badgeId) {
+      const d = L[key];
+      if (!d) return;
+      const s  = document.getElementById(subsId);
+      const v  = document.getElementById(viewsId);
+      const vi = document.getElementById(vidsId);
+      const b  = document.getElementById(bigId);
+      const dt = document.getElementById(dotId);
+      const bj = document.getElementById(badgeId);
+      if (s)  s.textContent  = d.subscribers;
+      if (v)  v.textContent  = d.totalViews;
+      if (vi) vi.textContent = d.videoCount;
+      if (b)  b.textContent  = d.subscribers;
+      if (dt && d.liveLoaded) dt.classList.add('on');
+      if (bj) bj.textContent = d.liveLoaded ? 'Live' : 'Cached';
+    }
+    updateCreator('jeff','jeff-stat-subs','jeff-stat-views',null,          'jeff-subs-big','jeff-dot','jeff-badge-text');
+    updateCreator('togi','togi-stat-subs','togi-stat-views',null,          'togi-subs-big','togi-dot','togi-badge-text');
+    updateCreator('bro', 'bro-stat-subs', 'bro-stat-views', 'bro-stat-vids','bro-subs-big', 'bro-dot', 'bro-badge-text');
+    const anyLive = ['jeff','togi','bro'].some(k => L[k].liveLoaded);
+    const pEl = document.getElementById('page-status-text');
+    if (pEl) pEl.innerHTML = anyLive
+      ? '<span class="ok">&#10003;</span> Live data loaded'
+      : '<span class="err">&#9888;</span> Cached data';
+  });
+</script>
+</body>
+</html>

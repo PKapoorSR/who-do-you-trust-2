@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compare — Who Do You Trust?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Spectral:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f7f7f5; --surface: #ffffff; --surface2: #f0efed;
+      --border: #e0dfd8; --text: #111118; --muted: #6b6b7a; --dim: #c0bfba;
+      --jeff: #0369a1; --togi: #be123c; --bro: #b45309; --jpg: #7c3aed;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Spectral', serif; font-size: 1.05rem; line-height: 1.72; }
+    a { color: inherit; text-decoration: none; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(247,247,245,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 3.5rem;
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; letter-spacing: 0.12em; }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: 'DM Mono', monospace; font-size: 0.75rem;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+    .selector-bar {
+      position: sticky; top: 58px; z-index: 90;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+    }
+    .selector-side { flex: 1; padding: 1.2rem 2rem; display: flex; align-items: center; gap: 1rem; border-right: 1px solid var(--border); }
+    .selector-side:last-of-type { border-right: none; }
+    .selector-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); flex-shrink: 0; }
+    .creator-select {
+      flex: 1; background: var(--surface2); border: 1px solid var(--border);
+      color: var(--text); font-family: 'DM Mono', monospace; font-size: 0.8rem;
+      padding: 0.55rem 0.8rem; cursor: pointer; outline: none; appearance: none; letter-spacing: 0.06em;
+    }
+    .creator-select:focus { border-color: var(--muted); }
+    .vs-badge { padding: 0 2rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-right: 1px solid var(--border); }
+    .vs-text { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.1em; color: var(--dim); }
+
+    .stats-strip { display: grid; grid-template-columns: repeat(4,1fr); border-bottom: 1px solid var(--border); background: var(--surface); }
+    .ss-cell { padding: 0.9rem 1.5rem; border-right: 1px solid var(--border); display: flex; align-items: center; gap: 0.9rem; }
+    .ss-cell:last-child { border-right: none; }
+    .ss-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
+    .ss-dot.on { background: #4ade80; box-shadow: 0 0 6px #4ade80; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .ss-name { font-family: 'DM Mono', monospace; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); flex-shrink: 0; }
+    .ss-subs { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.05em; margin-left: auto; }
+
+    .page-header { padding: 4rem 3.5rem 3rem; border-bottom: 1px solid var(--border); }
+    .page-header-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+    .page-header-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 6vw, 5rem); letter-spacing: 0.03em; line-height: 0.95; }
+    .page-header-sub { font-size: 1rem; color: var(--muted); margin-top: 1rem; max-width: 560px; line-height: 1.65; }
+
+    .compare-arena { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); min-height: 600px; }
+    .compare-panel { padding: 3rem; border-right: 1px solid var(--border); }
+    .compare-panel:last-child { border-right: none; }
+    .compare-panel-accent { height: 3px; width: 100%; margin-bottom: 2rem; }
+    .panel-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.02em; line-height: 0.92; margin-bottom: 0.4rem; }
+    .panel-handle { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); margin-bottom: 0.3rem; letter-spacing: 0.06em; }
+    .panel-platform { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+    .panel-quote { font-style: italic; font-size: 1rem; color: var(--muted); border-left: 2px solid var(--border); padding-left: 1rem; margin-bottom: 2rem; line-height: 1.68; }
+    .panel-section-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.08em; margin-bottom: 1rem; }
+    .panel-section-cite { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted); margin-bottom: 1rem; letter-spacing: 0.06em; display: block; }
+    .score-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.85rem; }
+    .score-row:last-child { margin-bottom: 0; }
+    .score-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); width: 100px; flex-shrink: 0; }
+    .score-track { flex: 1; height: 5px; background: var(--surface2); border: 1px solid var(--border); overflow: hidden; }
+    .score-fill { height: 100%; transition: width 0.7s cubic-bezier(.4,0,.2,1); }
+    .score-num { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; width: 32px; text-align: right; color: var(--text); line-height: 1; }
+    .panel-divider { height: 1px; background: var(--border); margin: 1.8rem 0; }
+    .meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .meta-cell { background: var(--surface); border: 1px solid var(--border); padding: 1rem 1.1rem; }
+    .meta-key { font-family: 'DM Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.4rem; }
+    .meta-val { font-size: 0.9rem; color: var(--text); line-height: 1.58; }
+    .risk-row { display: flex; align-items: center; gap: 0.75rem; margin-top: 1.5rem; }
+    .risk-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: #f87171; width: 100px; flex-shrink: 0; }
+    .risk-track { flex: 1; height: 8px; background: var(--surface2); border: 1px solid var(--border); overflow: hidden; }
+    .risk-fill { height: 100%; background: #f87171; transition: width 0.7s cubic-bezier(.4,0,.2,1); }
+    .risk-num { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; width: 32px; text-align: right; color: #f87171; line-height: 1; }
+
+    .empty-state { display: flex; align-items: center; justify-content: center; min-height: 400px; flex-direction: column; gap: 1rem; }
+    .empty-num { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; color: var(--dim); line-height: 1; }
+    .empty-msg { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    footer { border-top: 1px solid var(--border); padding: 2rem 3.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .footer-l { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); }
+    .footer-r { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--dim); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .selector-bar { top: 50px; flex-direction: column; }
+      .selector-side { width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
+      .vs-badge { padding: 0.8rem 2rem; border-right: none; border-bottom: 1px solid var(--border); width: 100%; justify-content: center; }
+      .compare-arena { grid-template-columns: 1fr; }
+      .compare-panel { border-right: none; border-bottom: 1px solid var(--border); padding: 2rem 1.5rem; }
+      .stats-strip { grid-template-columns: repeat(2,1fr); }
+      .ss-cell:nth-child(2) { border-right: none; }
+      .page-header { padding: 3rem 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">WHO DO YOU TRUST?</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="influencers.html">Influencers</a>
+    <a href="compare.html" class="active">Compare</a>
+    <a href="concepts.html">Concepts</a>
+  </div>
+</nav>
+
+<div class="selector-bar">
+  <div class="selector-side">
+    <span class="selector-label">Creator A</span>
+    <select class="creator-select" id="select-a">
+      <option value="">— Pick a creator —</option>
+      <option value="jeff">Jeff Nippard</option>
+      <option value="togi">Togi</option>
+      <option value="bro">Bro Science</option>
+      <option value="jpg">JPG</option>
+    </select>
+  </div>
+  <div class="vs-badge"><span class="vs-text">VS</span></div>
+  <div class="selector-side">
+    <span class="selector-label">Creator B</span>
+    <select class="creator-select" id="select-b">
+      <option value="">— Pick a creator —</option>
+      <option value="jeff">Jeff Nippard</option>
+      <option value="togi">Togi</option>
+      <option value="bro">Bro Science</option>
+      <option value="jpg">JPG</option>
+    </select>
+  </div>
+</div>
+
+<div class="stats-strip">
+  <div class="ss-cell" style="color:var(--jeff)"><div class="ss-dot" id="sd-jeff"></div><span class="ss-name">Jeff</span><span class="ss-subs" id="ss-jeff">8.35M</span></div>
+  <div class="ss-cell" style="color:var(--togi)"><div class="ss-dot" id="sd-togi"></div><span class="ss-name">Togi</span><span class="ss-subs" id="ss-togi">740K</span></div>
+  <div class="ss-cell" style="color:var(--bro)"><div class="ss-dot" id="sd-bro"></div><span class="ss-name">Bro Science</span><span class="ss-subs" id="ss-bro">2.5M</span></div>
+  <div class="ss-cell" style="color:var(--jpg)"><div class="ss-dot" id="sd-jpg"></div><span class="ss-name">JPG</span><span class="ss-subs" id="ss-jpg">450K+</span></div>
+</div>
+
+<div class="page-header">
+  <p class="page-header-label">03 — Compare</p>
+  <h1 class="page-header-title">Pick Two. Compare Them.</h1>
+  <p class="page-header-sub">Select a creator in each dropdown. You'll see their scores, what they make money from, who their audience is, and how their content holds up to scrutiny.</p>
+</div>
+
+<div class="compare-arena" id="compare-arena">
+  <div class="compare-panel" id="panel-a"><div class="empty-state"><div class="empty-num">A</div><div class="empty-msg">Pick Creator A above</div></div></div>
+  <div class="compare-panel" id="panel-b"><div class="empty-state"><div class="empty-num">B</div><div class="empty-msg">Pick Creator B above</div></div></div>
+</div>
+
+<footer>
+  <div class="footer-l">WHO DO YOU TRUST? — Media Studies Final Project — 2026</div>
+  <div class="footer-r">Scores are analytical estimates — see Concepts page for methodology</div>
+</footer>
+
+<script src="live-data.js"></script>
+<script>
+  const CREATORS = {
+    jeff: {
+      name: 'Jeff Nippard', handle: '@jeffnippard', platform: 'YouTube · Science-Based',
+      color: '#38bdf8',
+      quote: '"The research should speak for itself. My job is to translate it accurately."',
+      claimBasis: 'Research papers, cited on screen and in video descriptions. Claims can be traced to original sources.',
+      audience: '84.5% male · 26% US · mostly intermediate-to-advanced lifters who actively seek out research-based content',
+      revenue: 'MacroFactor app (co-created, earns commission) · training programs · selective disclosed sponsorships',
+      healthism: 'Health as something to optimize with science. The message: with the right information and consistency, you can fix your body.',
+      scores: { expertise: 90, trust: 85, appeal: 65 },
+      sift: { stop: 80, investigate: 88, coverage: 85, trace: 90 },
+      risk: 10
+    },
+    togi: {
+      name: 'Togi', handle: '@stoffer__ / @ShaneStoffer', platform: 'YouTube + Instagram + Kick',
+      color: '#f87171',
+      quote: '"I\'m not going to lie to you. Everything I do, I put it out there."',
+      claimBasis: 'Personal experience only. No external sources or verification. "This happened to me" is the whole argument.',
+      audience: 'Mostly male, 18–25 · bodybuilding-adjacent · high risk tolerance · strong personal connection to Shane',
+      revenue: 'Roobet affiliate (crypto casino, main income) · evoir.com supplements · YouTube · merchandise',
+      healthism: 'The body is still a personal project — but authenticity and transformation have replaced health as the goal.',
+      scores: { expertise: 22, trust: 28, appeal: 88 },
+      sift: { stop: 8, investigate: 14, coverage: 10, trace: 12 },
+      risk: 91
+    },
+    bro: {
+      name: 'Bro Science', handle: '@BroScienceLife', platform: 'YouTube · Satire / Comedy',
+      color: '#fbbf24',
+      quote: '"Dom Mazzetti is every gym bro you\'ve ever met. The joke only works if the observation is accurate."',
+      claimBasis: 'Satirical character work. Observations wrapped in parody — some accurate, none sourced.',
+      audience: 'Male 18–35 · gym-goers of all levels · comedy comes first, fitness second',
+      revenue: 'YouTube ads · DomMerch.com · David Protein sponsorship · The Swoly Bible (2016)',
+      healthism: 'Mocks the gym-bro obsession with the body while being completely part of it. The joke only works if you already share the values.',
+      scores: { expertise: 38, trust: 62, appeal: 82 },
+      sift: { stop: 72, investigate: 55, coverage: 60, trace: 50 },
+      risk: 33
+    },
+    jpg: {
+      name: 'JPG', handle: '@jpgcoaching', platform: 'TikTok · Cosmic Wellness',
+      color: '#c084fc',
+      quote: '"Your body is in conversation with the universe. Fitness is just one channel."',
+      claimBasis: 'Spiritual framework — energy, alignment, frequency. No empirical basis. Claims aren\'t designed to be verified.',
+      audience: 'Mostly female, 18–30 · wellness-oriented · spiritually engaged · discovered through TikTok algorithm, not actively searched',
+      revenue: 'Coaching programs · TikTok Creator Fund · likely wellness brand partnerships',
+      healthism: 'Health as cosmic alignment. Not reaching your fitness goals becomes a sign of spiritual misalignment.',
+      scores: { expertise: 28, trust: 44, appeal: 80 },
+      sift: { stop: 22, investigate: 28, coverage: 18, trace: 15 },
+      risk: 54
+    }
+  };
+
+  function buildPanel(key) {
+    const c = CREATORS[key];
+    const subs = (window.LIVE && window.LIVE[key]) ? window.LIVE[key].subscribers : '—';
+    return `
+      <div class="compare-panel-accent" style="background:${c.color}"></div>
+      <div class="panel-name" style="color:${c.color}">${c.name}</div>
+      <div class="panel-handle">${c.handle}</div>
+      <div class="panel-platform">${c.platform}</div>
+      <blockquote class="panel-quote">${c.quote}</blockquote>
+
+      <div class="panel-section-title">Source Credibility</div>
+      <span class="panel-section-cite">Hovland, Janis &amp; Kelley (1953) — how trustworthy does this creator appear?</span>
+      ${row('Expertise',       c.scores.expertise, c.color)}
+      ${row('Trustworthiness', c.scores.trust,     c.color)}
+      ${row('Appeal',          c.scores.appeal,    c.color)}
+
+      <div class="panel-divider"></div>
+      <div class="panel-section-title">SIFT Analysis</div>
+      <span class="panel-section-cite">Caulfield (2019) — how verifiable is this creator's content?</span>
+      ${row('Stop',          c.sift.stop,       c.color)}
+      ${row('Investigate',   c.sift.investigate,c.color)}
+      ${row('Find Coverage', c.sift.coverage,   c.color)}
+      ${row('Trace Claims',  c.sift.trace,      c.color)}
+
+      <div class="risk-row">
+        <span class="risk-label">Content Risk</span>
+        <div class="risk-track"><div class="risk-fill" style="width:${c.risk}%"></div></div>
+        <span class="risk-num">${c.risk}</span>
+      </div>
+
+      <div class="panel-divider"></div>
+      <div class="meta-row">
+        <div class="meta-cell"><div class="meta-key">Subscribers / Followers</div><div class="meta-val">${subs}</div></div>
+        <div class="meta-cell"><div class="meta-key">How claims are backed</div><div class="meta-val">${c.claimBasis}</div></div>
+        <div class="meta-cell"><div class="meta-key">Audience</div><div class="meta-val">${c.audience}</div></div>
+        <div class="meta-cell"><div class="meta-key">How they make money</div><div class="meta-val">${c.revenue}</div></div>
+      </div>
+      <div class="meta-cell"><div class="meta-key">How they frame health</div><div class="meta-val">${c.healthism}</div></div>
+    `;
+  }
+
+  function row(label, val, color) {
+    return `<div class="score-row"><span class="score-label">${label}</span><div class="score-track"><div class="score-fill" style="width:${val}%;background:${color}"></div></div><span class="score-num">${val}</span></div>`;
+  }
+
+  function render() {
+    const a = document.getElementById('select-a').value;
+    const b = document.getElementById('select-b').value;
+    document.getElementById('panel-a').innerHTML = a ? buildPanel(a) : `<div class="empty-state"><div class="empty-num">A</div><div class="empty-msg">Pick Creator A above</div></div>`;
+    document.getElementById('panel-b').innerHTML = b ? buildPanel(b) : `<div class="empty-state"><div class="empty-num">B</div><div class="empty-msg">Pick Creator B above</div></div>`;
+  }
+
+  document.getElementById('select-a').addEventListener('change', render);
+  document.getElementById('select-b').addEventListener('change', render);
+  document.getElementById('select-a').value = 'jeff';
+  document.getElementById('select-b').value = 'togi';
+
+  document.addEventListener('liveDataReady', () => {
+    const L = window.LIVE;
+    ['jeff','togi','bro','jpg'].forEach(k => {
+      const el  = document.getElementById(`ss-${k}`);
+      const dot = document.getElementById(`sd-${k}`);
+      if (el) el.textContent = L[k].subscribers;
+      if (dot && L[k].liveLoaded) dot.classList.add('on');
+    });
+    render();
+  });
+
+  render();
+</script>
+</body>
+</html>

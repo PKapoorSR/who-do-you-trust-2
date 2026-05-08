@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Who Do You Trust? — Fitness Influencer Credibility</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Spectral:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f7f5;
+      --surface: #ffffff;
+      --surface2: #f0efed;
+      --border: #e0dfd8;
+      --text: #111118;
+      --muted: #6b6b7a;
+      --dim: #c0bfba;
+      --jeff: #0369a1;
+      --togi: #be123c;
+      --bro: #b45309;
+      --jpg: #7c3aed;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Spectral', serif; font-size: 1.05rem; line-height: 1.72; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(247,247,245,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 3.5rem;
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; letter-spacing: 0.12em; }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: 'DM Mono', monospace; font-size: 0.75rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: calc(100vh - 58px);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 5rem 3.5rem 4rem;
+      position: relative; overflow: hidden; text-align: center;
+      background-image: radial-gradient(circle, rgba(190,188,182,0.5) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(247,247,245,0) 0%, rgba(247,247,245,0.92) 100%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 860px; }
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+      display: block; margin-bottom: 2rem;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5.5rem, 14vw, 11rem);
+      line-height: 0.86; letter-spacing: 0.02em; margin-bottom: 2.5rem;
+    }
+    .hero-hook {
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      color: var(--text); line-height: 1.55;
+      margin-bottom: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;
+    }
+    .hero-sub {
+      font-size: 0.97rem; color: var(--muted); line-height: 1.7;
+      max-width: 520px; margin: 0 auto 3rem;
+    }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      background: var(--text); color: var(--bg);
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.12em;
+      padding: 1rem 2.2rem; transition: background 0.2s, transform 0.2s;
+    }
+    .cta-btn:hover { background: #000; transform: translateX(4px); }
+    .hero-creators {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; justify-content: center;
+      margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid var(--border);
+      width: 100%; max-width: 700px;
+    }
+    .creator-chip {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: 0.08em;
+      padding: 0.45rem 1.2rem; border: 1px solid var(--c); color: var(--c);
+      transition: background 0.2s, color 0.2s;
+    }
+    .creator-chip:hover { background: var(--c); color: var(--bg); }
+    .chip-sep { color: var(--dim); font-family: 'DM Mono', monospace; font-size: 0.75rem; }
+
+    /* FADE-IN */
+    .fade-in {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* SECTION SHARED */
+    .sec-label {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+      display: block; margin-bottom: 0.6rem;
+    }
+    .sec-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem); letter-spacing: 0.03em; line-height: 1;
+    }
+    .sec-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.65; max-width: 520px; }
+
+    /* CREATOR GRID */
+    .creators-section {
+      padding: 6rem 3.5rem; border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .creators-section .sec-head { margin-bottom: 3rem; }
+    .creator-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+    .creator-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-top: 3px solid var(--c); padding: 2.5rem;
+      display: flex; flex-direction: column; gap: 1rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .creator-card:hover { transform: translateY(-4px); }
+    .card-jeff:hover { box-shadow: 0 12px 40px rgba(3,105,161,0.18); }
+    .card-togi:hover { box-shadow: 0 12px 40px rgba(190,18,60,0.16); }
+    .card-bro:hover  { box-shadow: 0 12px 40px rgba(180,83,9,0.16); }
+    .card-jpg:hover  { box-shadow: 0 12px 40px rgba(124,58,237,0.18); }
+    .card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .card-name {
+      font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem;
+      letter-spacing: 0.04em; color: var(--c); line-height: 1;
+    }
+    .card-platform {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      color: var(--muted); letter-spacing: 0.06em; margin-top: 0.3rem;
+    }
+    .card-subs-block { text-align: right; flex-shrink: 0; }
+    .card-subs {
+      font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem;
+      color: var(--text); letter-spacing: 0.02em; line-height: 1;
+    }
+    .card-subs-label {
+      font-family: 'DM Mono', monospace; font-size: 0.58rem;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .card-dot-row { display: flex; align-items: center; gap: 0.4rem; justify-content: flex-end; margin-top: 0.3rem; }
+    .card-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--muted); }
+    .card-dot.on { background: #4ade80; box-shadow: 0 0 5px #4ade80; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .card-strategy { font-size: 0.95rem; color: var(--muted); line-height: 1.68; flex: 1; }
+    .card-risk-row { display: flex; align-items: center; gap: 0.6rem; }
+    .card-risk-track { flex: 1; height: 5px; background: var(--surface2); border: 1px solid var(--border); overflow: hidden; }
+    .card-risk-fill { height: 100%; }
+    .card-risk-label {
+      font-family: 'DM Mono', monospace; font-size: 0.6rem;
+      text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap;
+    }
+    .card-cta {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); padding-top: 1rem;
+      border-top: 1px solid var(--border); transition: color 0.2s;
+    }
+    .creator-card:hover .card-cta { color: var(--c); }
+
+    /* TRUST MECHANICS */
+    .mechanics-section {
+      padding: 6rem 3.5rem; border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .mechanics-section .sec-head { margin-bottom: 3rem; }
+    .mechanics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .mechanic-card {
+      background: var(--surface); border: 1px solid var(--border); padding: 2.5rem;
+    }
+    .mechanic-num {
+      font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--dim); line-height: 1; margin-bottom: 0.8rem;
+    }
+    .mechanic-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.05em; margin-bottom: 0.8rem;
+    }
+    .mechanic-body { font-size: 0.95rem; color: var(--muted); line-height: 1.68; margin-bottom: 1.2rem; }
+    .mechanic-leader { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.06em; color: var(--muted); }
+
+    /* TRUST PROFILE */
+    .trust-section {
+      padding: 6rem 3.5rem; border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .trust-section .sec-head { margin-bottom: 2.5rem; }
+    .trust-selector { display: flex; gap: 2px; flex-wrap: wrap; margin-bottom: 2px; }
+    .trust-btn {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; letter-spacing: 0.08em;
+      padding: 0.9rem 2rem; background: var(--surface2); border: 1px solid var(--border);
+      color: var(--muted); cursor: pointer; transition: all 0.2s; flex: 1; min-width: 100px;
+    }
+    .trust-btn:hover { color: var(--text); background: var(--bg); }
+    .trust-btn.active-jeff { background: rgba(3,105,161,0.08); border-color: var(--jeff); color: var(--jeff); }
+    .trust-btn.active-togi { background: rgba(190,18,60,0.08);  border-color: var(--togi); color: var(--togi); }
+    .trust-btn.active-bro  { background: rgba(180,83,9,0.08);   border-color: var(--bro);  color: var(--bro);  }
+    .trust-btn.active-jpg  { background: rgba(124,58,237,0.08); border-color: var(--jpg);  color: var(--jpg);  }
+    .trust-panel {
+      background: var(--bg); border: 1px solid var(--border); border-top: none;
+      padding: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;
+    }
+    .tp-name {
+      font-family: 'Bebas Neue', sans-serif; font-size: 3rem; letter-spacing: 0.04em;
+      line-height: 1; margin-bottom: 0.5rem; transition: color 0.3s;
+    }
+    .tp-platform {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      color: var(--muted); letter-spacing: 0.08em; margin-bottom: 1rem;
+    }
+    .tp-tagline { font-size: 0.95rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.5rem; }
+    .tp-link {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em;
+      text-transform: uppercase; transition: color 0.2s;
+    }
+    .tp-link:hover { color: var(--text); }
+    .tp-scores { display: flex; flex-direction: column; gap: 1.4rem; }
+    .tp-row { display: flex; align-items: center; gap: 1rem; }
+    .tp-row-label {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); width: 132px; flex-shrink: 0;
+    }
+    .tp-track { flex: 1; height: 10px; background: var(--surface2); border: 1px solid var(--border); overflow: hidden; }
+    .tp-fill { height: 100%; width: 0; transition: width 0.85s cubic-bezier(.4,0,.2,1); }
+    .tp-val {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem;
+      width: 40px; text-align: right; color: var(--text); line-height: 1;
+    }
+    .tp-divider { padding-top: 1.4rem; border-top: 1px solid var(--border); }
+    .tp-risk-note {
+      font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-top: 0.4rem;
+    }
+
+    /* FINDINGS */
+    .findings-section {
+      padding: 6rem 3.5rem; border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .findings-section .sec-head { margin-bottom: 3rem; }
+    .findings-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+    .finding-card {
+      background: var(--surface); border: 1px solid var(--border); padding: 2.5rem;
+      display: flex; gap: 1.5rem; align-items: flex-start;
+    }
+    .finding-num {
+      font-family: 'Bebas Neue', sans-serif; font-size: 3rem;
+      color: var(--dim); line-height: 1; flex-shrink: 0;
+    }
+    .finding-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 0.04em;
+      margin-bottom: 0.6rem; line-height: 1.1;
+    }
+    .finding-text { font-size: 0.95rem; color: var(--muted); line-height: 1.68; }
+
+    /* NAV CARDS */
+    .nav-cards-section {
+      padding: 6rem 3.5rem; border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .nav-cards-section .sec-head { margin-bottom: 3rem; }
+    .nav-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .nav-card {
+      background: var(--bg); border: 1px solid var(--border);
+      padding: 2.5rem 2rem; display: flex; flex-direction: column; gap: 0.8rem;
+      transition: background 0.2s;
+    }
+    .nav-card:hover { background: var(--surface2); }
+    .nav-card-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--dim); line-height: 1; }
+    .nav-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: 0.04em; line-height: 1; }
+    .nav-card-tag {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);
+    }
+    .nav-card-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.68; flex: 1; }
+    .nav-card-cta {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+      padding-top: 1rem; border-top: 1px solid var(--border); transition: color 0.2s;
+    }
+    .nav-card:hover .nav-card-cta { color: var(--text); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border); padding: 2rem 3.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-l { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); }
+    .footer-r { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--dim); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1000px) {
+      .creator-grid { grid-template-columns: 1fr; }
+      .mechanics-grid { grid-template-columns: 1fr; }
+      .trust-panel { grid-template-columns: 1fr; gap: 2rem; }
+      .findings-grid { grid-template-columns: 1fr; }
+      .nav-cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 800px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 4rem 1.5rem 3rem; }
+      .creators-section, .mechanics-section, .trust-section,
+      .findings-section, .nav-cards-section { padding: 4rem 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">WHO DO YOU TRUST?</a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="influencers.html">Influencers</a>
+    <a href="compare.html">Compare</a>
+    <a href="concepts.html">Concepts</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-eyebrow">Media Studies · Final Project · 2026</span>
+    <h1 class="hero-title">WHO DO<br>YOU TRUST?</h1>
+    <p class="hero-hook">Four fitness influencers. Millions of followers. Different ways of convincing people to trust them.</p>
+    <p class="hero-sub">This project compares how online fitness creators build credibility — through science, raw honesty, comedy, and spiritual language.</p>
+    <a href="compare.html" class="cta-btn">Compare the Influencers →</a>
+  </div>
+  <div class="hero-creators">
+    <a href="influencers.html#jeff" class="creator-chip" style="--c: var(--jeff)">Jeff Nippard</a>
+    <span class="chip-sep">·</span>
+    <a href="influencers.html#togi" class="creator-chip" style="--c: var(--togi)">Togi</a>
+    <span class="chip-sep">·</span>
+    <a href="influencers.html#bro" class="creator-chip" style="--c: var(--bro)">Bro Science</a>
+    <span class="chip-sep">·</span>
+    <a href="influencers.html#jpg" class="creator-chip" style="--c: var(--jpg)">JPG</a>
+  </div>
+</section>
+
+<!-- ===== CREATOR GRID ===== -->
+<section class="creators-section">
+  <div class="sec-head fade-in">
+    <span class="sec-label">The four creators</span>
+    <h2 class="sec-title">Who They Are</h2>
+  </div>
+  <div class="creator-grid">
+
+    <a href="influencers.html#jeff" class="creator-card card-jeff fade-in" style="--c: var(--jeff)">
+      <div class="card-top">
+        <div>
+          <div class="card-name">Jeff Nippard</div>
+          <div class="card-platform">YouTube · @jeffnippard</div>
+        </div>
+        <div class="card-subs-block">
+          <div class="card-subs" id="hero-jeff-subs">8.35M</div>
+          <div class="card-subs-label">Subscribers</div>
+          <div class="card-dot-row"><span class="card-dot" id="dot-jeff"></span></div>
+        </div>
+      </div>
+      <p class="card-strategy">Cites research papers on screen in every video. Has a biochemistry degree and competed in powerlifting at the national level. Every claim links to a source.</p>
+      <div class="card-risk-row">
+        <div class="card-risk-track"><div class="card-risk-fill" style="width:10%; background:#4ade80"></div></div>
+        <span class="card-risk-label" style="color:#16a34a">Very low risk</span>
+      </div>
+      <span class="card-cta">View Profile →</span>
+    </a>
+
+    <a href="influencers.html#togi" class="creator-card card-togi fade-in" style="--c: var(--togi)">
+      <div class="card-top">
+        <div>
+          <div class="card-name">Togi</div>
+          <div class="card-platform">YouTube + Kick · @stoffer__</div>
+        </div>
+        <div class="card-subs-block">
+          <div class="card-subs" id="hero-togi-subs">740K</div>
+          <div class="card-subs-label">YT Subscribers</div>
+          <div class="card-dot-row"><span class="card-dot" id="dot-togi"></span></div>
+        </div>
+      </div>
+      <p class="card-strategy">Documents steroid cycles, gambling, and a 2024 overdose on camera. His brand is total honesty — even the dangerous parts.</p>
+      <div class="card-risk-row">
+        <div class="card-risk-track"><div class="card-risk-fill" style="width:91%; background:#f87171"></div></div>
+        <span class="card-risk-label" style="color:#dc2626">Very high risk</span>
+      </div>
+      <span class="card-cta">View Profile →</span>
+    </a>
+
+    <a href="influencers.html#bro" class="creator-card card-bro fade-in" style="--c: var(--bro)">
+      <div class="card-top">
+        <div>
+          <div class="card-name">Bro Science</div>
+          <div class="card-platform">YouTube · @BroScienceLife</div>
+        </div>
+        <div class="card-subs-block">
+          <div class="card-subs" id="hero-bro-subs">2.5M</div>
+          <div class="card-subs-label">Subscribers</div>
+          <div class="card-dot-row"><span class="card-dot" id="dot-bro"></span></div>
+        </div>
+      </div>
+      <p class="card-strategy">A comedian playing fictional gym bro Dom Mazzetti since 2012. Mocks fitness culture — but the observations inside the jokes are often accurate.</p>
+      <div class="card-risk-row">
+        <div class="card-risk-track"><div class="card-risk-fill" style="width:33%; background:#a3e635"></div></div>
+        <span class="card-risk-label" style="color:#65a30d">Low risk</span>
+      </div>
+      <span class="card-cta">View Profile →</span>
+    </a>
+
+    <a href="influencers.html#jpg" class="creator-card card-jpg fade-in" style="--c: var(--jpg)">
+      <div class="card-top">
+        <div>
+          <div class="card-name">JPG</div>
+          <div class="card-platform">TikTok · @jpgcoaching</div>
+        </div>
+        <div class="card-subs-block">
+          <div class="card-subs">450K+</div>
+          <div class="card-subs-label">Followers</div>
+          <div class="card-dot-row"><span class="card-dot"></span></div>
+        </div>
+      </div>
+      <p class="card-strategy">Uses spiritual concepts to coach fitness — energy alignment, frequency, cosmic timing. Feels calming and certain. No scientific backing.</p>
+      <div class="card-risk-row">
+        <div class="card-risk-track"><div class="card-risk-fill" style="width:54%; background:#fb923c"></div></div>
+        <span class="card-risk-label" style="color:#c2410c">Medium risk</span>
+      </div>
+      <span class="card-cta">View Profile →</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- ===== HOW TRUST WORKS ===== -->
+<section class="mechanics-section">
+  <div class="sec-head fade-in">
+    <span class="sec-label">Source Credibility Theory · Hovland, Janis &amp; Kelley, 1953</span>
+    <h2 class="sec-title">How Trust Actually Works</h2>
+    <p class="sec-sub" style="margin-top: 0.7rem;">Researchers break trust down into three dimensions. Most influencers score high on one or two — rarely all three.</p>
+  </div>
+  <div class="mechanics-grid">
+    <div class="mechanic-card fade-in">
+      <div class="mechanic-num">01</div>
+      <div class="mechanic-title">Expertise</div>
+      <p class="mechanic-body">How much does this creator actually know? Credentials, cited evidence, and demonstrated skill all count. High scores go to creators who show their work.</p>
+      <div class="mechanic-leader">Highest: <span style="color:var(--jeff)">Jeff Nippard</span> — 90 / 100</div>
+    </div>
+    <div class="mechanic-card fade-in">
+      <div class="mechanic-num">02</div>
+      <div class="mechanic-title">Trustworthiness</div>
+      <p class="mechanic-body">Does this creator seem honest? Hidden conflicts of interest and inconsistency hurt this score. Transparency raises it — but transparency can also be performed.</p>
+      <div class="mechanic-leader">Highest: <span style="color:var(--jeff)">Jeff Nippard</span> — 85 / 100</div>
+    </div>
+    <div class="mechanic-card fade-in">
+      <div class="mechanic-num">03</div>
+      <div class="mechanic-title">Appeal</div>
+      <p class="mechanic-body">Do people just like them — regardless of whether they're right? High appeal means trust based on personality, not evidence. This is the most dangerous dimension.</p>
+      <div class="mechanic-leader">Highest: <span style="color:var(--togi)">Togi</span> — 88 / 100</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST PROFILE INTERACTIVE ===== -->
+<section class="trust-section">
+  <div class="sec-head fade-in">
+    <span class="sec-label">Interactive</span>
+    <h2 class="sec-title">Trust Profile</h2>
+    <p class="sec-sub" style="margin-top: 0.7rem;">Click any creator to see how they score across all three credibility dimensions.</p>
+  </div>
+  <div class="trust-selector fade-in">
+    <button class="trust-btn" data-creator="jeff" onclick="selectCreator('jeff')">Jeff Nippard</button>
+    <button class="trust-btn" data-creator="togi" onclick="selectCreator('togi')">Togi</button>
+    <button class="trust-btn" data-creator="bro" onclick="selectCreator('bro')">Bro Science</button>
+    <button class="trust-btn" data-creator="jpg" onclick="selectCreator('jpg')">JPG</button>
+  </div>
+  <div class="trust-panel fade-in">
+    <div>
+      <div class="tp-name" id="tp-name">—</div>
+      <div class="tp-platform" id="tp-platform"></div>
+      <p class="tp-tagline" id="tp-tagline"></p>
+      <a href="#" class="tp-link" id="tp-link">View full profile →</a>
+    </div>
+    <div class="tp-scores">
+      <div class="tp-row">
+        <span class="tp-row-label">Expertise</span>
+        <div class="tp-track"><div class="tp-fill" id="tp-e-fill"></div></div>
+        <span class="tp-val" id="tp-e-val">—</span>
+      </div>
+      <div class="tp-row">
+        <span class="tp-row-label">Trustworthiness</span>
+        <div class="tp-track"><div class="tp-fill" id="tp-t-fill"></div></div>
+        <span class="tp-val" id="tp-t-val">—</span>
+      </div>
+      <div class="tp-row">
+        <span class="tp-row-label">Appeal</span>
+        <div class="tp-track"><div class="tp-fill" id="tp-a-fill"></div></div>
+        <span class="tp-val" id="tp-a-val">—</span>
+      </div>
+      <div class="tp-divider">
+        <div class="tp-row">
+          <span class="tp-row-label">Content Risk</span>
+          <div class="tp-track"><div class="tp-fill" id="tp-r-fill"></div></div>
+          <span class="tp-val" id="tp-r-val">—</span>
+        </div>
+        <div class="tp-risk-note" id="tp-r-note"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINDINGS ===== -->
+<section class="findings-section">
+  <div class="sec-head fade-in">
+    <span class="sec-label">What this project found</span>
+    <h2 class="sec-title">Four Things Worth Knowing</h2>
+  </div>
+  <div class="findings-grid">
+    <div class="finding-card fade-in">
+      <span class="finding-num">1</span>
+      <div>
+        <div class="finding-title">Looking trustworthy and being trustworthy are different</div>
+        <p class="finding-text">The most convincing creators are usually the best at performing trust. Visual style, editing, and how they carry themselves shape your opinion before you hear a single claim.</p>
+      </div>
+    </div>
+    <div class="finding-card fade-in">
+      <span class="finding-num">2</span>
+      <div>
+        <div class="finding-title">Raw honesty is still a strategy</div>
+        <p class="finding-text">Togi's unfiltered footage and overdose disclosures are just as intentional as Jeff's on-screen citations. "I hide nothing" is a brand decision, not its absence.</p>
+      </div>
+    </div>
+    <div class="finding-card fade-in">
+      <span class="finding-num">3</span>
+      <div>
+        <div class="finding-title">The most popular creator isn't the most credible</div>
+        <p class="finding-text">Jeff Nippard scores highest on expertise and trustworthiness. He's not the most followed. Togi scores lowest — and has one of the most loyal audiences. That gap is the whole point.</p>
+      </div>
+    </div>
+    <div class="finding-card fade-in">
+      <span class="finding-num">4</span>
+      <div>
+        <div class="finding-title">All four are selling the same idea</div>
+        <p class="finding-text">Science, raw honesty, comedy, or spirituality — every creator's message is the same: your body is your responsibility, and I can help you fix it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHERE TO GO ===== -->
+<section class="nav-cards-section">
+  <div class="sec-head fade-in">
+    <span class="sec-label">Where to go next</span>
+    <h2 class="sec-title">Three Pages</h2>
+  </div>
+  <div class="nav-cards">
+    <a href="influencers.html" class="nav-card fade-in">
+      <div class="nav-card-num">02</div>
+      <div class="nav-card-title">Influencer Profiles</div>
+      <div class="nav-card-tag">Deep dives on all four creators</div>
+      <p class="nav-card-desc">Each creator gets a full profile — real audience numbers, credibility strategy, how their claims hold up, and what risks their content poses.</p>
+      <span class="nav-card-cta">Read the profiles →</span>
+    </a>
+    <a href="compare.html" class="nav-card fade-in">
+      <div class="nav-card-num">03</div>
+      <div class="nav-card-title">Side-by-Side Compare</div>
+      <div class="nav-card-tag">Interactive tool</div>
+      <p class="nav-card-desc">Pick any two creators and compare them directly — credibility scores, content risk, how they make money, and who their audience is.</p>
+      <span class="nav-card-cta">Start comparing →</span>
+    </a>
+    <a href="concepts.html" class="nav-card fade-in">
+      <div class="nav-card-num">04</div>
+      <div class="nav-card-title">The Analysis</div>
+      <div class="nav-card-tag">Frameworks + charts + findings</div>
+      <p class="nav-card-desc">Five frameworks used to analyze the creators, explained simply — with animated charts, credibility scores, and six key findings.</p>
+      <span class="nav-card-cta">Explore the analysis →</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-l">WHO DO YOU TRUST? — Media Studies Final Project — 2026</div>
+  <div class="footer-r">Live data: YouTube Data API v3 · HypeAuditor · StarNgage</div>
+</footer>
+
+<script src="live-data.js"></script>
+<script>
+  /* LIVE DATA */
+  document.addEventListener('liveDataReady', () => {
+    const L = window.LIVE;
+    ['jeff','togi','bro'].forEach(k => {
+      const sEl = document.getElementById('hero-' + k + '-subs');
+      const dEl = document.getElementById('dot-' + k);
+      if (sEl && L[k]) sEl.textContent = L[k].subscribers;
+      if (dEl && L[k]?.liveLoaded) dEl.classList.add('on');
+    });
+  });
+
+  /* TRUST PROFILE */
+  const PROFILES = {
+    jeff: {
+      name: 'Jeff Nippard', platform: 'YouTube · @jeffnippard',
+      tagline: 'Science-based. Citations on screen. Biochemistry degree and national-level powerlifting competition.',
+      href: 'influencers.html#jeff',
+      expertise: 90, trust: 85, appeal: 65,
+      risk: 10, riskColor: '#16a34a', riskLabel: 'Very low risk'
+    },
+    togi: {
+      name: 'Togi', platform: 'YouTube + Kick · @stoffer__',
+      tagline: 'Radical transparency. Steroid cycles, gambling losses, and a 2024 overdose — all documented on camera.',
+      href: 'influencers.html#togi',
+      expertise: 22, trust: 28, appeal: 88,
+      risk: 91, riskColor: '#dc2626', riskLabel: 'Very high risk'
+    },
+    bro: {
+      name: 'Bro Science', platform: 'YouTube · @BroScienceLife',
+      tagline: 'Comedy. Plays fictional gym bro Dom Mazzetti. NYU graduate. Has been making these videos since 2012.',
+      href: 'influencers.html#bro',
+      expertise: 38, trust: 62, appeal: 82,
+      risk: 33, riskColor: '#65a30d', riskLabel: 'Low risk'
+    },
+    jpg: {
+      name: 'JPG', platform: 'TikTok · @jpgcoaching',
+      tagline: 'Spiritual fitness coaching. Energy alignment, frequency, and cosmic timing as health and training concepts.',
+      href: 'influencers.html#jpg',
+      expertise: 28, trust: 44, appeal: 80,
+      risk: 54, riskColor: '#c2410c', riskLabel: 'Medium risk'
+    }
+  };
+
+  function selectCreator(key) {
+    const p = PROFILES[key];
+
+    document.querySelectorAll('.trust-btn').forEach(btn => {
+      btn.className = 'trust-btn';
+      if (btn.dataset.creator === key) btn.classList.add('active-' + key);
+    });
+
+    const nameEl = document.getElementById('tp-name');
+    nameEl.textContent = p.name;
+    nameEl.style.color = 'var(--' + key + ')';
+    document.getElementById('tp-platform').textContent = p.platform;
+    document.getElementById('tp-tagline').textContent = p.tagline;
+    const lnk = document.getElementById('tp-link');
+    lnk.href = p.href;
+    lnk.style.color = 'var(--' + key + ')';
+
+    ['tp-e-fill','tp-t-fill','tp-a-fill','tp-r-fill'].forEach(id => {
+      document.getElementById(id).style.width = '0';
+    });
+
+    setTimeout(() => {
+      const color = 'var(--' + key + ')';
+      const set = (fillId, valId, val, c) => {
+        const f = document.getElementById(fillId);
+        f.style.background = c;
+        f.style.width = val + '%';
+        document.getElementById(valId).textContent = fillId === 'tp-r-fill' ? val + '%' : val;
+        if (fillId === 'tp-r-fill') document.getElementById(valId).style.color = c;
+      };
+      set('tp-e-fill', 'tp-e-val', p.expertise, color);
+      set('tp-t-fill', 'tp-t-val', p.trust, color);
+      set('tp-a-fill', 'tp-a-val', p.appeal, color);
+      set('tp-r-fill', 'tp-r-val', p.risk, p.riskColor);
+      const note = document.getElementById('tp-r-note');
+      note.textContent = p.riskLabel;
+      note.style.color = p.riskColor;
+    }, 60);
+  }
+
+  /* SCROLL FADE-IN */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  selectCreator('jeff');
+</script>
+</body>
+</html>

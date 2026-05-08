@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concepts — Who Do You Trust?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Spectral:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f7f5;
+      --surface: #ffffff;
+      --surface2: #f0efed;
+      --border: #e0dfd8;
+      --text: #111118;
+      --muted: #6b6b7a;
+      --dim: #c0bfba;
+      --jeff: #0369a1;
+      --togi: #be123c;
+      --bro: #b45309;
+      --jpg: #7c3aed;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Spectral', serif; font-size: 1.05rem; line-height: 1.72; }
+    a { color: inherit; text-decoration: none; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(247,247,245,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 3.5rem;
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; letter-spacing: 0.12em; }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: 'DM Mono', monospace; font-size: 0.75rem;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+    /* JUMP NAV */
+    .jump-nav {
+      position: sticky; top: 58px; z-index: 90;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; overflow-x: auto;
+    }
+    .jump-nav a {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+      padding: 0.9rem 1.4rem; border-right: 1px solid var(--border);
+      white-space: nowrap; transition: all 0.2s; flex-shrink: 0;
+    }
+    .jump-nav a:hover { background: var(--surface2); color: var(--text); }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 5rem 3.5rem 3rem; border-bottom: 1px solid var(--border);
+    }
+    .page-label {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem;
+    }
+    .page-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 5rem); letter-spacing: 0.03em; line-height: 0.95;
+    }
+    .page-sub { font-size: 1rem; color: var(--muted); margin-top: 1rem; max-width: 600px; line-height: 1.7; }
+
+    /* CONCEPT SECTIONS */
+    .concept-section {
+      padding: 6rem 3.5rem; border-bottom: 1px solid var(--border);
+    }
+    .concept-label {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem;
+    }
+    .concept-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.03em; line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .concept-cite {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted);
+      letter-spacing: 0.08em; margin-bottom: 2rem; display: block;
+    }
+    .concept-body {
+      font-size: 1.05rem; color: var(--muted); max-width: 700px; line-height: 1.82; margin-bottom: 2.5rem;
+    }
+    .concept-body + .concept-body { margin-top: -1rem; }
+    .concept-body em { font-style: italic; color: var(--text); }
+    .concept-body strong { font-weight: 600; color: var(--text); }
+
+    /* BAR CHART */
+    .chart-wrap {
+      margin-top: 3rem;
+    }
+    .chart-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+    }
+    .chart-subtitle {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted);
+      letter-spacing: 0.1em; margin-bottom: 2rem;
+    }
+    .chart-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 2px;
+    }
+    .chart-col {
+      background: var(--surface); border: 1px solid var(--border); padding: 1.5rem;
+    }
+    .chart-col-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.05em;
+      margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.8rem;
+    }
+    .chart-bar-row {
+      display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1rem;
+    }
+    .chart-bar-row:last-child { margin-bottom: 0; }
+    .chart-creator {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem; text-transform: uppercase;
+      letter-spacing: 0.1em; width: 36px; flex-shrink: 0;
+    }
+    .chart-track {
+      flex: 1; height: 14px; background: var(--surface2); border: 1px solid var(--border); overflow: hidden;
+    }
+    .chart-fill {
+      height: 100%; width: 0; transition: width 1s cubic-bezier(.4,0,.2,1);
+    }
+    .chart-val {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1rem; width: 32px;
+      text-align: right; color: var(--text); line-height: 1;
+    }
+
+    /* SIFT TABLE */
+    .sift-table-wrap { margin-top: 3rem; overflow-x: auto; }
+    .sift-table {
+      width: 100%; border-collapse: collapse;
+      border: 1px solid var(--border);
+    }
+    .sift-table th, .sift-table td {
+      padding: 1rem 1.2rem; border: 1px solid var(--border); vertical-align: top;
+      text-align: left;
+    }
+    .sift-table th {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.06em;
+      background: var(--surface); font-weight: 400;
+    }
+    .sift-table th.dim-header {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--muted); font-weight: 400;
+    }
+    .sift-table td {
+      font-size: 0.88rem; color: var(--muted); line-height: 1.55;
+      background: var(--bg);
+    }
+    .sift-table .score-cell {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--text);
+      text-align: center; background: var(--surface);
+    }
+    .sift-table tr:hover td { background: var(--surface2); }
+    .step-badge {
+      font-family: 'DM Mono', monospace; font-size: 0.6rem; text-transform: uppercase;
+      letter-spacing: 0.1em; padding: 0.2rem 0.5rem; border: 1px solid var(--border);
+      display: inline-block; margin-bottom: 0.4rem;
+    }
+
+    /* CONCEPT CARDS */
+    .concept-cards { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; margin-top: 2.5rem; }
+    .concept-card {
+      background: var(--surface); border: 1px solid var(--border); padding: 2rem;
+    }
+    .concept-card-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.04em;
+      margin-bottom: 0.8rem; line-height: 1;
+    }
+    .concept-card-body { font-size: 0.95rem; color: var(--muted); line-height: 1.68; }
+    .concept-card-body em { font-style: italic; color: var(--text); }
+
+    /* DIMENSIONS EXPLANATION */
+    .dimension-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 2.5rem; }
+    .dim-card {
+      background: var(--surface); border: 1px solid var(--border); padding: 2rem;
+    }
+    .dim-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.05em;
+      margin-bottom: 0.8rem;
+    }
+    .dim-body { font-size: 0.93rem; color: var(--muted); line-height: 1.65; }
+    .dim-scores { margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .dim-score-row { display: flex; align-items: center; gap: 0.6rem; }
+    .dim-creator { font-family: 'DM Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; width: 32px; flex-shrink: 0; }
+    .dim-track { flex: 1; height: 5px; background: var(--surface2); border: 1px solid var(--border); overflow: hidden; }
+    .dim-fill { height: 100%; width: 0; transition: width 1s cubic-bezier(.4,0,.2,1); }
+    .dim-val { font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; width: 28px; text-align: right; color: var(--text); }
+
+    /* TAKEAWAYS */
+    .takeaways-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; margin-top: 2.5rem; }
+    .takeaway-card {
+      background: var(--surface); border: 1px solid var(--border); padding: 2rem;
+    }
+    .takeaway-num {
+      font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--dim);
+      line-height: 1; margin-bottom: 0.8rem;
+    }
+    .takeaway-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.04em;
+      margin-bottom: 0.8rem; line-height: 1.1;
+    }
+    .takeaway-body { font-size: 0.95rem; color: var(--muted); line-height: 1.68; }
+    .takeaway-body em { font-style: italic; color: var(--text); }
+
+    footer {
+      border-top: 1px solid var(--border); padding: 2rem 3.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-l { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); }
+    .footer-r { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--dim); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .jump-nav { top: 50px; }
+      .concept-section { padding: 4rem 1.5rem; }
+      .chart-grid { grid-template-columns: 1fr; }
+      .concept-cards { grid-template-columns: 1fr; }
+      .dimension-grid { grid-template-columns: 1fr; }
+      .takeaways-grid { grid-template-columns: 1fr; }
+      .page-header { padding: 3rem 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .sift-table th, .sift-table td { padding: 0.7rem 0.8rem; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">WHO DO YOU TRUST?</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="influencers.html">Influencers</a>
+    <a href="compare.html">Compare</a>
+    <a href="concepts.html" class="active">Concepts</a>
+  </div>
+</nav>
+
+<div class="jump-nav">
+  <a href="#credibility">Source Credibility</a>
+  <a href="#sift">SIFT</a>
+  <a href="#healthism">Healthism</a>
+  <a href="#cultural">Cultural Production</a>
+  <a href="#rhetoric">Visual Rhetoric</a>
+  <a href="#takeaways">Takeaways</a>
+</div>
+
+<div class="page-header">
+  <p class="page-label">04 — Course Concepts</p>
+  <h1 class="page-title">Five Frameworks, One Argument</h1>
+  <p class="page-sub">Five tools for analyzing how fitness influencers build trust. Each one reveals something different about why we believe who we believe.</p>
+</div>
+
+<!-- ======================== SOURCE CREDIBILITY THEORY ======================== -->
+<div class="concept-section" id="credibility">
+  <p class="concept-label">Framework 01</p>
+  <h2 class="concept-title">Source Credibility Theory</h2>
+  <span class="concept-cite">Hovland, C.I., Janis, I.L., &amp; Kelley, H.H. (1953). <em>Communication and Persuasion.</em> Yale University Press.</span>
+
+  <p class="concept-body">When we decide whether to trust someone, we're judging three things at once: how much they know, how honest they seem, and how much we like them. That's Source Credibility Theory (Hovland, Janis & Kelley, 1953).</p>
+
+  <p class="concept-body">The key point: <em>none of these require the person to actually be right.</em> A creator can look like an expert without being one. Looking credible and being credible are not the same thing — and in fitness content, the difference matters.</p>
+
+  <div class="dimension-grid">
+    <div class="dim-card">
+      <div class="dim-title" style="color:var(--jeff)">Expertise</div>
+      <p class="dim-body">How much does this creator look like they know what they're talking about? Credentials, citations, and clear reasoning all count. Jeff <em>shows his work.</em> Togi doesn't have any to show.</p>
+      <div class="dim-scores" id="dim-expertise">
+        <div class="dim-score-row"><span class="dim-creator" style="color:var(--jeff)">Jeff</span><div class="dim-track"><div class="dim-fill" style="background:var(--jeff)" data-val="90"></div></div><span class="dim-val">90</span></div>
+        <div class="dim-score-row"><span class="dim-creator" style="color:var(--bro)">Bro</span><div class="dim-track"><div class="dim-fill" style="background:var(--bro)" data-val="38"></div></div><span class="dim-val">38</span></div>
+        <div class="dim-score-row"><span class="dim-creator" style="color:var(--jpg)">JPG</span><div class="dim-track"><div class="dim-fill" style="background:var(--jpg)" data-val="28"></div></div><span class="dim-val">28</span></div>
+        <div class="dim-score-row"><span class="dim-creator" style="color:var(--togi)">Togi</span><div class="dim-track"><div class="dim-fill" style="background:var(--togi)" data-val="22"></div></div><span class="dim-val">22</span></div>
+      </div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-title" style="color:var(--bro)">Trustworthiness</div>
+      <p class="dim-body">Does this creator seem honest? Are they hiding financial interests? Togi's overdose video felt raw and real — but it also built massive trust while his supplement deals stayed in the background. <em>Vulnerability can be a performance.</em></p>
+      <div class="dim-scores">
+        <div class="dim-score-row"><span class="dim-creator" style="color:var(--jeff)">Jeff</span><div class="dim-track"><div class="dim-fill" style="background:var(--jeff)" data-val="85"></div></div><span class="dim-val">85</span></div>
+        <div class="dim-score-row"><span class="dim-creator" style="color:var(--bro)">Bro</span><div class="dim-track"><div class="dim-fill" style="background:var(--bro)" data-val="62"></div></div><span class="dim-val">62</span></div>
+        <div class="dim-score-row"><span class="dim-creator" style="color:var(--jpg)">JPG</span><div class="dim-track"><div class="dim-fill" style="background:var(--jpg)" data-val="44"></div></div><span class="dim-val">44</span></div>
+        <div class="dim-score-row"><span class="dim-creator" style="color:var(--togi)">Togi</span><div class="dim-track"><div class="dim-fill" style="background:var(--togi)" data-val="28"></div></div><span class="dim-val">28</span></div>
+      </div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-title" style="color:var(--togi)">Attractiveness / Appeal</div>
+      <p class="dim-body">Do you just like them — regardless of whether they're right? High appeal means people trust the person, not the information. Togi and Dom score highest here. Their audiences would follow them <em>through almost anything.</em></p>
+      <div class="dim-scores">
+        <div class="dim-score-row"><span class="dim-creator" style="color:var(--togi)">Togi</span><div class="dim-track"><div class="dim-fill" style="background:var(--togi)" data-val="88"></div></div><span class="dim-val">88</span></div>
+        <div class="dim-score-row"><span class="dim-creator" style="color:var(--bro)">Bro</span><div class="dim-track"><div class="dim-fill" style="background:var(--bro)" data-val="82"></div></div><span class="dim-val">82</span></div>
+        <div class="dim-score-row"><span class="dim-creator" style="color:var(--jpg)">JPG</span><div class="dim-track"><div class="dim-fill" style="background:var(--jpg)" data-val="80"></div></div><span class="dim-val">80</span></div>
+        <div class="dim-score-row"><span class="dim-creator" style="color:var(--jeff)">Jeff</span><div class="dim-track"><div class="dim-fill" style="background:var(--jeff)" data-val="65"></div></div><span class="dim-val">65</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">All Scores — Side by Side</div>
+    <div class="chart-subtitle">All three dimensions, all four creators · Scores are estimates based on analysis, not objective measurements</div>
+    <div class="chart-grid">
+      <div class="chart-col">
+        <div class="chart-col-title">Expertise</div>
+        <div class="chart-bar-row">
+          <span class="chart-creator" style="color:var(--jeff)">Jeff</span>
+          <div class="chart-track"><div class="chart-fill" style="background:var(--jeff)" data-val="90"></div></div>
+          <span class="chart-val">90</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-creator" style="color:var(--bro)">Bro</span>
+          <div class="chart-track"><div class="chart-fill" style="background:var(--bro)" data-val="38"></div></div>
+          <span class="chart-val">38</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-creator" style="color:var(--jpg)">JPG</span>
+          <div class="chart-track"><div class="chart-fill" style="background:var(--jpg)" data-val="28"></div></div>
+          <span class="chart-val">28</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-creator" style="color:var(--togi)">Togi</span>
+          <div class="chart-track"><div class="chart-fill" style="background:var(--togi)" data-val="22"></div></div>
+          <span class="chart-val">22</span>
+        </div>
+      </div>
+      <div class="chart-col">
+        <div class="chart-col-title">Trustworthiness</div>
+        <div class="chart-bar-row">
+          <span class="chart-creator" style="color:var(--jeff)">Jeff</span>
+          <div class="chart-track"><div class="chart-fill" style="background:var(--jeff)" data-val="85"></div></div>
+          <span class="chart-val">85</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-creator" style="color:var(--bro)">Bro</span>
+          <div class="chart-track"><div class="chart-fill" style="background:var(--bro)" data-val="62"></div></div>
+          <span class="chart-val">62</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-creator" style="color:var(--jpg)">JPG</span>
+          <div class="chart-track"><div class="chart-fill" style="background:var(--jpg)" data-val="44"></div></div>
+          <span class="chart-val">44</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-creator" style="color:var(--togi)">Togi</span>
+          <div class="chart-track"><div class="chart-fill" style="background:var(--togi)" data-val="28"></div></div>
+          <span class="chart-val">28</span>
+        </div>
+      </div>
+      <div class="chart-col">
+        <div class="chart-col-title">Appeal</div>
+        <div class="chart-bar-row">
+          <span class="chart-creator" style="color:var(--togi)">Togi</span>
+          <div class="chart-track"><div class="chart-fill" style="background:var(--togi)" data-val="88"></div></div>
+          <span class="chart-val">88</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-creator" style="color:var(--bro)">Bro</span>
+          <div class="chart-track"><div class="chart-fill" style="background:var(--bro)" data-val="82"></div></div>
+          <span class="chart-val">82</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-creator" style="color:var(--jpg)">JPG</span>
+          <div class="chart-track"><div class="chart-fill" style="background:var(--jpg)" data-val="80"></div></div>
+          <span class="chart-val">80</span>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-creator" style="color:var(--jeff)">Jeff</span>
+          <div class="chart-track"><div class="chart-fill" style="background:var(--jeff)" data-val="65"></div></div>
+          <span class="chart-val">65</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== SIFT ======================== -->
+<div class="concept-section" id="sift">
+  <p class="concept-label">Framework 02</p>
+  <h2 class="concept-title">The SIFT Framework</h2>
+  <span class="concept-cite">Caulfield, M. (2019). <em>SIFT (The Four Moves).</em> Hapgood. CC BY 4.0.</span>
+
+  <p class="concept-body">SIFT is a fact-checking shortcut developed by researcher Mike Caulfield. Instead of asking "is this true?" — which takes time and expertise — it asks four quick questions you can apply to anything.</p>
+
+  <p class="concept-body">Applied to fitness creators, SIFT shows how much verification is actually possible around each one. For Jeff, quite a lot. For Togi, almost nothing — and that's by design.</p>
+
+  <div class="sift-table-wrap">
+    <table class="sift-table">
+      <thead>
+        <tr>
+          <th class="dim-header">SIFT Step</th>
+          <th style="color:var(--jeff)">Jeff Nippard</th>
+          <th style="color:var(--togi)">Togi</th>
+          <th style="color:var(--bro)">Bro Science</th>
+          <th style="color:var(--jpg)">JPG</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <span class="step-badge">S — Stop</span><br>
+            Pause before reacting. Notice your emotional response.
+          </td>
+          <td>Slow, detailed, non-sensational. The format tells you to take your time. Score: <strong style="color:var(--jeff)">80</strong></td>
+          <td>Built for shock. Overdoses, steroid reveals, gambling streams. Hard to stop and think when this is playing. Score: <strong style="color:var(--togi)">8</strong></td>
+          <td>The comedy format is a built-in pause signal. Though new viewers might not catch that it's satire right away. Score: <strong style="color:var(--bro)">72</strong></td>
+          <td>Feels calming and validating. That feeling bypasses the impulse to question anything. Score: <strong style="color:var(--jpg)">22</strong></td>
+        </tr>
+        <tr>
+          <td>
+            <span class="step-badge">I — Investigate</span><br>
+            Look up the source before the content.
+          </td>
+          <td>Easy to verify. Biochemistry degree, national powerlifting record, 10+ years of documented content. Score: <strong style="color:var(--jeff)">88</strong></td>
+          <td>Almost nothing to look up. No credentials. His public record is videos he made himself. Score: <strong style="color:var(--togi)">14</strong></td>
+          <td>You can find him — NYU grad, comedian — but the Dom character has overshadowed the real person. Score: <strong style="color:var(--bro)">55</strong></td>
+          <td>Very little to find. No credentials in any relevant field. The brand is the content. Score: <strong style="color:var(--jpg)">28</strong></td>
+        </tr>
+        <tr>
+          <td>
+            <span class="step-badge">F — Find Coverage</span><br>
+            Look for other reporting on the claim.
+          </td>
+          <td>His claims line up with published sports science. Other evidence-based creators cite him. Score: <strong style="color:var(--jeff)">85</strong></td>
+          <td>Almost no outside coverage. The one notable mention: Greg Doucette's critique, which was negative. Score: <strong style="color:var(--togi)">10</strong></td>
+          <td>Covered in fitness and mainstream media. The Dwayne Johnson collab and Swoly Bible both got independent press. Score: <strong style="color:var(--bro)">60</strong></td>
+          <td>Nothing. Exists entirely inside the TikTok recommendation bubble. Score: <strong style="color:var(--jpg)">18</strong></td>
+        </tr>
+        <tr>
+          <td>
+            <span class="step-badge">T — Trace Claims</span><br>
+            Find the original source.
+          </td>
+          <td>Citations are on screen and in the description. You can follow them to the original study. Score: <strong style="color:var(--jeff)">90</strong></td>
+          <td>There's nothing to trace. It's personal experience. That's the point — you can't verify it. Score: <strong style="color:var(--togi)">12</strong></td>
+          <td>It's satire — not meant to be literally true. Hard to trace a joke to a source. Score: <strong style="color:var(--bro)">50</strong></td>
+          <td>"Energy alignment" and "frequency" don't point anywhere. There's no original source because no factual claim is being made. Score: <strong style="color:var(--jpg)">15</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ======================== HEALTHISM ======================== -->
+<div class="concept-section" id="healthism">
+  <p class="concept-label">Framework 03</p>
+  <h2 class="concept-title">Healthism</h2>
+  <span class="concept-cite">Crawford, R. (1980). Healthism and the medicalization of everyday life. <em>International Journal of Health Services, 10</em>(3), 365–388.</span>
+
+  <p class="concept-body">Healthism is the idea that being healthy is a personal moral duty — and that if you're unhealthy, it's your own fault. Sociologist Robert Crawford coined the term in 1980. He argued this thinking ignores the social and economic reasons people struggle with health in the first place.</p>
+
+  <p class="concept-body">All four creators push this idea — just in different ways. <strong>Jeff</strong> says: use the science, apply it correctly, get results. <strong>Togi</strong> says: the body is a personal project — make it extreme. <strong>Bro Science</strong> mocks gym culture while being completely inside it. <strong>JPG</strong> says: health is cosmic alignment — if you're not getting results, your energy is off.</p>
+
+  <div class="concept-cards">
+    <div class="concept-card">
+      <div class="concept-card-title" style="color:var(--jeff)">Jeff — Rational Healthism</div>
+      <p class="concept-card-body">Health as a science problem. The message: right information + right habits = results. If you fail, you just haven't optimized correctly. Useful and research-grounded — but it still ignores that not everyone has equal access to time, food, or money.</p>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title" style="color:var(--togi)">Togi — Transgressive Healthism</div>
+      <p class="concept-card-body">Togi breaks every conventional health rule — steroids, gambling, self-destruction — but still treats his body as his main project. He swapped wellness for <em>authenticity.</em> But the body is still the point. That's still healthism.</p>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title" style="color:var(--bro)">Bro Science — Satirical Healthism</div>
+      <p class="concept-card-body">Dom makes fun of the gym-obsessed. But the joke only works if you're already that person. His audience is laughing <em>at themselves.</em> The parody is still part of the culture it's mocking.</p>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title" style="color:var(--jpg)">JPG — Spiritual Healthism</div>
+      <p class="concept-card-body">Health as cosmic alignment. If you're not getting results, your frequency is off. This takes healthism the furthest: failure isn't just a physical problem — it's a spiritual one. Your body is a cosmic project, and falling short is a moral failing.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== CULTURAL PRODUCTION ======================== -->
+<div class="concept-section" id="cultural">
+  <p class="concept-label">Framework 04</p>
+  <h2 class="concept-title">Cultural Production &amp; Reproduction</h2>
+  <span class="concept-cite">Bourdieu, P. (1993). <em>The Field of Cultural Production.</em> Polity. / Hall, S. (1980). Encoding/Decoding. In <em>Culture, Media, Language.</em> Hutchinson.</span>
+
+  <p class="concept-body">Stuart Hall's encoding/decoding model (1980): creators put meaning into content, and audiences read it back out — but not always the same way. Fitness creators sell a vision of what bodies should look like and how health should be pursued. Viewers decide how much to buy in.</p>
+
+  <p class="concept-body">Pierre Bourdieu looked at culture as a competition. On YouTube and TikTok, the algorithm runs that competition — and it rewards shocking, emotional, and extreme content over careful and accurate content. This pushes all creators toward drama and entertainment, <em>even the ones trying to be scientific.</em> Jeff Nippard packages research as a YouTube show because he has to.</p>
+
+  <div class="concept-cards">
+    <div class="concept-card">
+      <div class="concept-card-title">The Algorithm as Field</div>
+      <p class="concept-card-body">YouTube rewards watch time and emotional reactions. That means shocking, dramatic content spreads further than accurate, calm content. Togi's videos are built exactly for this. Jeff's succeed in spite of it — which suggests his audience is actively looking for him, not discovering him through recommendations.</p>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title">Reproduction of Norms</div>
+      <p class="concept-card-body">Every creator here reinforces the same norm: the body matters, and it's a project to manage. Even the ones who mock it. Bro Science jokes about gym obsession — but the joke only works on people who are already obsessed. Subverting an idea from inside it often ends up reinforcing it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== VISUAL RHETORIC ======================== -->
+<div class="concept-section" id="rhetoric">
+  <p class="concept-label">Framework 05</p>
+  <h2 class="concept-title">Visual Rhetoric</h2>
+  <span class="concept-cite">Foss, S. (2004). Framing the study of visual rhetoric. <em>Defining Visual Rhetorics.</em> / Barthes, R. (1977). Rhetoric of the Image. In <em>Image-Music-Text.</em> Fontana.</span>
+
+  <p class="concept-body">Visuals make arguments before any words do. Roland Barthes (1977) and Sonja Foss (2004) both argued that what you see sets up how you interpret everything that comes after it.</p>
+
+  <p class="concept-body">Each creator's visual style is a trust argument that lands before a single fact is stated. <em>Jeff's lab-style graphics say: this is rigorous. Togi's handheld footage says: this is raw and real. Dom's comedy staging says: don't take this literally. JPG's glowing aesthetic says: this is a safe, open space.</em> The visuals shape what the audience is prepared to believe before evaluation begins.</p>
+
+  <div class="concept-cards">
+    <div class="concept-card">
+      <div class="concept-card-title" style="color:var(--jeff)">Jeff — Scientific Visual Register</div>
+      <p class="concept-card-body">White backgrounds, on-screen citations, split-screen comparisons. This borrows the visual language of academic presentations. The message: treat this like a research paper. This is not science — it is the <em>look of science.</em></p>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title" style="color:var(--togi)">Togi — Authenticity Visual Register</div>
+      <p class="concept-card-body">Handheld footage, raw lighting, gym mirrors, direct address to camera. The message: nothing is being hidden. But "authentic" is also a style — it takes deliberate choices to look like nothing is staged. It's as crafted as any polished video.</p>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title" style="color:var(--bro)">Bro Science — Comedy Visual Register</div>
+      <p class="concept-card-body">Exaggerated performance, comedy-sketch cuts, bright color grading. The visual signal: this is a joke. But that also gives it cover — when Dom says something that's actually true, it comes with a built-in disclaimer.</p>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title" style="color:var(--jpg)">JPG — Spiritual Visual Register</div>
+      <p class="concept-card-body">Soft focus, pastel colors, slow panning shots of nature. Borrowed from wellness Instagram and yoga culture. The signal: this is a safe space. Enter with openness, not skepticism. It's a visual invitation to stop asking questions.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== TAKEAWAYS ======================== -->
+<div class="concept-section" id="takeaways">
+  <p class="concept-label">Project Findings</p>
+  <h2 class="concept-title">Six Takeaways</h2>
+  <p class="concept-body">What comparing four creators through five frameworks actually showed.</p>
+
+  <div class="takeaways-grid">
+    <div class="takeaway-card">
+      <div class="takeaway-num">01</div>
+      <div class="takeaway-title">Credibility Is Performed Before It Is Earned</div>
+      <p class="takeaway-body">The most powerful trust signals kick in before you've heard a single fact. Jeff's citation graphics, Togi's raw footage, Dom's comedy setup, JPG's soft glow — all of these make a trust argument before anything is said. The packaging shapes what you're ready to believe.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">02</div>
+      <div class="takeaway-title">Expertise and Appeal Are Inversely Distributed</div>
+      <p class="takeaway-body">The creator with the highest expertise score (Jeff, 90) has the lowest appeal score (65). The creator with the highest appeal (Togi, 88) has the lowest expertise (22). Being the most knowledgeable and being the most popular are not the same thing — and they may actually work against each other.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">03</div>
+      <div class="takeaway-title">Authenticity Is a Credibility Strategy, Not Its Opposite</div>
+      <p class="takeaway-body">Togi's openness — documenting steroid cycles, gambling losses, an overdose — is as calculated as Jeff's citations. Both are trust strategies. The difference: Togi's approach <em>can't be fact-checked.</em> "This happened to me" doesn't have a source. Authenticity-as-brand is the hardest credibility move to see through.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">04</div>
+      <div class="takeaway-title">Satire Cannot Escape What It Critiques</div>
+      <p class="takeaway-body">Dom uses parody to mock gym culture — but the joke only works if the audience is already inside that culture. His viewers are laughing at themselves. When you parody something for people who love it, you reinforce it at the same time.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">05</div>
+      <div class="takeaway-title">The Algorithm Rewards the Least Verifiable Content</div>
+      <p class="takeaway-body">YouTube's engagement metrics favor shocking, emotional, and personal content over accurate, careful content. Togi's videos are built for that. Jeff succeeds in spite of it — which means his audience is actively looking for him, not stumbling on him through recommendations.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">06</div>
+      <div class="takeaway-title">Healthism Adapts to Every Credibility Register</div>
+      <p class="takeaway-body">Science, transgression, satire, spirituality — four completely different styles, same core message: health is your responsibility, and your body is the main project. The styles are different. The idea underneath is the same. That's why it's hard to push back on — it shows up in forms that look like opposites.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-l">WHO DO YOU TRUST? — Media Studies Final Project — 2026</div>
+  <div class="footer-r">Hovland et al. 1953 &middot; Caulfield 2019 &middot; Crawford 1980 &middot; Bourdieu 1993 &middot; Hall 1980 &middot; Foss 2004 &middot; Barthes 1977</div>
+</footer>
+
+<script src="live-data.js"></script>
+<script>
+  // Animate all chart/dim bars into view using IntersectionObserver
+  function animateBars() {
+    const fills = document.querySelectorAll('.chart-fill, .dim-fill');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const val = el.getAttribute('data-val');
+          if (val) el.style.width = val + '%';
+          obs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    fills.forEach(el => obs.observe(el));
+  }
+
+  if ('IntersectionObserver' in window) {
+    animateBars();
+  } else {
+    // Fallback: set all widths immediately
+    document.querySelectorAll('.chart-fill, .dim-fill').forEach(el => {
+      const val = el.getAttribute('data-val');
+      if (val) el.style.width = val + '%';
+    });
+  }
+</script>
+</body>
+</html>
