@@ -6,7 +6,7 @@
   const CHANNELS = {
     jeff: 'UC68TLK0mAEzUyHx5x5k-S1Q',
     bro:  'UCduKuJToxWPizJ7I2E6n1kA',
-    togi: 'UCG-leaV0PnqbS-48KqPtduw',
+    togi: 'UCb2y3fAB0mt6Chk7fTko7eg',
   };
 
   const STATIC = {
@@ -18,11 +18,11 @@
       raw: { subscribers: 8350000, views: 1754000000, videos: 617 }
     },
     togi: {
-      subscribers: '740K', totalViews: '85M', videoCount: '312',
+      subscribers: '1.03M', totalViews: '47.2M', videoCount: '43',
       avgViewsPerVideo: '—', likeRate: '—', avgDurationMin: '—',
-      videosPerMonth: '—', channelStarted: '2021', postingConsistency: '—',
+      videosPerMonth: '—', channelStarted: '2023', postingConsistency: '—',
       topVideo: null, liveLoaded: false,
-      raw: { subscribers: 740000, views: 85000000, videos: 312 }
+      raw: { subscribers: 1030000, views: 47212521, videos: 43 }
     },
     bro: {
       subscribers: '2.5M', totalViews: '500M', videoCount: '356',
