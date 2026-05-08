@@ -156,8 +156,17 @@
     .trends-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
     .trends-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: 0.03em; line-height: 0.95; margin-bottom: 0.8rem; }
     .trends-sub { font-size: 0.9rem; color: var(--muted); margin-bottom: 2rem; max-width: 560px; line-height: 1.65; }
-    .trends-embed-wrap { border: 1px solid var(--border); overflow: hidden; background: var(--surface); }
-    .trends-embed-wrap iframe { width: 100%; height: 420px; border: none; display: block; }
+    .trends-link-card { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; border: 1px solid var(--border); background: var(--surface); padding: 2.5rem 2.8rem; text-decoration: none; transition: border-color 0.2s; }
+    .trends-link-card:hover { border-color: var(--text); }
+    .trends-card-left { display: flex; flex-direction: column; gap: 0.8rem; }
+    .trends-card-topics { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .trends-topic { font-family: 'DM Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.25rem 0.6rem; border: 1px solid var(--border); color: var(--muted); }
+    .trends-topic.jeff { border-color: var(--jeff); color: var(--jeff); }
+    .trends-topic.togi { border-color: var(--togi); color: var(--togi); }
+    .trends-topic.bro  { border-color: var(--bro);  color: var(--bro); }
+    .trends-topic.jpg  { border-color: var(--jpg);  color: var(--jpg); }
+    .trends-card-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+    .trends-card-cta { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.06em; color: var(--text); white-space: nowrap; }
 
     @media (max-width: 1000px) {
       .stat-grid { grid-template-columns: repeat(2,1fr); }
@@ -174,6 +183,8 @@
       .sift-row { grid-template-columns: 100px 1fr; }
       .top-video-card { grid-template-columns: 1fr; }
       .trends-section { padding: 3rem 1.5rem; }
+      .trends-link-card { grid-template-columns: 1fr; }
+      .trends-card-cta { display: none; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
     }
   </style>
@@ -869,10 +880,19 @@
 <section class="trends-section">
   <p class="trends-label">Google Trends — YouTube Search</p>
   <h2 class="trends-title">Search Interest Over Time</h2>
-  <p class="trends-sub">Relative YouTube search volume. 100 = peak popularity in the period. Shows public perception shifts — relevant to how perceived expertise rises and falls over time (Source Credibility Theory).</p>
-  <div class="trends-embed-wrap">
-    <iframe src="https://trends.google.com/trends/embed/explore/TIMESERIES?req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22Jeff%20Nippard%22%2C%22geo%22%3A%22%22%2C%22time%22%3A%22today%2012-m%22%7D%2C%7B%22keyword%22%3A%22Shane%20Stoffer%22%2C%22geo%22%3A%22%22%2C%22time%22%3A%22today%2012-m%22%7D%2C%7B%22keyword%22%3A%22Bro%20Science%20Life%22%2C%22geo%22%3A%22%22%2C%22time%22%3A%22today%2012-m%22%7D%2C%7B%22keyword%22%3A%22JPG%20Coaching%22%2C%22geo%22%3A%22%22%2C%22time%22%3A%22today%2012-m%22%7D%5D%2C%22category%22%3A0%2C%22property%22%3A%22youtube%22%7D&tz=300&hl=en" scrolling="no" frameborder="0" loading="lazy" title="Google Trends — YouTube search interest comparison"></iframe>
-  </div>
+  <p class="trends-sub">Relative YouTube search volume for each creator over the past 12 months. 100 = peak. Shows how public perception shifts — directly relevant to Source Credibility Theory: expertise is perceptual, not fixed.</p>
+  <a class="trends-link-card" href="https://trends.google.com/trends/explore?date=today%2012-m&gprop=youtube&q=Jeff%20Nippard,Shane%20Stoffer,Bro%20Science%20Life,JPG%20Coaching" target="_blank" rel="noopener">
+    <div class="trends-card-left">
+      <div class="trends-card-topics">
+        <span class="trends-topic jeff">Jeff Nippard</span>
+        <span class="trends-topic togi">Shane Stoffer</span>
+        <span class="trends-topic bro">Bro Science Life</span>
+        <span class="trends-topic jpg">JPG Coaching</span>
+      </div>
+      <p class="trends-card-desc">YouTube search · past 12 months · all regions. Opens live interactive chart on Google Trends.</p>
+    </div>
+    <div class="trends-card-cta">Open Trends ↗</div>
+  </a>
 </section>
 
 <footer>
