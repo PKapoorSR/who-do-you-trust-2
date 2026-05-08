@@ -87,7 +87,6 @@
     .panel-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.02em; line-height: 0.92; margin-bottom: 0.4rem; }
     .panel-handle { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); margin-bottom: 0.3rem; letter-spacing: 0.06em; }
     .panel-platform { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
-    .panel-quote { font-style: italic; font-size: 1rem; color: var(--muted); border-left: 2px solid var(--border); padding-left: 1rem; margin-bottom: 2rem; line-height: 1.68; }
 
     /* TRUST SIGNALS */
     .trust-strategy { font-family: 'DM Mono', monospace; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 0.5rem; margin-top: 1.5rem; }
@@ -152,7 +151,7 @@
   <div class="selector-side">
     <span class="selector-label">Creator A</span>
     <select class="creator-select" id="select-a">
-      <option value="">— Pick a creator —</option>
+      <option value="">Pick a creator</option>
       <option value="jeff">Jeff Nippard</option>
       <option value="togi">Togi</option>
       <option value="bro">Bro Science</option>
@@ -163,7 +162,7 @@
   <div class="selector-side">
     <span class="selector-label">Creator B</span>
     <select class="creator-select" id="select-b">
-      <option value="">— Pick a creator —</option>
+      <option value="">Pick a creator</option>
       <option value="jeff">Jeff Nippard</option>
       <option value="togi">Togi</option>
       <option value="bro">Bro Science</option>
@@ -180,14 +179,14 @@
 </div>
 
 <div class="page-header">
-  <p class="page-header-label">03 — Compare</p>
+  <p class="page-header-label">03 Compare</p>
   <h1 class="page-header-title">How Trust Gets Built</h1>
   <p class="page-header-sub">These creators use completely different strategies to earn credibility. Compare any two.</p>
 </div>
 
 <!-- SPECTRUMS SECTION -->
 <div class="spectrums-section">
-  <p class="spectrums-header">Where each creator sits — three dimensions</p>
+  <p class="spectrums-header">Where each creator sits</p>
 
   <!-- Spectrum 1: Claim Basis -->
   <div class="spectrum-wrap">
@@ -302,8 +301,8 @@
   <div class="thesis-inner">
     <p class="thesis-label">Central Argument</p>
     <h2 class="thesis-headline">Trust is built differently for each creator. But the feeling of trust is the same.</h2>
-    <p class="thesis-body">Jeff earns it through credentials and citations. Togi earns it through vulnerability and openness. Bro Science earns it through humor and cultural recognition. JPG earns it through confidence and consistency. Four completely different approaches. One identical result: an audience that believes what they are told.</p>
-    <p class="thesis-body">The question is not who to trust. It is what kind of trust each creator is asking for — and whether that kind of trust can be verified.</p>
+    <p class="thesis-body">Jeff earns it through credentials and citations. Togi earns it through vulnerability and openness. Bro Science earns it through humor and cultural recognition. JPG earns it through confidence and consistency. Four completely different approaches. One identical result. An audience that believes what they are told.</p>
+    <p class="thesis-body">The question is not who to trust. It is what kind of trust each creator is asking for and whether that kind of trust can be verified.</p>
   </div>
 </div>
 
@@ -316,13 +315,12 @@
 <script>
   const CREATORS = {
     jeff: {
-      name: 'Jeff Nippard', handle: '@jeffnippard', platform: 'YouTube. Long-form educational.',
+      name: 'Jeff Nippard', handle: '@jeffnippard', platform: 'YouTube. Long form educational.',
       color: 'var(--jeff)',
-      quote: '"The research should speak for itself. My job is to translate it accurately."',
       strategy: 'Science and Citations',
       signalsPos: [
         'Biochemistry degree (verified)',
-        'Peer-reviewed studies cited on screen',
+        'Peer reviewed studies cited on screen',
         'Publicly reversed past positions when evidence changed',
         'Sponsorships disclosed'
       ],
@@ -331,13 +329,12 @@
       ],
       claimBasis: 'Research papers cited on screen and in descriptions. Claims can be traced to original sources.',
       revenue: 'MacroFactor app (co-created with Eric Helms). Training programs. Disclosed brand sponsorships.',
-      healthism: 'Science-optimized body. Right information + right habits = results.',
-      platform: 'YouTube. Long-form educational.'
+      healthism: 'Science optimized body. Right information + right habits = results.',
+      platform: 'YouTube. Long form educational.'
     },
     togi: {
       name: 'Togi', handle: '@stoffer__', platform: 'YouTube. Instagram. Lifestyle and bodybuilding.',
       color: 'var(--togi)',
-      quote: '"I\'m not going to lie to you. Everything I do, I put it out there."',
       strategy: 'Authenticity and Parasocial Bond',
       signalsPos: [
         'Shares personal experiences openly',
@@ -346,50 +343,48 @@
       signalsWarn: [
         'No verifiable credentials',
         'Gambling sponsorships (Roobet)',
-        'Claims based entirely on personal experience — cannot be verified'
+        'Claims based entirely on personal experience. Cannot be verified.'
       ],
-      claimBasis: 'Personal experience only. \'This happened to me\' is the entire argument. Nothing to trace.',
+      claimBasis: 'Personal experience only. This happened to me is the entire argument. Nothing to trace.',
       revenue: 'Roobet gambling affiliate (primary). Supplement brand deals. YouTube ad revenue.',
       healthism: 'Body as personal project. Authenticity replaced wellness as the goal.',
       platform: 'YouTube. Instagram. Lifestyle and bodybuilding.'
     },
     bro: {
-      name: 'Bro Science', handle: '@BroScienceLife', platform: 'YouTube. Long-form comedy and satire.',
+      name: 'Bro Science', handle: '@BroScienceLife', platform: 'YouTube. Long form comedy and satire.',
       color: 'var(--bro)',
-      quote: '"Dom Mazzetti is every gym bro you\'ve ever met. The joke only works if the observation is accurate."',
       strategy: 'Satire and Cultural Recognition',
       signalsPos: [
         'NYU graduate (public record)',
-        'Satire clearly signaled — not meant as fitness advice',
+        'Satire clearly signaled. Not meant as fitness advice.',
         'Gym culture observations widely recognized as accurate'
       ],
       signalsWarn: [
         'Sponsorships embedded in comedy format',
         'New viewers may not immediately recognize satire'
       ],
-      claimBasis: 'Satirical character work. Parody of gym culture — observations, not instructions.',
+      claimBasis: 'Satirical character work. Parody of gym culture. Observations not instructions.',
       revenue: 'YouTube ad revenue. DomMerch.com. David Protein sponsorship. The Swoly Bible (2016).',
       healthism: 'Mocks gym obsession from inside it. The joke requires the audience to already share the values.',
-      platform: 'YouTube. Long-form comedy and satire.'
+      platform: 'YouTube. Long form comedy and satire.'
     },
     jpg: {
-      name: 'JPG', handle: '@jpgcoaching', platform: 'TikTok. Short-form instructional. GymTok.',
+      name: 'JPG', handle: '@jpgcoaching', platform: 'TikTok. Short form instructional. GymTok.',
       color: 'var(--jpg)',
-      quote: '"Good technique is non-negotiable. The details are what separate progress from injury."',
       strategy: 'Confidence and Instructional Authority',
       signalsPos: [
         'Public coaching business (jpgcoaching.com)',
         'Hypertrophy content consistent with bodybuilding research',
-        'Instructional format — exercise form and selection focus'
+        'Instructional format. Exercise form and selection focus.'
       ],
       signalsWarn: [
         'No academic credentials cited',
         'No source citations in content'
       ],
-      claimBasis: 'Coaching experience and biomechanics reasoning. No peer-reviewed citations.',
+      claimBasis: 'Coaching experience and biomechanics reasoning. No peer reviewed citations.',
       revenue: 'JPG Coaching online programs. Legion supplement affiliate. TikTok brand deals.',
       healthism: 'Technical body optimization. Correct exercise selection and volume as the answer.',
-      platform: 'TikTok. Short-form instructional. GymTok.'
+      platform: 'TikTok. Short form instructional. GymTok.'
     }
   };
 
@@ -409,7 +404,6 @@
       <div class="panel-name" style="color:${colorVar}">${c.name}</div>
       <div class="panel-handle">${c.handle}</div>
       <div class="panel-platform">${c.platform}</div>
-      <blockquote class="panel-quote">${c.quote}</blockquote>
 
       <p class="trust-strategy">Trust Strategy</p>
       <div class="strategy-headline" style="color:${colorVar}">${c.strategy}</div>
