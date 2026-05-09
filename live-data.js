@@ -131,11 +131,13 @@
     const channelStarted    = new Date(publishedAt).getFullYear().toString();
     const postingConsistency = calcConsistency(uploadDates);
 
+    const avatar = item.snippet.thumbnails?.medium?.url || item.snippet.thumbnails?.default?.url || '';
+
     return {
       subscribers: fmt(subs), totalViews: fmt(views), videoCount: String(vids),
       avgViewsPerVideo: fmt(Math.round(views / vids)),
       likeRate, avgDurationMin, videosPerMonth, channelStarted, postingConsistency,
-      liveLoaded: true,
+      avatar, liveLoaded: true,
       raw: { subscribers: subs, views, videos: vids }
     };
   }
@@ -192,6 +194,8 @@
     const avgLikes  = video > 0 ? fmt(Math.round(heart / video)) : '—';
     const ageMonths = (Date.now() - new Date('2021-01-01').getTime()) / (1000 * 60 * 60 * 24 * 30.44);
     const vpm       = video > 0 ? (video / ageMonths).toFixed(1) : '—';
+    const avatar = j.photo || j.avatar || j.avatarLarger || '';
+
     return {
       subscribers:      fmt(fans),
       totalViews:       fmt(heart),
@@ -199,7 +203,7 @@
       avgLikesPerVideo: avgLikes,
       videosPerMonth:   vpm,
       following:        following ? fmt(following)    : '—',
-      liveLoaded:       true,
+      avatar,           liveLoaded: true,
       raw: { subscribers: fans, views: heart, videos: video }
     };
   }

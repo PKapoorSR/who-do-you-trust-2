@@ -63,7 +63,8 @@
     .creator-name-big { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 7vw, 6rem); letter-spacing: 0.02em; line-height: 0.92; color: var(--creator-color, var(--text)); }
     .creator-handle-big { font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--muted); margin-top: 0.6rem; letter-spacing: 0.06em; }
     .creator-bio { margin-top: 1.5rem; font-size: 1rem; color: var(--muted); max-width: 580px; line-height: 1.75; }
-    .creator-header-right { text-align: right; flex-shrink: 0; }
+    .creator-header-right { text-align: right; flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 0; }
+    .creator-avatar { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; border: 2px solid var(--creator-color, var(--border)); margin-bottom: 1.2rem; background: var(--surface2); display: block; }
     .live-subs-big { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--creator-color, var(--text)); letter-spacing: 0.03em; line-height: 1; }
     .live-subs-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.2rem; }
     .live-badge { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.5rem; padding: 0.25rem 0.6rem; border: 1px solid var(--border); background: var(--surface); font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
@@ -222,6 +223,7 @@
       <p class="creator-bio">Jeff Nippard has a degree in biochemistry from the University of Western Ontario. He competed in powerlifting at the provincial and national level. His YouTube channel started in 2014. His videos regularly show research studies on screen and include sources in the description. Over time he has changed some of his opinions when new research became available.</p>
     </div>
     <div class="creator-header-right">
+      <img class="creator-avatar" id="jeff-avatar" src="" alt="Jeff Nippard">
       <div class="live-subs-big" id="jeff-subs-big">8.35M</div>
       <div class="live-subs-label">YouTube Subscribers</div>
       <div class="live-badge"><span class="live-badge-dot" id="jeff-dot"></span><span id="jeff-badge-text">Loading</span></div>
@@ -365,6 +367,7 @@
     </div>
 
     <div class="creator-header-right">
+      <img class="creator-avatar" id="togi-avatar" src="" alt="Shane Stoffer">
       <div class="live-subs-big" id="togi-subs-big">1.03M</div>
       <div class="live-subs-label">YouTube Subscribers</div>
       <div class="live-badge">
@@ -516,6 +519,7 @@
     </div>
 
     <div class="creator-header-right">
+      <img class="creator-avatar" id="bro-avatar" src="" alt="Bro Science">
       <div class="live-subs-big" id="bro-subs-big">2.5M</div>
 
       <div class="live-subs-label">YouTube Subscribers</div>
@@ -670,6 +674,7 @@
     </div>
 
     <div class="creator-header-right">
+      <img class="creator-avatar" id="jpg-avatar" src="" alt="JPG Coaching">
       <div class="live-subs-big" id="jpg-subs-big">3.6M</div>
 
       <div class="live-subs-label">TikTok Followers</div>
@@ -869,7 +874,7 @@
     const creators = {
       jeff: {
         bigId: 'jeff-subs-big', dotId: 'jeff-dot', badgeId: 'jeff-badge-text',
-        consistencyId: 'jeff-stat-consistency',
+        consistencyId: 'jeff-stat-consistency', avatarId: 'jeff-avatar',
         vidLinkId: 'jeff-vid-link', vidThumbId: 'jeff-vid-thumb',
         vidTitleId: 'jeff-vid-title', vidViewsId: 'jeff-vid-views',
         cells: {
@@ -885,7 +890,7 @@
       },
       togi: {
         bigId: 'togi-subs-big', dotId: 'togi-dot', badgeId: 'togi-badge-text',
-        consistencyId: 'togi-stat-consistency',
+        consistencyId: 'togi-stat-consistency', avatarId: 'togi-avatar',
         vidLinkId: 'togi-vid-link', vidThumbId: 'togi-vid-thumb',
         vidTitleId: 'togi-vid-title', vidViewsId: 'togi-vid-views',
         cells: {
@@ -901,7 +906,7 @@
       },
       bro: {
         bigId: 'bro-subs-big', dotId: 'bro-dot', badgeId: 'bro-badge-text',
-        consistencyId: 'bro-stat-consistency',
+        consistencyId: 'bro-stat-consistency', avatarId: 'bro-avatar',
         vidLinkId: 'bro-vid-link', vidThumbId: 'bro-vid-thumb',
         vidTitleId: 'bro-vid-title', vidViewsId: 'bro-vid-views',
         cells: {
@@ -917,6 +922,7 @@
       },
       jpg: {
         bigId: 'jpg-subs-big', dotId: 'jpg-dot', badgeId: 'jpg-badge-text',
+        avatarId: 'jpg-avatar',
         cells: {
           'jpg-stat-subs':       'subscribers',
           'jpg-stat-likes':      'totalViews',
@@ -951,6 +957,12 @@
       // posting consistency note
       const cons = document.getElementById(cfg.consistencyId);
       if (cons && d.postingConsistency) cons.textContent = d.postingConsistency;
+
+      // creator avatar
+      if (d.avatar && cfg.avatarId) {
+        const av = document.getElementById(cfg.avatarId);
+        if (av) av.src = d.avatar;
+      }
 
       // example content video card
       if (d.topVideo && cfg.vidLinkId) {
