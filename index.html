@@ -161,13 +161,6 @@
     .card-dot.on { background: #4ade80; box-shadow: 0 0 5px #4ade80; animation: blink 2s infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
     .card-strategy { font-size: 0.95rem; color: var(--muted); line-height: 1.68; flex: 1; }
-    .card-risk-row { display: flex; align-items: center; gap: 0.6rem; }
-    .card-risk-track { flex: 1; height: 5px; background: var(--surface2); border: 1px solid var(--border); overflow: hidden; }
-    .card-risk-fill { height: 100%; }
-    .card-risk-label {
-      font-family: 'DM Mono', monospace; font-size: 0.6rem;
-      text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap;
-    }
     .card-cta {
       font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--muted); padding-top: 1rem;
@@ -193,59 +186,6 @@
     }
     .mechanic-body { font-size: 0.95rem; color: var(--muted); line-height: 1.68; margin-bottom: 1.2rem; }
     .mechanic-leader { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.06em; color: var(--muted); }
-
-    /* TRUST PROFILE */
-    .trust-section {
-      padding: 6rem 3.5rem; border-bottom: 1px solid var(--border);
-      background: var(--surface);
-    }
-    .trust-section .sec-head { margin-bottom: 2.5rem; }
-    .trust-selector { display: flex; gap: 2px; flex-wrap: wrap; margin-bottom: 2px; }
-    .trust-btn {
-      font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; letter-spacing: 0.08em;
-      padding: 0.9rem 2rem; background: var(--surface2); border: 1px solid var(--border);
-      color: var(--muted); cursor: pointer; transition: all 0.2s; flex: 1; min-width: 100px;
-    }
-    .trust-btn:hover { color: var(--text); background: var(--bg); }
-    .trust-btn.active-jeff { background: rgba(3,105,161,0.08); border-color: var(--jeff); color: var(--jeff); }
-    .trust-btn.active-togi { background: rgba(190,18,60,0.08);  border-color: var(--togi); color: var(--togi); }
-    .trust-btn.active-bro  { background: rgba(180,83,9,0.08);   border-color: var(--bro);  color: var(--bro);  }
-    .trust-btn.active-jpg  { background: rgba(124,58,237,0.08); border-color: var(--jpg);  color: var(--jpg);  }
-    .trust-panel {
-      background: var(--bg); border: 1px solid var(--border); border-top: none;
-      padding: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;
-    }
-    .tp-name {
-      font-family: 'Bebas Neue', sans-serif; font-size: 3rem; letter-spacing: 0.04em;
-      line-height: 1; margin-bottom: 0.5rem; transition: color 0.3s;
-    }
-    .tp-platform {
-      font-family: 'DM Mono', monospace; font-size: 0.65rem;
-      color: var(--muted); letter-spacing: 0.08em; margin-bottom: 1rem;
-    }
-    .tp-tagline { font-size: 0.95rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.5rem; }
-    .tp-link {
-      font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em;
-      text-transform: uppercase; transition: color 0.2s;
-    }
-    .tp-link:hover { color: var(--text); }
-    .tp-scores { display: flex; flex-direction: column; gap: 1.4rem; }
-    .tp-row { display: flex; align-items: center; gap: 1rem; }
-    .tp-row-label {
-      font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--muted); width: 132px; flex-shrink: 0;
-    }
-    .tp-track { flex: 1; height: 10px; background: var(--surface2); border: 1px solid var(--border); overflow: hidden; }
-    .tp-fill { height: 100%; width: 0; transition: width 0.85s cubic-bezier(.4,0,.2,1); }
-    .tp-val {
-      font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem;
-      width: 40px; text-align: right; color: var(--text); line-height: 1;
-    }
-    .tp-divider { padding-top: 1.4rem; border-top: 1px solid var(--border); }
-    .tp-risk-note {
-      font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em;
-      text-transform: uppercase; margin-top: 0.4rem;
-    }
 
     /* FINDINGS */
     .findings-section {
@@ -372,11 +312,7 @@
           <div class="card-dot-row"><span class="card-dot" id="dot-jeff"></span></div>
         </div>
       </div>
-      <p class="card-strategy">Biochemistry degree. Cites research papers on screen. Every claim has a source.</p>
-      <div class="card-risk-row">
-        <div class="card-risk-track"><div class="card-risk-fill" style="width:10%; background:#4ade80"></div></div>
-        <span class="card-risk-label" style="color:#16a34a">Very low risk</span>
-      </div>
+      <p class="card-strategy">Biochemistry degree. Cites research papers on screen.</p>
       <span class="card-cta">View Profile →</span>
     </a>
 
@@ -387,16 +323,12 @@
           <div class="card-platform">YouTube + Kick · @stoffer__</div>
         </div>
         <div class="card-subs-block">
-          <div class="card-subs" id="hero-togi-subs">740K</div>
-          <div class="card-subs-label">YT Subscribers</div>
+          <div class="card-subs" id="hero-togi-subs">1.03M</div>
+          <div class="card-subs-label">Subscribers</div>
           <div class="card-dot-row"><span class="card-dot" id="dot-togi"></span></div>
         </div>
       </div>
-      <p class="card-strategy">Documents steroid cycles, gambling and a 2024 overdose on camera. Total honesty is the brand.</p>
-      <div class="card-risk-row">
-        <div class="card-risk-track"><div class="card-risk-fill" style="width:91%; background:#f87171"></div></div>
-        <span class="card-risk-label" style="color:#dc2626">Very high risk</span>
-      </div>
+      <p class="card-strategy">Documents steroid cycles, gambling, and a 2024 overdose on camera.</p>
       <span class="card-cta">View Profile →</span>
     </a>
 
@@ -412,11 +344,7 @@
           <div class="card-dot-row"><span class="card-dot" id="dot-bro"></span></div>
         </div>
       </div>
-      <p class="card-strategy">Plays fictional gym bro Dom Mazzetti since 2012. Satire with accurate observations.</p>
-      <div class="card-risk-row">
-        <div class="card-risk-track"><div class="card-risk-fill" style="width:33%; background:#a3e635"></div></div>
-        <span class="card-risk-label" style="color:#65a30d">Low risk</span>
-      </div>
+      <p class="card-strategy">Plays fictional gym bro Dom Mazzetti. Satire built on accurate observations.</p>
       <span class="card-cta">View Profile →</span>
     </a>
 
@@ -427,16 +355,12 @@
           <div class="card-platform">TikTok · @jpgcoaching</div>
         </div>
         <div class="card-subs-block">
-          <div class="card-subs">450K+</div>
-          <div class="card-subs-label">Followers</div>
+          <div class="card-subs" id="hero-jpg-subs">3.6M</div>
+          <div class="card-subs-label">TikTok Followers</div>
           <div class="card-dot-row"><span class="card-dot"></span></div>
         </div>
       </div>
-      <p class="card-strategy">Energy alignment, frequency, cosmic timing. No scientific backing.</p>
-      <div class="card-risk-row">
-        <div class="card-risk-track"><div class="card-risk-fill" style="width:54%; background:#fb923c"></div></div>
-        <span class="card-risk-label" style="color:#c2410c">Medium risk</span>
-      </div>
+      <p class="card-strategy">Hypertrophy coaching and exercise technique on TikTok.</p>
       <span class="card-cta">View Profile →</span>
     </a>
 
@@ -446,73 +370,23 @@
 <!-- ===== HOW TRUST WORKS ===== -->
 <section class="mechanics-section">
   <div class="sec-head fade-in">
-    <span class="sec-label">Hovland, Janis &amp; Kelley 1953</span>
     <h2 class="sec-title">How Trust Works</h2>
   </div>
   <div class="mechanics-grid">
     <div class="mechanic-card fade-in">
       <div class="mechanic-num">01</div>
       <div class="mechanic-title">Expertise</div>
-      <p class="mechanic-body">Credentials, citations, demonstrated skill. High scores go to creators who show their work.</p>
-      <div class="mechanic-leader">Highest: <span style="color:var(--jeff)">Jeff Nippard</span> 90 / 100</div>
+      <p class="mechanic-body">Credentials, citations, demonstrated skill. Jeff shows his work. Togi has none to show.</p>
     </div>
     <div class="mechanic-card fade-in">
       <div class="mechanic-num">02</div>
       <div class="mechanic-title">Trustworthiness</div>
-      <p class="mechanic-body">Honesty and consistency. Conflicts of interest hurt it. Transparency can also be performed.</p>
-      <div class="mechanic-leader">Highest: <span style="color:var(--jeff)">Jeff Nippard</span> 85 / 100</div>
+      <p class="mechanic-body">Honesty, disclosed conflicts of interest. Transparency can also be performed.</p>
     </div>
     <div class="mechanic-card fade-in">
       <div class="mechanic-num">03</div>
       <div class="mechanic-title">Appeal</div>
-      <p class="mechanic-body">Do people like them regardless of whether they're right. The most dangerous dimension.</p>
-      <div class="mechanic-leader">Highest: <span style="color:var(--togi)">Togi</span> 88 / 100</div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== TRUST PROFILE INTERACTIVE ===== -->
-<section class="trust-section">
-  <div class="sec-head fade-in">
-    <h2 class="sec-title">Trust Profile</h2>
-  </div>
-  <div class="trust-selector fade-in">
-    <button class="trust-btn" data-creator="jeff" onclick="selectCreator('jeff')">Jeff Nippard</button>
-    <button class="trust-btn" data-creator="togi" onclick="selectCreator('togi')">Togi</button>
-    <button class="trust-btn" data-creator="bro" onclick="selectCreator('bro')">Bro Science</button>
-    <button class="trust-btn" data-creator="jpg" onclick="selectCreator('jpg')">JPG</button>
-  </div>
-  <div class="trust-panel fade-in">
-    <div>
-      <div class="tp-name" id="tp-name">—</div>
-      <div class="tp-platform" id="tp-platform"></div>
-      <p class="tp-tagline" id="tp-tagline"></p>
-      <a href="#" class="tp-link" id="tp-link">View full profile →</a>
-    </div>
-    <div class="tp-scores">
-      <div class="tp-row">
-        <span class="tp-row-label">Expertise</span>
-        <div class="tp-track"><div class="tp-fill" id="tp-e-fill"></div></div>
-        <span class="tp-val" id="tp-e-val">—</span>
-      </div>
-      <div class="tp-row">
-        <span class="tp-row-label">Trustworthiness</span>
-        <div class="tp-track"><div class="tp-fill" id="tp-t-fill"></div></div>
-        <span class="tp-val" id="tp-t-val">—</span>
-      </div>
-      <div class="tp-row">
-        <span class="tp-row-label">Appeal</span>
-        <div class="tp-track"><div class="tp-fill" id="tp-a-fill"></div></div>
-        <span class="tp-val" id="tp-a-val">—</span>
-      </div>
-      <div class="tp-divider">
-        <div class="tp-row">
-          <span class="tp-row-label">Content Risk</span>
-          <div class="tp-track"><div class="tp-fill" id="tp-r-fill"></div></div>
-          <span class="tp-val" id="tp-r-val">—</span>
-        </div>
-        <div class="tp-risk-note" id="tp-r-note"></div>
-      </div>
+      <p class="mechanic-body">Do people like them regardless of whether they are right. The most dangerous dimension.</p>
     </div>
   </div>
 </section>
@@ -541,14 +415,14 @@
       <span class="finding-num">3</span>
       <div>
         <div class="finding-title">The most followed creator is not the most credible</div>
-        <p class="finding-text">Jeff scores highest on credibility. Togi scores lowest and has the more loyal audience. That gap is the point.</p>
+        <p class="finding-text">Jeff has the strongest credentials and the second largest audience. Togi has the most loyal audience and almost no verifiable basis for his claims.</p>
       </div>
     </div>
     <div class="finding-card fade-in">
       <span class="finding-num">4</span>
       <div>
         <div class="finding-title">All four are selling the same idea</div>
-        <p class="finding-text">Science, comedy, honesty or spirituality. The message is always the same. Your body is your responsibility and I can help you fix it.</p>
+        <p class="finding-text">Science, comedy, authenticity, or coaching. The message is always the same. Your body is your responsibility and I can help you fix it.</p>
       </div>
     </div>
   </div>
@@ -563,27 +437,26 @@
     <a href="influencers.html" class="nav-card fade-in">
       <div class="nav-card-num">02</div>
       <div class="nav-card-title">Influencer Profiles</div>
-      <p class="nav-card-desc">Scores, tactics and content risk for all four creators.</p>
+      <p class="nav-card-desc">Live stats, trust signals, and top videos for all four creators.</p>
       <span class="nav-card-cta">Read the profiles →</span>
     </a>
     <a href="compare.html" class="nav-card fade-in">
       <div class="nav-card-num">03</div>
       <div class="nav-card-title">Compare</div>
-      <p class="nav-card-desc">Pick any two and see their scores side by side.</p>
+      <p class="nav-card-desc">Pick any two creators and see them side by side.</p>
       <span class="nav-card-cta">Start comparing →</span>
     </a>
     <a href="concepts.html" class="nav-card fade-in">
       <div class="nav-card-num">04</div>
       <div class="nav-card-title">The Analysis</div>
-      <p class="nav-card-desc">Five frameworks. Animated charts. Six findings.</p>
+      <p class="nav-card-desc">Six frameworks applied to all four creators.</p>
       <span class="nav-card-cta">Explore the analysis →</span>
     </a>
   </div>
 </section>
 
 <footer>
-  <div class="footer-l">Who Do You Trust. Media Studies 2026</div>
-  <div class="footer-r">YouTube Data API v3</div>
+  <div class="footer-l">Who Do You Trust. NEXT 240 Final 2026</div>
 </footer>
 
 <script src="live-data.js"></script>
@@ -591,85 +464,13 @@
   /* LIVE DATA */
   document.addEventListener('liveDataReady', () => {
     const L = window.LIVE;
-    ['jeff','togi','bro'].forEach(k => {
+    ['jeff','togi','bro','jpg'].forEach(k => {
       const sEl = document.getElementById('hero-' + k + '-subs');
       const dEl = document.getElementById('dot-' + k);
       if (sEl && L[k]) sEl.textContent = L[k].subscribers;
       if (dEl && L[k]?.liveLoaded) dEl.classList.add('on');
     });
   });
-
-  /* TRUST PROFILE */
-  const PROFILES = {
-    jeff: {
-      name: 'Jeff Nippard', platform: 'YouTube · @jeffnippard',
-      tagline: 'Biochemistry degree. Research citations on screen. National powerlifting competitor.',
-      href: 'influencers.html#jeff',
-      expertise: 90, trust: 85, appeal: 65,
-      risk: 10, riskColor: '#16a34a', riskLabel: 'Very low risk'
-    },
-    togi: {
-      name: 'Togi', platform: 'YouTube + Kick · @stoffer__',
-      tagline: 'Steroid cycles, gambling losses and a 2024 overdose. All on camera.',
-      href: 'influencers.html#togi',
-      expertise: 22, trust: 28, appeal: 88,
-      risk: 91, riskColor: '#dc2626', riskLabel: 'Very high risk'
-    },
-    bro: {
-      name: 'Bro Science', platform: 'YouTube · @BroScienceLife',
-      tagline: 'NYU grad. Plays Dom Mazzetti since 2012. Comedy first.',
-      href: 'influencers.html#bro',
-      expertise: 38, trust: 62, appeal: 82,
-      risk: 33, riskColor: '#65a30d', riskLabel: 'Low risk'
-    },
-    jpg: {
-      name: 'JPG', platform: 'TikTok · @jpgcoaching',
-      tagline: 'Energy alignment, frequency and cosmic timing as fitness concepts.',
-      href: 'influencers.html#jpg',
-      expertise: 28, trust: 44, appeal: 80,
-      risk: 54, riskColor: '#c2410c', riskLabel: 'Medium risk'
-    }
-  };
-
-  function selectCreator(key) {
-    const p = PROFILES[key];
-
-    document.querySelectorAll('.trust-btn').forEach(btn => {
-      btn.className = 'trust-btn';
-      if (btn.dataset.creator === key) btn.classList.add('active-' + key);
-    });
-
-    const nameEl = document.getElementById('tp-name');
-    nameEl.textContent = p.name;
-    nameEl.style.color = 'var(--' + key + ')';
-    document.getElementById('tp-platform').textContent = p.platform;
-    document.getElementById('tp-tagline').textContent = p.tagline;
-    const lnk = document.getElementById('tp-link');
-    lnk.href = p.href;
-    lnk.style.color = 'var(--' + key + ')';
-
-    ['tp-e-fill','tp-t-fill','tp-a-fill','tp-r-fill'].forEach(id => {
-      document.getElementById(id).style.width = '0';
-    });
-
-    setTimeout(() => {
-      const color = 'var(--' + key + ')';
-      const set = (fillId, valId, val, c) => {
-        const f = document.getElementById(fillId);
-        f.style.background = c;
-        f.style.width = val + '%';
-        document.getElementById(valId).textContent = fillId === 'tp-r-fill' ? val + '%' : val;
-        if (fillId === 'tp-r-fill') document.getElementById(valId).style.color = c;
-      };
-      set('tp-e-fill', 'tp-e-val', p.expertise, color);
-      set('tp-t-fill', 'tp-t-val', p.trust, color);
-      set('tp-a-fill', 'tp-a-val', p.appeal, color);
-      set('tp-r-fill', 'tp-r-val', p.risk, p.riskColor);
-      const note = document.getElementById('tp-r-note');
-      note.textContent = p.riskLabel;
-      note.style.color = p.riskColor;
-    }, 60);
-  }
 
   /* SCROLL FADE-IN */
   const obs = new IntersectionObserver(entries => {
@@ -678,8 +479,6 @@
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
-
-  selectCreator('jeff');
 </script>
 </body>
 </html>
