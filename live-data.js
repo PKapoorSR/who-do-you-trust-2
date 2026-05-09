@@ -184,15 +184,22 @@
     );
     if (!res.ok) throw new Error(`countik HTTP ${res.status}`);
     const j = await res.json();
-    const fans  = parseInt(j.fans  || 0, 10);
-    const heart = parseInt(j.heart || 0, 10);
-    const video = parseInt(j.video || 0, 10);
+    const fans      = parseInt(j.fans      || 0, 10);
+    const heart     = parseInt(j.heart     || 0, 10);
+    const video     = parseInt(j.video     || 0, 10);
+    const following = parseInt(j.following || 0, 10);
     if (!fans) throw new Error('No follower data returned');
+    const avgLikes  = video > 0 ? fmt(Math.round(heart / video)) : '—';
+    const ageMonths = (Date.now() - new Date('2021-01-01').getTime()) / (1000 * 60 * 60 * 24 * 30.44);
+    const vpm       = video > 0 ? (video / ageMonths).toFixed(1) : '—';
     return {
-      subscribers: fmt(fans),
-      totalViews:  fmt(heart),
-      videoCount:  video ? String(video) : '—',
-      liveLoaded:  true,
+      subscribers:      fmt(fans),
+      totalViews:       fmt(heart),
+      videoCount:       video     ? String(video)     : '—',
+      avgLikesPerVideo: avgLikes,
+      videosPerMonth:   vpm,
+      following:        following ? fmt(following)    : '—',
+      liveLoaded:       true,
       raw: { subscribers: fans, views: heart, videos: video }
     };
   }

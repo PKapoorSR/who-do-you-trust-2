@@ -752,6 +752,11 @@
       </div>
 
       <div class="stat-cell">
+        <div class="stat-val" id="jpg-stat-avg-likes">—</div>
+        <div class="stat-key">Avg Likes / Video</div>
+      </div>
+
+      <div class="stat-cell">
         <div class="stat-val" id="jpg-stat-vids">—</div>
         <div class="stat-key">Videos Posted</div>
       </div>
@@ -759,6 +764,22 @@
       <div class="stat-cell">
         <div class="stat-val">2021</div>
         <div class="stat-key">TikTok Started</div>
+      </div>
+
+      <div class="stat-cell">
+        <div class="stat-val" id="jpg-stat-vpm">—</div>
+        <div class="stat-key">Videos / Month</div>
+      </div>
+
+      <div class="stat-cell">
+        <div class="stat-val">&lt; 60 sec</div>
+        <div class="stat-key">Avg Video Length</div>
+        <div class="stat-note">TikTok short form</div>
+      </div>
+
+      <div class="stat-cell">
+        <div class="stat-val" id="jpg-stat-following">—</div>
+        <div class="stat-key">Following</div>
       </div>
     </div>
 
@@ -956,9 +977,12 @@
       jpg: {
         bigId: 'jpg-subs-big', dotId: 'jpg-dot', badgeId: 'jpg-badge-text',
         cells: {
-          'jpg-stat-subs':   'subscribers',
-          'jpg-stat-likes':  'totalViews',
-          'jpg-stat-vids':   'videoCount',
+          'jpg-stat-subs':       'subscribers',
+          'jpg-stat-likes':      'totalViews',
+          'jpg-stat-avg-likes':  'avgLikesPerVideo',
+          'jpg-stat-vids':       'videoCount',
+          'jpg-stat-vpm':        'videosPerMonth',
+          'jpg-stat-following':  'following',
         }
       },
     };
