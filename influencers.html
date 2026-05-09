@@ -84,7 +84,7 @@
     .concept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 2.5rem; }
     .concept-panel { background: var(--surface); border: 1px solid var(--border); padding: 2rem; }
     .concept-panel-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
-    .concept-panel-cite { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--dim); letter-spacing: 0.06em; margin-bottom: 1.5rem; display: block; }
+
 
     /* QUALITATIVE CREDIBILITY ROWS — no bars, no fake numbers */
     .cred-row { display: grid; grid-template-columns: 110px 1fr; gap: 1rem; padding: 0.85rem 0; border-bottom: 1px solid var(--border); align-items: start; }
@@ -93,10 +93,15 @@
     .cred-text { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
     .cred-text em { font-style: italic; color: var(--text); }
 
-    .revenue-note { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
-    .revenue-note em { font-style: italic; color: var(--text); }
-    .revenue-item { display: flex; gap: 0.6rem; align-items: baseline; margin-bottom: 0.6rem; font-size: 0.9rem; color: var(--muted); line-height: 1.55; }
-    .revenue-item::before { content: '—'; font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--dim); flex-shrink: 0; }
+    .vid-ex-card { display: flex; flex-direction: column; text-decoration: none; border: 1px solid var(--border); background: var(--surface2); overflow: hidden; transition: border-color 0.2s; margin-bottom: 1.2rem; }
+    .vid-ex-card:hover { border-color: var(--creator-color, var(--text)); }
+    .vid-ex-thumb { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+    .vid-ex-tiktok-placeholder { background: #161823; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: white; letter-spacing: 0.1em; }
+    .vid-ex-body { padding: 0.8rem 0.9rem; display: flex; flex-direction: column; gap: 0.3rem; }
+    .vid-ex-title { font-family: 'Spectral', serif; font-size: 0.82rem; font-weight: 600; color: var(--text); line-height: 1.45; }
+    .vid-ex-views { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.04em; color: var(--creator-color, var(--text)); line-height: 1; }
+    .vid-ex-cta { font-family: 'DM Mono', monospace; font-size: 0.57rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+    .vid-ex-note { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
 
     /* SIFT ANALYSIS — qualitative, no fake bars */
     .sift-section { margin-bottom: 2.5rem; }
@@ -127,20 +132,6 @@
     .footer-l { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); }
     .footer-r { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--dim); }
 
-    /* MOST VIEWED VIDEO */
-    .top-video-wrap { margin: 0 0 2.5rem; }
-    .top-video-section-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 0.8rem; }
-    .top-video-card { display: grid; grid-template-columns: 280px 1fr; border: 1px solid var(--border); background: var(--surface); text-decoration: none; transition: border-color 0.2s; overflow: hidden; }
-    .top-video-card:hover { border-color: var(--creator-color, var(--text)); }
-    .top-video-thumb-wrap { position: relative; aspect-ratio: 16/9; background: var(--surface2); overflow: hidden; }
-    .top-video-thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .top-video-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.28); opacity: 0; transition: opacity 0.2s; }
-    .top-video-play-icon { width: 44px; height: 44px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-size: 1rem; padding-left: 3px; }
-    .top-video-card:hover .top-video-play { opacity: 1; }
-    .top-video-info { padding: 1.5rem 1.8rem; display: flex; flex-direction: column; gap: 0.6rem; }
-    .top-video-title { font-family: 'Spectral', serif; font-size: 1rem; font-weight: 600; color: var(--text); line-height: 1.5; }
-    .top-video-views { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.04em; color: var(--creator-color, var(--text)); line-height: 1; }
-    .top-video-cta { font-family: 'DM Mono', monospace; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-top: auto; }
 
     /* CROSS-PLATFORM ROW */
     .xplat-row { display: flex; gap: 2px; margin: 0 0 2.5rem; flex-wrap: wrap; }
@@ -181,8 +172,7 @@
       .creator-body { padding: 0 1.5rem; }
       .page-header { padding: 3rem 1.5rem 2rem; grid-template-columns: 1fr; }
       .sift-row { grid-template-columns: 100px 1fr; }
-      .top-video-card { grid-template-columns: 1fr; }
-      .trends-section { padding: 3rem 1.5rem; }
+.trends-section { padding: 3rem 1.5rem; }
       .trends-link-card { grid-template-columns: 1fr; }
       .trends-card-cta { display: none; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
@@ -250,20 +240,6 @@
       <div class="stat-cell"><div class="stat-val" id="jeff-stat-duration">—</div><div class="stat-key">Avg Video Length</div><div class="stat-note">Last 50 videos</div></div>
     </div>
 
-    <div class="top-video-wrap">
-      <p class="top-video-section-label">Most Viewed Video — All Time</p>
-      <a class="top-video-card" id="jeff-top-link" href="https://youtube.com/@jeffnippard" target="_blank" rel="noopener">
-        <div class="top-video-thumb-wrap">
-          <img class="top-video-thumb" id="jeff-top-thumb" src="" alt="Jeff Nippard most viewed video">
-          <div class="top-video-play"><div class="top-video-play-icon">▶</div></div>
-        </div>
-        <div class="top-video-info">
-          <div class="top-video-title" id="jeff-top-title">Loading&hellip;</div>
-          <div class="top-video-views" id="jeff-top-views">—</div>
-          <div class="top-video-cta">Watch on YouTube ↗</div>
-        </div>
-      </a>
-    </div>
 
     <div class="xplat-row">
       <div class="xplat-item"><div class="xplat-platform">Instagram</div><div class="xplat-handle"><a href="https://instagram.com/jeffnippard" target="_blank" rel="noopener">@jeffnippard ↗</a></div><div class="xplat-note">Public profile</div></div>
@@ -293,16 +269,16 @@
       </div>
 
       <div class="concept-panel">
-        <div class="concept-panel-title">Revenue</div>
-        <span class="concept-panel-cite">Publicly documented sources as of 2026</span>
-
-        <div class="revenue-item">MacroFactor nutrition app co created with Eric Helms. Jeff promotes the app and uses referral codes.</div>
-
-        <div class="revenue-item">Training programs sold through his website</div>
-
-        <div class="revenue-item">YouTube ad revenue from long form videos and shorts</div>
-
-        <div class="revenue-item">Brand sponsorships and paid partnerships that are usually disclosed in videos</div>
+        <div class="concept-panel-title">Example Content</div>
+        <a class="vid-ex-card" id="jeff-vid-link" href="https://youtube.com/@jeffnippard" target="_blank" rel="noopener">
+          <img class="vid-ex-thumb" id="jeff-vid-thumb" src="" alt="Jeff Nippard video">
+          <div class="vid-ex-body">
+            <div class="vid-ex-title" id="jeff-vid-title">Loading&hellip;</div>
+            <div class="vid-ex-views" id="jeff-vid-views">—</div>
+            <div class="vid-ex-cta">Watch on YouTube ↗</div>
+          </div>
+        </a>
+        <p class="vid-ex-note">Research studies shown on screen with sources in the description. Viewers can compare his explanations directly against the original papers.</p>
       </div>
     </div>
 
@@ -410,20 +386,6 @@
       <div class="stat-cell"><div class="stat-val" id="togi-stat-duration">—</div><div class="stat-key">Avg Video Length</div><div class="stat-note">Last 50 videos</div></div>
     </div>
 
-    <div class="top-video-wrap">
-      <p class="top-video-section-label">Most Viewed Video — All Time</p>
-      <a class="top-video-card" id="togi-top-link" href="https://youtube.com/@shanestoffer" target="_blank" rel="noopener">
-        <div class="top-video-thumb-wrap">
-          <img class="top-video-thumb" id="togi-top-thumb" src="" alt="Togi most viewed video">
-          <div class="top-video-play"><div class="top-video-play-icon">▶</div></div>
-        </div>
-        <div class="top-video-info">
-          <div class="top-video-title" id="togi-top-title">Loading&hellip;</div>
-          <div class="top-video-views" id="togi-top-views">—</div>
-          <div class="top-video-cta">Watch on YouTube ↗</div>
-        </div>
-      </a>
-    </div>
 
     <div class="xplat-row">
       <div class="xplat-item"><div class="xplat-platform">Instagram</div><div class="xplat-handle"><a href="https://instagram.com/stoffer__" target="_blank" rel="noopener">@stoffer__ ↗</a></div><div class="xplat-note">Public profile</div></div>
@@ -454,19 +416,16 @@
       </div>
 
       <div class="concept-panel">
-        <div class="concept-panel-title">Revenue</div>
-
-        <span class="concept-panel-cite">Publicly documented sources as of 2026</span>
-
-        <div class="revenue-item">Online gambling and casino related sponsorships including Roobet content</div>
-
-        <div class="revenue-item">Supplement and fitness related brand promotions</div>
-
-        <div class="revenue-item">YouTube ad revenue</div>
-
-        <div class="revenue-item">Merchandise and social media promotions</div>
-
-        <p style="margin-top:1.2rem;font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--dim);">Gambling sponsorships are the largest criticism connected to his content because much of his audience appears to be young viewers.</p>
+        <div class="concept-panel-title">Example Content</div>
+        <a class="vid-ex-card" id="togi-vid-link" href="https://youtube.com/@shanestoffer" target="_blank" rel="noopener">
+          <img class="vid-ex-thumb" id="togi-vid-thumb" src="" alt="Shane Stoffer video">
+          <div class="vid-ex-body">
+            <div class="vid-ex-title" id="togi-vid-title">Loading&hellip;</div>
+            <div class="vid-ex-views" id="togi-vid-views">—</div>
+            <div class="vid-ex-cta">Watch on YouTube ↗</div>
+          </div>
+        </a>
+        <p class="vid-ex-note">Personal vlogs where viewers follow daily life. Credibility is built through shared experiences and emotional connection rather than expertise or credentials.</p>
       </div>
     </div>
 
@@ -580,20 +539,6 @@
       <div class="stat-cell"><div class="stat-val" id="bro-stat-duration">—</div><div class="stat-key">Avg Video Length</div><div class="stat-note">Last 50 videos</div></div>
     </div>
 
-    <div class="top-video-wrap">
-      <p class="top-video-section-label">Most Viewed Video — All Time</p>
-      <a class="top-video-card" id="bro-top-link" href="https://youtube.com/@BroScienceLife" target="_blank" rel="noopener">
-        <div class="top-video-thumb-wrap">
-          <img class="top-video-thumb" id="bro-top-thumb" src="" alt="Bro Science most viewed video">
-          <div class="top-video-play"><div class="top-video-play-icon">▶</div></div>
-        </div>
-        <div class="top-video-info">
-          <div class="top-video-title" id="bro-top-title">Loading&hellip;</div>
-          <div class="top-video-views" id="bro-top-views">—</div>
-          <div class="top-video-cta">Watch on YouTube ↗</div>
-        </div>
-      </a>
-    </div>
 
     <div class="xplat-row">
       <div class="xplat-item"><div class="xplat-platform">Instagram</div><div class="xplat-handle"><a href="https://instagram.com/broscience.life" target="_blank" rel="noopener">@broscience.life ↗</a></div><div class="xplat-note">Public profile</div></div>
@@ -625,19 +570,16 @@
       </div>
 
       <div class="concept-panel">
-        <div class="concept-panel-title">Revenue</div>
-
-        <span class="concept-panel-cite">Publicly documented sources as of 2026</span>
-
-        <div class="revenue-item">YouTube ad revenue</div>
-
-        <div class="revenue-item">Dom Mazzetti merchandise and clothing sales</div>
-
-        <div class="revenue-item">Sponsored content and brand partnerships</div>
-
-        <div class="revenue-item">The Swoly Bible book released in 2016</div>
-
-        <div class="revenue-item">Media and production collaborations including Seven Bucks Productions</div>
+        <div class="concept-panel-title">Example Content</div>
+        <a class="vid-ex-card" id="bro-vid-link" href="https://youtube.com/@BroScienceLife" target="_blank" rel="noopener">
+          <img class="vid-ex-thumb" id="bro-vid-thumb" src="" alt="Bro Science video">
+          <div class="vid-ex-body">
+            <div class="vid-ex-title" id="bro-vid-title">Loading&hellip;</div>
+            <div class="vid-ex-views" id="bro-vid-views">—</div>
+            <div class="vid-ex-cta">Watch on YouTube ↗</div>
+          </div>
+        </a>
+        <p class="vid-ex-note">Comedy and parody format signals that the content is not literal. Viewers understand the joke which can make the creator appear more transparent than traditional fitness advice channels.</p>
       </div>
     </div>
 
@@ -814,17 +756,16 @@
       </div>
 
       <div class="concept-panel">
-        <div class="concept-panel-title">Revenue</div>
-
-        <span class="concept-panel-cite">Publicly documented sources as of 2026</span>
-
-        <div class="revenue-item">Online coaching services through JPG Coaching</div>
-
-        <div class="revenue-item">Workout programs and training plans sold on his website</div>
-
-        <div class="revenue-item">Supplement affiliate codes and sponsorships including Legion</div>
-
-        <div class="revenue-item">TikTok and social media brand partnerships</div>
+        <div class="concept-panel-title">Example Content</div>
+        <a class="vid-ex-card" href="https://www.tiktok.com/@jpgcoaching" target="_blank" rel="noopener">
+          <div class="vid-ex-tiktok-placeholder">TikTok</div>
+          <div class="vid-ex-body">
+            <div class="vid-ex-title">@jpgcoaching on TikTok</div>
+            <div class="vid-ex-views" id="jpg-vid-subs">3.6M+</div>
+            <div class="vid-ex-cta">View Profile ↗</div>
+          </div>
+        </a>
+        <p class="vid-ex-note">Short exercise demonstrations with detailed technique explanations. Practical advice for muscle growth that appeals directly to gym audiences without relying on credentials.</p>
       </div>
     </div>
 
@@ -929,8 +870,8 @@
       jeff: {
         bigId: 'jeff-subs-big', dotId: 'jeff-dot', badgeId: 'jeff-badge-text',
         consistencyId: 'jeff-stat-consistency',
-        topLinkId: 'jeff-top-link', topThumbId: 'jeff-top-thumb',
-        topTitleId: 'jeff-top-title', topViewsId: 'jeff-top-views',
+        vidLinkId: 'jeff-vid-link', vidThumbId: 'jeff-vid-thumb',
+        vidTitleId: 'jeff-vid-title', vidViewsId: 'jeff-vid-views',
         cells: {
           'jeff-stat-subs':      'subscribers',
           'jeff-stat-views':     'totalViews',
@@ -945,8 +886,8 @@
       togi: {
         bigId: 'togi-subs-big', dotId: 'togi-dot', badgeId: 'togi-badge-text',
         consistencyId: 'togi-stat-consistency',
-        topLinkId: 'togi-top-link', topThumbId: 'togi-top-thumb',
-        topTitleId: 'togi-top-title', topViewsId: 'togi-top-views',
+        vidLinkId: 'togi-vid-link', vidThumbId: 'togi-vid-thumb',
+        vidTitleId: 'togi-vid-title', vidViewsId: 'togi-vid-views',
         cells: {
           'togi-stat-subs':      'subscribers',
           'togi-stat-views':     'totalViews',
@@ -961,8 +902,8 @@
       bro: {
         bigId: 'bro-subs-big', dotId: 'bro-dot', badgeId: 'bro-badge-text',
         consistencyId: 'bro-stat-consistency',
-        topLinkId: 'bro-top-link', topThumbId: 'bro-top-thumb',
-        topTitleId: 'bro-top-title', topViewsId: 'bro-top-views',
+        vidLinkId: 'bro-vid-link', vidThumbId: 'bro-vid-thumb',
+        vidTitleId: 'bro-vid-title', vidViewsId: 'bro-vid-views',
         cells: {
           'bro-stat-subs':      'subscribers',
           'bro-stat-views':     'totalViews',
@@ -1011,17 +952,23 @@
       const cons = document.getElementById(cfg.consistencyId);
       if (cons && d.postingConsistency) cons.textContent = d.postingConsistency;
 
-      // most viewed video
-      if (d.topVideo) {
+      // example content video card
+      if (d.topVideo && cfg.vidLinkId) {
         const tv = d.topVideo;
-        const link  = document.getElementById(cfg.topLinkId);
-        const thumb = document.getElementById(cfg.topThumbId);
-        const title = document.getElementById(cfg.topTitleId);
-        const views = document.getElementById(cfg.topViewsId);
+        const link  = document.getElementById(cfg.vidLinkId);
+        const thumb = document.getElementById(cfg.vidThumbId);
+        const title = document.getElementById(cfg.vidTitleId);
+        const views = document.getElementById(cfg.vidViewsId);
         if (link)  link.href = tv.url;
         if (thumb) { thumb.src = tv.thumbnail; thumb.alt = tv.title; }
         if (title) title.textContent = tv.title;
         if (views) views.textContent = tv.views;
+      }
+
+      // JPG live follower count in example content panel
+      if (k === 'jpg' && d.subscribers) {
+        const jpgVidSubs = document.getElementById('jpg-vid-subs');
+        if (jpgVidSubs) jpgVidSubs.textContent = d.subscribers + ' Followers';
       }
     });
 
