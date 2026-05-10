@@ -157,6 +157,33 @@
     .sg tr:last-child .sg-dim, .sg-row:last-child .sg-dim, .sg-row:last-child .sg-cell { border-bottom: none; }
     .sg-note { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
 
+    /* SLIDERS */
+    .summary-instruct { font-family: 'DM Mono', monospace; font-size: 0.63rem; color: var(--dim); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2rem; }
+    .sg-slider-wrap { margin-bottom: 0.55rem; }
+    .sg-slider-track-row { display: flex; align-items: center; gap: 0.5rem; }
+    .sg-slider-end { font-family: 'DM Mono', monospace; font-size: 0.5rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--dim); flex-shrink: 0; }
+    .sg-slider {
+      flex: 1; -webkit-appearance: none; appearance: none;
+      height: 2px; background: var(--border); outline: none; cursor: pointer; margin: 0;
+    }
+    .sg-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 12px; height: 12px;
+      background: var(--text); cursor: pointer;
+    }
+    .sg-slider::-moz-range-thumb {
+      width: 12px; height: 12px; border: none; border-radius: 0;
+      background: var(--text); cursor: pointer;
+    }
+    .sg-slider-val {
+      font-family: 'DM Mono', monospace; font-size: 0.57rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.16rem 0.45rem; border: 1px solid;
+      display: inline-block; margin-top: 0.38rem;
+    }
+    .sg-val-good { color: #16a34a; border-color: rgba(22,163,74,0.3); background: rgba(22,163,74,0.07); }
+    .sg-val-mid  { color: #d97706; border-color: rgba(217,119,6,0.3);  background: rgba(217,119,6,0.07); }
+    .sg-val-bad  { color: #dc2626; border-color: rgba(220,38,38,0.3);  background: rgba(220,38,38,0.07); }
+
     @media (max-width: 1000px) {
       .stat-grid { grid-template-columns: repeat(2,1fr); }
       .concept-grid { grid-template-columns: 1fr; }
@@ -793,6 +820,7 @@
 <section class="summary-section">
   <p class="summary-label">At a Glance</p>
   <h2 class="summary-title">Creator Comparison</h2>
+  <p class="summary-instruct">Drag the sliders to record your own rating of each creator.</p>
 
   <div class="sg">
     <div class="sg-head"></div>
@@ -802,28 +830,76 @@
     <div class="sg-head mpmd">MPMD</div>
 
     <div class="sg-dim">Expertise</div>
-    <div class="sg-cell"><span class="risk-tag risk-low">High</span><span class="sg-note">Biochemistry degree. Competed in powerlifting at national level.</span></div>
-    <div class="sg-cell"><span class="risk-tag risk-high">Low</span><span class="sg-note">No formal credentials. Authority comes from personal experience.</span></div>
-    <div class="sg-cell"><span class="risk-tag risk-high">Low</span><span class="sg-note">Comedy character. Not presented as a fitness expert.</span></div>
-    <div class="sg-cell"><span class="risk-tag risk-high">Low</span><span class="sg-note">No formal credentials. Audience trust built through volume and detail of self-directed research.</span></div>
+    <div class="sg-cell">
+      <div class="sg-slider-wrap"><div class="sg-slider-track-row"><span class="sg-slider-end">Low</span><input type="range" class="sg-slider" min="1" max="3" step="1" value="3" data-inv="0"><span class="sg-slider-end">High</span></div><div class="sg-slider-val"></div></div>
+      <span class="sg-note">Biochemistry degree. Competed in powerlifting at national level.</span>
+    </div>
+    <div class="sg-cell">
+      <div class="sg-slider-wrap"><div class="sg-slider-track-row"><span class="sg-slider-end">Low</span><input type="range" class="sg-slider" min="1" max="3" step="1" value="1" data-inv="0"><span class="sg-slider-end">High</span></div><div class="sg-slider-val"></div></div>
+      <span class="sg-note">No formal credentials. Authority comes from personal experience.</span>
+    </div>
+    <div class="sg-cell">
+      <div class="sg-slider-wrap"><div class="sg-slider-track-row"><span class="sg-slider-end">Low</span><input type="range" class="sg-slider" min="1" max="3" step="1" value="1" data-inv="0"><span class="sg-slider-end">High</span></div><div class="sg-slider-val"></div></div>
+      <span class="sg-note">Comedy character. Not presented as a fitness expert.</span>
+    </div>
+    <div class="sg-cell">
+      <div class="sg-slider-wrap"><div class="sg-slider-track-row"><span class="sg-slider-end">Low</span><input type="range" class="sg-slider" min="1" max="3" step="1" value="1" data-inv="0"><span class="sg-slider-end">High</span></div><div class="sg-slider-val"></div></div>
+      <span class="sg-note">No formal credentials. Audience trust built through volume and detail of self-directed research.</span>
+    </div>
 
     <div class="sg-dim">Trustworthiness</div>
-    <div class="sg-cell"><span class="risk-tag risk-low">High</span><span class="sg-note">Discloses sponsors. Has publicly updated old advice when research changed.</span></div>
-    <div class="sg-cell"><span class="risk-tag risk-mod">Med</span><span class="sg-note">Emotionally open. Gambling sponsorships raise transparency concerns.</span></div>
-    <div class="sg-cell"><span class="risk-tag risk-low">High</span><span class="sg-note">Parody format is openly exaggerated. Viewers understand it is not literal.</span></div>
-    <div class="sg-cell"><span class="risk-tag risk-high">Low</span><span class="sg-note">Financial ties to Gorilla Mind and Marek Health. Business involvement not always stated in videos.</span></div>
+    <div class="sg-cell">
+      <div class="sg-slider-wrap"><div class="sg-slider-track-row"><span class="sg-slider-end">Low</span><input type="range" class="sg-slider" min="1" max="3" step="1" value="3" data-inv="0"><span class="sg-slider-end">High</span></div><div class="sg-slider-val"></div></div>
+      <span class="sg-note">Discloses sponsors. Has publicly updated old advice when research changed.</span>
+    </div>
+    <div class="sg-cell">
+      <div class="sg-slider-wrap"><div class="sg-slider-track-row"><span class="sg-slider-end">Low</span><input type="range" class="sg-slider" min="1" max="3" step="1" value="2" data-inv="0"><span class="sg-slider-end">High</span></div><div class="sg-slider-val"></div></div>
+      <span class="sg-note">Emotionally open. Gambling sponsorships raise transparency concerns.</span>
+    </div>
+    <div class="sg-cell">
+      <div class="sg-slider-wrap"><div class="sg-slider-track-row"><span class="sg-slider-end">Low</span><input type="range" class="sg-slider" min="1" max="3" step="1" value="3" data-inv="0"><span class="sg-slider-end">High</span></div><div class="sg-slider-val"></div></div>
+      <span class="sg-note">Parody format is openly exaggerated. Viewers understand it is not literal.</span>
+    </div>
+    <div class="sg-cell">
+      <div class="sg-slider-wrap"><div class="sg-slider-track-row"><span class="sg-slider-end">Low</span><input type="range" class="sg-slider" min="1" max="3" step="1" value="1" data-inv="0"><span class="sg-slider-end">High</span></div><div class="sg-slider-val"></div></div>
+      <span class="sg-note">Financial ties to Gorilla Mind and Marek Health. Business involvement not always stated in videos.</span>
+    </div>
 
     <div class="sg-dim">Verifiability</div>
-    <div class="sg-cell"><span class="risk-tag risk-low">High</span><span class="sg-note">Research papers shown on screen. Sources linked in descriptions.</span></div>
-    <div class="sg-cell"><span class="risk-tag risk-high">Low</span><span class="sg-note">Personal stories only. Nothing external to trace or confirm.</span></div>
-    <div class="sg-cell"><span class="risk-tag risk-mod">Med</span><span class="sg-note">Satire is clearly labeled. Creator background is publicly documented.</span></div>
-    <div class="sg-cell"><span class="risk-tag risk-mod">Med</span><span class="sg-note">Some claims reference published research. Opinions on his own products are harder to evaluate independently.</span></div>
+    <div class="sg-cell">
+      <div class="sg-slider-wrap"><div class="sg-slider-track-row"><span class="sg-slider-end">Low</span><input type="range" class="sg-slider" min="1" max="3" step="1" value="3" data-inv="0"><span class="sg-slider-end">High</span></div><div class="sg-slider-val"></div></div>
+      <span class="sg-note">Research papers shown on screen. Sources linked in descriptions.</span>
+    </div>
+    <div class="sg-cell">
+      <div class="sg-slider-wrap"><div class="sg-slider-track-row"><span class="sg-slider-end">Low</span><input type="range" class="sg-slider" min="1" max="3" step="1" value="1" data-inv="0"><span class="sg-slider-end">High</span></div><div class="sg-slider-val"></div></div>
+      <span class="sg-note">Personal stories only. Nothing external to trace or confirm.</span>
+    </div>
+    <div class="sg-cell">
+      <div class="sg-slider-wrap"><div class="sg-slider-track-row"><span class="sg-slider-end">Low</span><input type="range" class="sg-slider" min="1" max="3" step="1" value="2" data-inv="0"><span class="sg-slider-end">High</span></div><div class="sg-slider-val"></div></div>
+      <span class="sg-note">Satire is clearly labeled. Creator background is publicly documented.</span>
+    </div>
+    <div class="sg-cell">
+      <div class="sg-slider-wrap"><div class="sg-slider-track-row"><span class="sg-slider-end">Low</span><input type="range" class="sg-slider" min="1" max="3" step="1" value="2" data-inv="0"><span class="sg-slider-end">High</span></div><div class="sg-slider-val"></div></div>
+      <span class="sg-note">Some claims reference published research. Opinions on his own products are harder to evaluate independently.</span>
+    </div>
 
     <div class="sg-dim">Risk Level</div>
-    <div class="sg-cell"><span class="risk-tag risk-low">Low</span><span class="sg-note">Science backed. Conflicts of interest disclosed.</span></div>
-    <div class="sg-cell"><span class="risk-tag risk-high">High</span><span class="sg-note">Steroid content and gambling promotions aimed at young audience.</span></div>
-    <div class="sg-cell"><span class="risk-tag risk-low">Low</span><span class="sg-note">Humor is clearly satire. Not intended as real fitness instruction.</span></div>
-    <div class="sg-cell"><span class="risk-tag risk-high">High</span><span class="sg-note">Covers drug protocols without medical training. Business ties to covered products. Unapproved substances discussed for general audiences.</span></div>
+    <div class="sg-cell">
+      <div class="sg-slider-wrap"><div class="sg-slider-track-row"><span class="sg-slider-end">Low</span><input type="range" class="sg-slider" min="1" max="3" step="1" value="1" data-inv="1"><span class="sg-slider-end">High</span></div><div class="sg-slider-val"></div></div>
+      <span class="sg-note">Science backed. Conflicts of interest disclosed.</span>
+    </div>
+    <div class="sg-cell">
+      <div class="sg-slider-wrap"><div class="sg-slider-track-row"><span class="sg-slider-end">Low</span><input type="range" class="sg-slider" min="1" max="3" step="1" value="3" data-inv="1"><span class="sg-slider-end">High</span></div><div class="sg-slider-val"></div></div>
+      <span class="sg-note">Steroid content and gambling promotions aimed at young audience.</span>
+    </div>
+    <div class="sg-cell">
+      <div class="sg-slider-wrap"><div class="sg-slider-track-row"><span class="sg-slider-end">Low</span><input type="range" class="sg-slider" min="1" max="3" step="1" value="1" data-inv="1"><span class="sg-slider-end">High</span></div><div class="sg-slider-val"></div></div>
+      <span class="sg-note">Humor is clearly satire. Not intended as real fitness instruction.</span>
+    </div>
+    <div class="sg-cell">
+      <div class="sg-slider-wrap"><div class="sg-slider-track-row"><span class="sg-slider-end">Low</span><input type="range" class="sg-slider" min="1" max="3" step="1" value="3" data-inv="1"><span class="sg-slider-end">High</span></div><div class="sg-slider-val"></div></div>
+      <span class="sg-note">Covers drug protocols without medical training. Business ties to covered products. Unapproved substances discussed for general audiences.</span>
+    </div>
   </div>
 </section>
 
@@ -951,6 +1027,23 @@
 
     const st = document.getElementById('page-status-text');
     if (st) st.innerHTML = '<span class="ok">●</span> Live data loaded';
+  });
+
+  // Summary grid sliders
+  document.querySelectorAll('.sg-slider').forEach(function(slider) {
+    function sync() {
+      var v   = parseInt(slider.value);
+      var inv = slider.dataset.inv === '1';
+      var lbl = slider.closest('.sg-slider-wrap').querySelector('.sg-slider-val');
+      lbl.textContent = ['Low', 'Med', 'High'][v - 1];
+      var cls = 'sg-slider-val ';
+      if (v === 2) cls += 'sg-val-mid';
+      else if ((v === 3 && !inv) || (v === 1 && inv)) cls += 'sg-val-good';
+      else cls += 'sg-val-bad';
+      lbl.className = cls;
+    }
+    slider.addEventListener('input', sync);
+    sync();
   });
 </script>
 </body>
