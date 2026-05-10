@@ -144,21 +144,18 @@
     .xplat-item a:hover { text-decoration: underline; }
 
     /* GOOGLE TRENDS SECTION */
-    .trends-section { border-top: 2px solid var(--border); padding: 4rem 3.5rem; }
-    .trends-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
-    .trends-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: 0.03em; line-height: 0.95; margin-bottom: 0.8rem; }
-    .trends-sub { font-size: 0.9rem; color: var(--muted); margin-bottom: 2rem; max-width: 560px; line-height: 1.65; }
-    .trends-link-card { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; border: 1px solid var(--border); background: var(--surface); padding: 2.5rem 2.8rem; text-decoration: none; transition: border-color 0.2s; }
-    .trends-link-card:hover { border-color: var(--text); }
-    .trends-card-left { display: flex; flex-direction: column; gap: 0.8rem; }
-    .trends-card-topics { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-    .trends-topic { font-family: 'DM Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.25rem 0.6rem; border: 1px solid var(--border); color: var(--muted); }
-    .trends-topic.jeff { border-color: var(--jeff); color: var(--jeff); }
-    .trends-topic.togi { border-color: var(--togi); color: var(--togi); }
-    .trends-topic.bro  { border-color: var(--bro);  color: var(--bro); }
-    .trends-topic.jpg  { border-color: var(--jpg);  color: var(--jpg); }
-    .trends-card-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
-    .trends-card-cta { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.06em; color: var(--text); white-space: nowrap; }
+    .summary-section { border-top: 2px solid var(--border); padding: 4rem 3.5rem; }
+    .summary-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+    .summary-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: 0.03em; line-height: 0.95; margin-bottom: 2.5rem; }
+    .sg { display: grid; grid-template-columns: 130px repeat(4, 1fr); border: 1px solid var(--border); }
+    .sg-head { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.06em; padding: 0.9rem 1rem; border-bottom: 2px solid var(--border); border-right: 1px solid var(--border); background: var(--surface); }
+    .sg-head:last-child { border-right: none; }
+    .sg-head.jeff { color: var(--jeff); } .sg-head.togi { color: var(--togi); } .sg-head.bro { color: var(--bro); } .sg-head.jpg { color: var(--jpg); }
+    .sg-dim { font-family: 'DM Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); padding: 1rem; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); background: var(--surface); display: flex; align-items: flex-start; }
+    .sg-cell { padding: 0.9rem 1rem; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 0.45rem; }
+    .sg-cell:last-child, .sg-dim:last-child { border-right: none; }
+    .sg tr:last-child .sg-dim, .sg-row:last-child .sg-dim, .sg-row:last-child .sg-cell { border-bottom: none; }
+    .sg-note { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
 
     @media (max-width: 1000px) {
       .stat-grid { grid-template-columns: repeat(2,1fr); }
@@ -173,9 +170,8 @@
       .creator-body { padding: 0 1.5rem; }
       .page-header { padding: 3rem 1.5rem 2rem; grid-template-columns: 1fr; }
       .sift-row { grid-template-columns: 100px 1fr; }
-.trends-section { padding: 3rem 1.5rem; }
-      .trends-link-card { grid-template-columns: 1fr; }
-      .trends-card-cta { display: none; }
+.summary-section { padding: 3rem 1.5rem; }
+      .sg { grid-template-columns: 90px repeat(4, 1fr); font-size: 0.8rem; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
     }
   </style>
@@ -836,27 +832,46 @@
 </div>
 
 
-<section class="trends-section">
-  <p class="trends-label">Google Trends — YouTube Search</p>
-  <h2 class="trends-title">Search Interest Over Time</h2>
-  <p class="trends-sub">Relative YouTube search volume for each creator over the past 12 months. 100 = peak. Shows how public perception shifts — directly relevant to Source Credibility Theory: expertise is perceptual, not fixed.</p>
-  <a class="trends-link-card" href="https://trends.google.com/trends/explore?date=today%2012-m&gprop=youtube&q=Jeff%20Nippard,Shane%20Stoffer,Bro%20Science%20Life,JPG%20Coaching" target="_blank" rel="noopener">
-    <div class="trends-card-left">
-      <div class="trends-card-topics">
-        <span class="trends-topic jeff">Jeff Nippard</span>
-        <span class="trends-topic togi">Shane Stoffer</span>
-        <span class="trends-topic bro">Bro Science Life</span>
-        <span class="trends-topic jpg">JPG Coaching</span>
-      </div>
-      <p class="trends-card-desc">YouTube search · past 12 months · all regions. Opens live interactive chart on Google Trends.</p>
-    </div>
-    <div class="trends-card-cta">Open Trends ↗</div>
-  </a>
+<section class="summary-section">
+  <p class="summary-label">At a Glance</p>
+  <h2 class="summary-title">Creator Comparison</h2>
+
+  <div class="sg">
+    <div class="sg-head"></div>
+    <div class="sg-head jeff">Jeff Nippard</div>
+    <div class="sg-head togi">Togi</div>
+    <div class="sg-head bro">Bro Science</div>
+    <div class="sg-head jpg">JPG</div>
+
+    <div class="sg-dim">Expertise</div>
+    <div class="sg-cell"><span class="risk-tag risk-low">High</span><span class="sg-note">Biochemistry degree. Competed in powerlifting at national level.</span></div>
+    <div class="sg-cell"><span class="risk-tag risk-high">Low</span><span class="sg-note">No formal credentials. Authority comes from personal experience.</span></div>
+    <div class="sg-cell"><span class="risk-tag risk-high">Low</span><span class="sg-note">Comedy character. Not presented as a fitness expert.</span></div>
+    <div class="sg-cell"><span class="risk-tag risk-mod">Med</span><span class="sg-note">Online coaching background. No academic or medical credentials.</span></div>
+
+    <div class="sg-dim">Trustworthiness</div>
+    <div class="sg-cell"><span class="risk-tag risk-low">High</span><span class="sg-note">Discloses sponsors. Has publicly updated old advice when research changed.</span></div>
+    <div class="sg-cell"><span class="risk-tag risk-mod">Med</span><span class="sg-note">Emotionally open. Gambling sponsorships raise transparency concerns.</span></div>
+    <div class="sg-cell"><span class="risk-tag risk-low">High</span><span class="sg-note">Parody format is openly exaggerated. Viewers understand it is not literal.</span></div>
+    <div class="sg-cell"><span class="risk-tag risk-mod">Med</span><span class="sg-note">Structured content. Some debates online over originality of advice.</span></div>
+
+    <div class="sg-dim">Verifiability</div>
+    <div class="sg-cell"><span class="risk-tag risk-low">High</span><span class="sg-note">Research papers shown on screen. Sources linked in descriptions.</span></div>
+    <div class="sg-cell"><span class="risk-tag risk-high">Low</span><span class="sg-note">Personal stories only. Nothing external to trace or confirm.</span></div>
+    <div class="sg-cell"><span class="risk-tag risk-mod">Med</span><span class="sg-note">Satire is clearly labeled. Creator background is publicly documented.</span></div>
+    <div class="sg-cell"><span class="risk-tag risk-high">Low</span><span class="sg-note">Based on coaching experience. No peer reviewed sources provided.</span></div>
+
+    <div class="sg-dim">Risk Level</div>
+    <div class="sg-cell"><span class="risk-tag risk-low">Low</span><span class="sg-note">Science backed. Conflicts of interest disclosed.</span></div>
+    <div class="sg-cell"><span class="risk-tag risk-high">High</span><span class="sg-note">Steroid content and gambling promotions aimed at young audience.</span></div>
+    <div class="sg-cell"><span class="risk-tag risk-low">Low</span><span class="sg-note">Humor is clearly satire. Not intended as real fitness instruction.</span></div>
+    <div class="sg-cell"><span class="risk-tag risk-low">Low</span><span class="sg-note">Practical gym advice. Limited documented red flags.</span></div>
+  </div>
 </section>
 
 <footer>
   <div class="footer-l">Who Do You Trust. Media Studies 2026</div>
-  <div class="footer-r">YouTube Data API v3 · Google Trends · manually verified public sources</div>
+  <div class="footer-r">YouTube Data API v3 · manually verified public sources</div>
 </footer>
 
 <script src="live-data.js"></script>
