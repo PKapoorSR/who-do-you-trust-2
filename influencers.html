@@ -56,7 +56,7 @@
 
     .creator-header {
       padding: 3rem 3.5rem 2rem;
-      display: grid; grid-template-columns: 1fr 220px; gap: 3rem; align-items: start;
+      display: grid; grid-template-columns: 1fr auto auto; gap: 3.5rem; align-items: center;
       border-bottom: 1px solid var(--border);
     }
     .creator-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; }
@@ -64,7 +64,7 @@
     .creator-handle-big { font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--muted); margin-top: 0.6rem; letter-spacing: 0.06em; }
     .creator-bio { margin-top: 1.5rem; font-size: 1rem; color: var(--muted); max-width: 580px; line-height: 1.75; }
     .creator-header-right { text-align: right; flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 0; }
-    .creator-avatar { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 3px solid var(--creator-color, var(--border)); margin-bottom: 1.2rem; background: var(--surface2); display: block; }
+    .creator-avatar { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 3px solid var(--creator-color, var(--border)); background: var(--surface2); display: block; flex-shrink: 0; }
     .live-subs-big { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--creator-color, var(--text)); letter-spacing: 0.03em; line-height: 1; }
     .live-subs-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.2rem; }
     .live-badge { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.5rem; padding: 0.25rem 0.6rem; border: 1px solid var(--border); background: var(--surface); font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
@@ -238,8 +238,8 @@
       <div class="creator-handle-big">@jeffnippard on YouTube</div>
       <p class="creator-bio">Jeff Nippard has a degree in biochemistry from the University of Western Ontario. He competed in powerlifting at the provincial and national level. His YouTube channel started in 2014. His videos regularly show research studies on screen and include sources in the description. Over time he has changed some of his opinions when new research became available.</p>
     </div>
+    <img class="creator-avatar" id="jeff-avatar" src="https://yt3.googleusercontent.com/ytc/AIdro_k3d_sCJXZcQk5KQTlFzdGMIJwJpZ9g2W07Z616E5DENGI=s900-c-k-c0x00ffffff-no-rj" alt="Jeff Nippard">
     <div class="creator-header-right">
-      <img class="creator-avatar" id="jeff-avatar" src="https://yt3.googleusercontent.com/ytc/AIdro_k3d_sCJXZcQk5KQTlFzdGMIJwJpZ9g2W07Z616E5DENGI=s900-c-k-c0x00ffffff-no-rj" alt="Jeff Nippard">
       <div class="live-subs-big" id="jeff-subs-big">8.35M</div>
       <div class="live-subs-label">YouTube Subscribers</div>
       <div class="live-badge"><span class="live-badge-dot" id="jeff-dot"></span><span id="jeff-badge-text">Loading</span></div>
@@ -382,8 +382,8 @@
       <p class="creator-bio">Shane Stoffer was born on July 20 2002. He became popular online through fitness content lifestyle videos gambling streams and videos about steroid use. Much of his content is based on personal experiences instead of professional expertise or scientific research. In 2024 fitness creator Greg Doucette publicly criticized some of Togi's steroid related content and argued that it could influence younger audiences.</p>
     </div>
 
+    <img class="creator-avatar" id="togi-avatar" src="https://yt3.googleusercontent.com/aGAuhlVoHXZjEESd0NmSYXuwX-P1G9L5xTeJpY-j_swVTf8hOQlDTExh0hOr7LR8cCkBRvoO8SM=s900-c-k-c0x00ffffff-no-rj" alt="Shane Stoffer">
     <div class="creator-header-right">
-      <img class="creator-avatar" id="togi-avatar" src="https://yt3.googleusercontent.com/aGAuhlVoHXZjEESd0NmSYXuwX-P1G9L5xTeJpY-j_swVTf8hOQlDTExh0hOr7LR8cCkBRvoO8SM=s900-c-k-c0x00ffffff-no-rj" alt="Shane Stoffer">
       <div class="live-subs-big" id="togi-subs-big">1.03M</div>
       <div class="live-subs-label">YouTube Subscribers</div>
       <div class="live-badge">
@@ -534,12 +534,10 @@
       <p class="creator-bio">Mike Tornabene is a comedian and graduate of New York University. He created the character Dom Mazzetti in 2012. The character is a parody of gym culture and gives exaggerated or intentionally incorrect fitness advice for comedy. The channel became popular because many jokes are based on real gym stereotypes and behaviors. Mike Tornabene also released a book called The Swoly Bible in 2016 and has worked with Seven Bucks Productions connected to Dwayne Johnson.</p>
     </div>
 
+    <img class="creator-avatar" id="bro-avatar" src="https://yt3.googleusercontent.com/ytc/AIdro_laMSE3QIC7C4MXfq72qCoR081H-QWLXa5uyVoOm7NzWM4=s900-c-k-c0x00ffffff-no-rj" alt="Bro Science">
     <div class="creator-header-right">
-      <img class="creator-avatar" id="bro-avatar" src="https://yt3.googleusercontent.com/ytc/AIdro_laMSE3QIC7C4MXfq72qCoR081H-QWLXa5uyVoOm7NzWM4=s900-c-k-c0x00ffffff-no-rj" alt="Bro Science">
       <div class="live-subs-big" id="bro-subs-big">2.5M</div>
-
       <div class="live-subs-label">YouTube Subscribers</div>
-
       <div class="live-badge">
         <span class="live-badge-dot" id="bro-dot"></span>
         <span id="bro-badge-text">Loading</span>
@@ -689,12 +687,10 @@
       <p class="creator-bio">Derek launched More Plates More Dates in 2016 as a bodybuilding channel that gradually expanded into steroid use, hormone therapy, and supplement research. He does not hold a medical degree or scientific certification. His audience grew through the level of detail in his videos and his willingness to cover topics that many fitness creators do not address. He is the founder of Gorilla Mind, a supplement company, and a co-founder of Marek Health, a hormone optimization clinic. Both businesses are related to topics he regularly covers on the channel.</p>
     </div>
 
+    <img class="creator-avatar" id="mpmd-avatar" src="https://yt3.googleusercontent.com/ytc/AIdro_mfSu9MGqCbhjRP02M1y3r3QeqYpKESRrJqffq53oa4duI=s900-c-k-c0x00ffffff-no-rj" alt="More Plates More Dates">
     <div class="creator-header-right">
-      <img class="creator-avatar" id="mpmd-avatar" src="https://yt3.googleusercontent.com/ytc/AIdro_mfSu9MGqCbhjRP02M1y3r3QeqYpKESRrJqffq53oa4duI=s900-c-k-c0x00ffffff-no-rj" alt="More Plates More Dates">
       <div class="live-subs-big" id="mpmd-subs-big">2.05M</div>
-
       <div class="live-subs-label">YouTube Subscribers</div>
-
       <div class="live-badge">
         <span class="live-badge-dot" id="mpmd-dot"></span>
         <span id="mpmd-badge-text">Loading</span>
