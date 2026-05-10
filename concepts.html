@@ -33,58 +33,76 @@
     }
     .nav-links a:hover, .nav-links a.active { color: var(--text); }
 
-    .jump-nav {
-      position: sticky; top: 58px; z-index: 90;
-      background: var(--surface); border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; overflow-x: auto;
+    /* PAGE HEADER */
+    .page-header {
+      padding: 5rem 3.5rem 3rem; border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: end;
     }
-    .jump-nav a {
-      font-family: 'DM Mono', monospace; font-size: 0.68rem;
-      letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
-      padding: 0.9rem 1.4rem; border-right: 1px solid var(--border);
-      white-space: nowrap; transition: all 0.2s; flex-shrink: 0;
-    }
-    .jump-nav a:hover { background: var(--surface2); color: var(--text); }
-
-    .page-header { padding: 5rem 3.5rem 3rem; border-bottom: 1px solid var(--border); }
     .page-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
-    .page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 6vw, 5rem); letter-spacing: 0.03em; line-height: 0.95; }
-    .page-sub { font-size: 1rem; color: var(--muted); margin-top: 1rem; max-width: 600px; line-height: 1.7; }
+    .page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 8vw, 7rem); letter-spacing: 0.03em; line-height: 0.9; }
+    .page-sub { font-size: 1rem; color: var(--muted); line-height: 1.75; align-self: end; }
 
-    .concept-section { padding: 5rem 3.5rem; border-bottom: 1px solid var(--border); }
-    .concept-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
-    .concept-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.03em; line-height: 1; margin-bottom: 0.5rem; }
-    .concept-body { font-size: 1rem; color: var(--muted); max-width: 680px; line-height: 1.78; margin-bottom: 2rem; }
-    .concept-body em { font-style: italic; color: var(--text); }
-    .concept-body strong { font-weight: 600; color: var(--text); }
+    /* FRAMEWORK DEFINITIONS STRIP */
+    .fw-strip {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      background: var(--border); gap: 1px;
+      border-bottom: 2px solid var(--border);
+    }
+    .fw-item { background: var(--surface); padding: 3rem 2.5rem; }
+    .fw-num { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: var(--dim); line-height: 1; margin-bottom: 0.4rem; }
+    .fw-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.9rem; letter-spacing: 0.04em; line-height: 1.05; margin-bottom: 1rem; }
+    .fw-def { font-size: 0.93rem; color: var(--muted); line-height: 1.72; }
+    .fw-def em { font-style: italic; color: var(--text); }
 
-    /* QUALITATIVE RATINGS */
-    .rating { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.2rem 0.6rem; border: 1px solid; display: inline-block; }
-    .rating.high { color: #16a34a; border-color: rgba(22,163,74,0.3); background: rgba(22,163,74,0.07); }
-    .rating.med  { color: #d97706; border-color: rgba(217,119,6,0.3);  background: rgba(217,119,6,0.07); }
-    .rating.low  { color: #dc2626; border-color: rgba(220,38,38,0.3);  background: rgba(220,38,38,0.07); }
-
-
-    /* CONCEPT CARDS */
-    .concept-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 2.5rem; }
-    .concept-card { background: var(--surface); border: 1px solid var(--border); padding: 2rem; }
-    .concept-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; letter-spacing: 0.04em; margin-bottom: 0.7rem; line-height: 1; }
-    .concept-card-body { font-size: 0.92rem; color: var(--muted); line-height: 1.65; }
-    .concept-card-body em { font-style: italic; color: var(--text); }
-    .concept-card-eg { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--dim); letter-spacing: 0.06em; margin-top: 0.8rem; line-height: 1.55; border-top: 1px solid var(--border); padding-top: 0.7rem; }
+    /* MATRIX GRID */
+    .matrix {
+      display: grid;
+      grid-template-columns: 180px repeat(3, 1fr);
+      background: var(--border);
+      gap: 1px;
+    }
+    .matrix-corner {
+      background: var(--surface2);
+    }
+    .matrix-col-head {
+      background: var(--surface);
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
+      padding: 1.1rem 1.4rem; display: flex; align-items: center;
+    }
+    .matrix-row-head {
+      background: var(--surface);
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem;
+      letter-spacing: 0.05em; line-height: 1.1;
+      padding: 2rem 1.2rem 2rem 1.4rem;
+      color: var(--c, var(--text));
+      border-left: 3px solid var(--c, var(--border));
+      display: flex; align-items: flex-start;
+    }
+    .matrix-cell {
+      background: var(--bg);
+      padding: 2rem 1.5rem;
+      font-size: 0.9rem; color: var(--muted); line-height: 1.7;
+    }
+    .matrix-cell em { font-style: italic; color: var(--text); }
 
     footer { border-top: 1px solid var(--border); padding: 2rem 3.5rem; display: flex; justify-content: space-between; align-items: center; }
     .footer-l { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); }
     .footer-r { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--dim); }
 
-    @media (max-width: 900px) {
+    @media (max-width: 1000px) {
+      .matrix { grid-template-columns: 130px repeat(3,1fr); }
+      .fw-item { padding: 2rem 1.5rem; }
+    }
+    @media (max-width: 700px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
-      .jump-nav { top: 50px; }
-      .concept-section { padding: 3.5rem 1.5rem; }
-      .page-header { padding: 3rem 1.5rem; }
-      .concept-cards { grid-template-columns: 1fr; }
-      .takeaways-grid { grid-template-columns: 1fr; }
+      .page-header { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+      .fw-strip { grid-template-columns: 1fr; }
+      .matrix { grid-template-columns: 1fr; }
+      .matrix-corner, .matrix-col-head { display: none; }
+      .matrix-row-head { font-size: 1.6rem; padding: 1.5rem; }
+      .matrix-cell { padding: 1rem 1.5rem; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
     }
   </style>
@@ -101,94 +119,65 @@
   </div>
 </nav>
 
-<div class="jump-nav">
-  <a href="#credibility">Source Credibility</a>
-  <a href="#psi">Parasocial</a>
-  <a href="#healthism">Healthism</a>
-</div>
-
 <div class="page-header">
-  <p class="page-label">04 Course Concepts</p>
-  <h1 class="page-title">Three Frameworks</h1>
-  <p class="page-sub">Three ideas that explain how fitness creators build trust and why audiences believe them.</p>
+  <div>
+    <p class="page-label">04 Course Concepts</p>
+    <h1 class="page-title">Three Frameworks</h1>
+  </div>
+  <p class="page-sub">Three ideas that explain how fitness creators build trust and why audiences believe them. Each framework applied to all four creators.</p>
 </div>
 
-<!-- ====== SOURCE CREDIBILITY ====== -->
-<div class="concept-section" id="credibility">
-  <p class="concept-label">Framework 01</p>
-  <h2 class="concept-title">Source Credibility Theory</h2>
-  <p class="concept-body">We judge trust on three things. <em>Expertise</em> (do they know?), <em>trustworthiness</em> (are they honest?), and <em>appeal</em> (do we like them?). None of these require the person to actually be correct.</p>
-
-  <div class="concept-cards">
-    <div class="concept-card">
-      <div class="concept-card-title" style="color:var(--jeff)">Jeff Nippard</div>
-      <p class="concept-card-body">High expertise, high trustworthiness, medium appeal. The most verifiable creator. Credibility is earned through evidence, not personality.</p>
-    </div>
-    <div class="concept-card">
-      <div class="concept-card-title" style="color:var(--togi)">Togi</div>
-      <p class="concept-card-body">Low expertise, low trustworthiness, high appeal. The least verifiable creator. Credibility comes entirely from emotional connection.</p>
-    </div>
-    <div class="concept-card">
-      <div class="concept-card-title" style="color:var(--bro)">Bro Science</div>
-      <p class="concept-card-body">Low expertise, medium trustworthiness, high appeal. The parody format signals honesty. Credibility built through shared cultural belonging.</p>
-    </div>
-    <div class="concept-card">
-      <div class="concept-card-title" style="color:var(--mpmd)">MPMD</div>
-      <p class="concept-card-body">No formal credentials, financial connections to products he covers, and a large engaged audience. His credibility is built on the depth and consistency of his research rather than any verified professional background.</p>
-    </div>
+<!-- FRAMEWORK DEFINITIONS -->
+<div class="fw-strip">
+  <div class="fw-item">
+    <div class="fw-num">01</div>
+    <div class="fw-name">Source Credibility Theory</div>
+    <p class="fw-def">We judge trust on three things: <em>expertise</em> (do they know?), <em>trustworthiness</em> (are they honest?), and <em>appeal</em> (do we like them?). None of these require the person to actually be correct.</p>
+  </div>
+  <div class="fw-item">
+    <div class="fw-num">02</div>
+    <div class="fw-name">Parasocial Interaction</div>
+    <p class="fw-def">Viewers feel they know the creator personally. That feeling makes audiences accept recommendations as if they came from a trusted friend rather than a stranger online.</p>
+  </div>
+  <div class="fw-item">
+    <div class="fw-num">03</div>
+    <div class="fw-name">Healthism</div>
+    <p class="fw-def">Health as a personal moral duty. All four creators reinforce this in different styles. The styles look like opposites. The underlying message is the same.</p>
   </div>
 </div>
 
-<!-- ====== PSI ====== -->
-<div class="concept-section" id="psi">
-  <p class="concept-label">Framework 02</p>
-  <h2 class="concept-title">Parasocial Interaction</h2>
-  <p class="concept-body">Viewers feel they know the creator personally. That feeling makes audiences accept recommendations as if they came from a trusted friend rather than a stranger online.</p>
+<!-- MATRIX -->
+<div class="matrix">
 
-  <div class="concept-cards">
-    <div class="concept-card">
-      <div class="concept-card-title" style="color:var(--togi)">Togi</div>
-      <p class="concept-card-body">Personal drama and vulnerability build the deepest bond. His audience follows <em>him</em>, not fitness information.</p>
-    </div>
-    <div class="concept-card">
-      <div class="concept-card-title" style="color:var(--jeff)">Jeff Nippard</div>
-      <p class="concept-card-body">Audiences trust the channel's standards more than his personality. Lower emotional bond but harder to break through controversy.</p>
-    </div>
-    <div class="concept-card">
-      <div class="concept-card-title" style="color:var(--bro)">Bro Science</div>
-      <p class="concept-card-body">The bond is to the Dom Mazzetti character. Belonging to the in-joke still activates trust when sponsorships appear inside it.</p>
-    </div>
-    <div class="concept-card">
-      <div class="concept-card-title" style="color:var(--mpmd)">MPMD</div>
-      <p class="concept-card-body">Viewers follow Derek for access to topics most fitness creators do not cover in detail. The connection is built around trust in his knowledge rather than shared personal experiences or emotional closeness.</p>
-    </div>
-  </div>
-</div>
+  <div class="matrix-corner"></div>
+  <div class="matrix-col-head">Source Credibility</div>
+  <div class="matrix-col-head">Parasocial Interaction</div>
+  <div class="matrix-col-head">Healthism</div>
 
-<!-- ====== HEALTHISM ====== -->
-<div class="concept-section" id="healthism">
-  <p class="concept-label">Framework 03</p>
-  <h2 class="concept-title">Healthism</h2>
-  <p class="concept-body">Health as a personal moral duty. All four creators reinforce this in different styles. The styles look like opposites. The underlying message is the same.</p>
+  <!-- JEFF -->
+  <div class="matrix-row-head" style="--c:var(--jeff)">Jeff Nippard</div>
+  <div class="matrix-cell">High expertise, high trustworthiness, medium appeal. The most verifiable creator. Credibility is earned through evidence, not personality.</div>
+  <div class="matrix-cell">Audiences trust the channel's standards more than his personality. Lower emotional bond, but harder to shake through controversy.</div>
+  <div class="matrix-cell"><em>Rational.</em> Right information plus right habits equals results. The gap is always knowledge, never access or circumstance.</div>
 
-  <div class="concept-cards">
-    <div class="concept-card">
-      <div class="concept-card-title" style="color:var(--jeff)">Jeff — Rational</div>
-      <p class="concept-card-body">Right information plus right habits equals results. The gap is always knowledge, never access or circumstance.</p>
-    </div>
-    <div class="concept-card">
-      <div class="concept-card-title" style="color:var(--togi)">Togi — Transgressive</div>
-      <p class="concept-card-body">Breaks every health rule. But his body is still the main project. He swapped wellness for <em>authenticity</em>. The obsession stayed.</p>
-    </div>
-    <div class="concept-card">
-      <div class="concept-card-title" style="color:var(--bro)">Bro Science — Satirical</div>
-      <p class="concept-card-body">The parody only works if you already share gym culture values. Mocking something for people who love it reinforces it.</p>
-    </div>
-    <div class="concept-card">
-      <div class="concept-card-title" style="color:var(--mpmd)">MPMD — Chemical</div>
-      <p class="concept-card-body">Physical improvement is framed as an ongoing research project. Knowing the right compounds and protocols is presented as the main thing separating good results from poor ones. Cost, safety, and access are rarely positioned as relevant factors.</p>
-    </div>
-  </div>
+  <!-- TOGI -->
+  <div class="matrix-row-head" style="--c:var(--togi)">Togi</div>
+  <div class="matrix-cell">Low expertise, low trustworthiness, high appeal. The least verifiable creator. Credibility comes entirely from emotional connection.</div>
+  <div class="matrix-cell">Personal drama and vulnerability build the deepest bond. His audience follows <em>him</em>, not fitness information.</div>
+  <div class="matrix-cell"><em>Transgressive.</em> Breaks every health rule. But his body is still the main project. He swapped wellness for authenticity. The obsession stayed.</div>
+
+  <!-- BRO SCIENCE -->
+  <div class="matrix-row-head" style="--c:var(--bro)">Bro Science</div>
+  <div class="matrix-cell">Low expertise, medium trustworthiness, high appeal. The parody format signals honesty. Credibility built through shared cultural belonging.</div>
+  <div class="matrix-cell">The bond is to the Dom Mazzetti character. Belonging to the in-joke still activates trust when sponsorships appear inside it.</div>
+  <div class="matrix-cell"><em>Satirical.</em> The parody only works if you already share gym culture values. Mocking something for people who love it reinforces it.</div>
+
+  <!-- MPMD -->
+  <div class="matrix-row-head" style="--c:var(--mpmd)">MPMD</div>
+  <div class="matrix-cell">No formal credentials, financial connections to products he covers. Credibility built on depth of research rather than any verified professional background.</div>
+  <div class="matrix-cell">Viewers follow Derek for access to topics most fitness creators do not cover. The connection is built around trust in his knowledge rather than personal closeness.</div>
+  <div class="matrix-cell"><em>Chemical.</em> Physical improvement framed as a research project. Knowledge of the right compounds is presented as the main thing separating good results from poor ones.</div>
+
 </div>
 
 <footer>
