@@ -33,27 +33,6 @@
     }
     .nav-links a:hover, .nav-links a.active { color: var(--text); }
 
-    /* PAGE HEADER */
-    .page-header {
-      padding: 5rem 3.5rem 3rem; border-bottom: 1px solid var(--border);
-      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: end;
-    }
-    .page-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
-    .page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 8vw, 7rem); letter-spacing: 0.03em; line-height: 0.9; }
-    .page-sub { font-size: 1rem; color: var(--muted); line-height: 1.75; align-self: end; }
-
-    /* FRAMEWORK DEFINITIONS STRIP */
-    .fw-strip {
-      display: grid; grid-template-columns: repeat(3,1fr);
-      background: var(--border); gap: 1px;
-      border-bottom: 2px solid var(--border);
-    }
-    .fw-item { background: var(--surface); padding: 3rem 2.5rem; }
-    .fw-num { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: var(--dim); line-height: 1; margin-bottom: 0.4rem; }
-    .fw-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.9rem; letter-spacing: 0.04em; line-height: 1.05; margin-bottom: 1rem; }
-    .fw-def { font-size: 0.93rem; color: var(--muted); line-height: 1.72; }
-    .fw-def em { font-style: italic; color: var(--text); }
-
     /* MATRIX GRID */
     .matrix {
       display: grid;
@@ -66,9 +45,14 @@
     }
     .matrix-col-head {
       background: var(--surface);
+      padding: 1.4rem 1.4rem; display: flex; flex-direction: column; gap: 0.35rem; justify-content: center;
+    }
+    .matrix-col-name {
       font-family: 'DM Mono', monospace; font-size: 0.65rem;
-      text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
-      padding: 1.1rem 1.4rem; display: flex; align-items: center;
+      text-transform: uppercase; letter-spacing: 0.14em; color: var(--text);
+    }
+    .matrix-col-def {
+      font-family: 'Spectral', serif; font-size: 0.8rem; color: var(--muted); line-height: 1.45; font-style: italic;
     }
     .matrix-row-head {
       background: var(--surface);
@@ -92,13 +76,10 @@
 
     @media (max-width: 1000px) {
       .matrix { grid-template-columns: 130px repeat(3,1fr); }
-      .fw-item { padding: 2rem 1.5rem; }
     }
     @media (max-width: 700px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
-      .page-header { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
-      .fw-strip { grid-template-columns: 1fr; }
       .matrix { grid-template-columns: 1fr; }
       .matrix-corner, .matrix-col-head { display: none; }
       .matrix-row-head { font-size: 1.6rem; padding: 1.5rem; }
@@ -119,40 +100,22 @@
   </div>
 </nav>
 
-<div class="page-header">
-  <div>
-    <p class="page-label">04 Course Concepts</p>
-    <h1 class="page-title">Three Frameworks</h1>
-  </div>
-  <p class="page-sub">Three ideas that explain how fitness creators build trust and why audiences believe them. Each framework applied to all four creators.</p>
-</div>
-
-<!-- FRAMEWORK DEFINITIONS -->
-<div class="fw-strip">
-  <div class="fw-item">
-    <div class="fw-num">01</div>
-    <div class="fw-name">Source Credibility Theory</div>
-    <p class="fw-def">We judge trust on three things. <em>Expertise</em> asks if they seem knowledgeable. <em>Trustworthiness</em> asks if they seem honest. <em>Appeal</em> asks if we like them. None of these require the person to actually be correct.</p>
-  </div>
-  <div class="fw-item">
-    <div class="fw-num">02</div>
-    <div class="fw-name">Parasocial Interaction</div>
-    <p class="fw-def">Viewers feel they know the creator personally. That feeling makes audiences accept recommendations as if they came from a trusted friend rather than a stranger online.</p>
-  </div>
-  <div class="fw-item">
-    <div class="fw-num">03</div>
-    <div class="fw-name">Healthism</div>
-    <p class="fw-def">Health as a personal moral duty. All four creators reinforce this in different styles. The styles look like opposites. The underlying message is the same.</p>
-  </div>
-</div>
-
 <!-- MATRIX -->
 <div class="matrix">
 
   <div class="matrix-corner"></div>
-  <div class="matrix-col-head">Source Credibility</div>
-  <div class="matrix-col-head">Parasocial Interaction</div>
-  <div class="matrix-col-head">Healthism</div>
+  <div class="matrix-col-head">
+    <span class="matrix-col-name">Source Credibility</span>
+    <span class="matrix-col-def">Do they seem knowledgeable, honest, and likable?</span>
+  </div>
+  <div class="matrix-col-head">
+    <span class="matrix-col-name">Parasocial Interaction</span>
+    <span class="matrix-col-def">Viewers feel a personal bond with the creator.</span>
+  </div>
+  <div class="matrix-col-head">
+    <span class="matrix-col-name">Healthism</span>
+    <span class="matrix-col-def">Health treated as a personal moral responsibility.</span>
+  </div>
 
   <!-- JEFF -->
   <div class="matrix-row-head" style="--c:var(--jeff)">Jeff Nippard</div>
