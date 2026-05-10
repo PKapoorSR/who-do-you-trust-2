@@ -21,7 +21,7 @@
       --jeff: #0369a1;
       --togi: #be123c;
       --bro: #b45309;
-      --jpg: #7c3aed;
+      --mpmd: #0d9488;
     }
 
     html { scroll-behavior: smooth; }
@@ -137,7 +137,7 @@
     .card-jeff:hover { box-shadow: 0 12px 40px rgba(3,105,161,0.18); }
     .card-togi:hover { box-shadow: 0 12px 40px rgba(190,18,60,0.16); }
     .card-bro:hover  { box-shadow: 0 12px 40px rgba(180,83,9,0.16); }
-    .card-jpg:hover  { box-shadow: 0 12px 40px rgba(124,58,237,0.18); }
+    .card-mpmd:hover  { box-shadow: 0 12px 40px rgba(13,148,136,0.18); }
     .card-top { display: flex; justify-content: space-between; align-items: flex-start; }
     .card-name {
       font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem;
@@ -288,7 +288,7 @@
     <span class="chip-sep">·</span>
     <a href="influencers.html#bro" class="creator-chip" style="--c: var(--bro)">Bro Science</a>
     <span class="chip-sep">·</span>
-    <a href="influencers.html#jpg" class="creator-chip" style="--c: var(--jpg)">JPG</a>
+    <a href="influencers.html#mpmd" class="creator-chip" style="--c: var(--mpmd)">MPMD</a>
   </div>
 </section>
 
@@ -348,19 +348,19 @@
       <span class="card-cta">View Profile →</span>
     </a>
 
-    <a href="influencers.html#jpg" class="creator-card card-jpg fade-in" style="--c: var(--jpg)">
+    <a href="influencers.html#mpmd" class="creator-card card-mpmd fade-in" style="--c: var(--mpmd)">
       <div class="card-top">
         <div>
-          <div class="card-name">JPG</div>
-          <div class="card-platform">TikTok · @jpgcoaching</div>
+          <div class="card-name">More Plates More Dates</div>
+          <div class="card-platform">YouTube · @moreplatesmoredates</div>
         </div>
         <div class="card-subs-block">
-          <div class="card-subs" id="hero-jpg-subs">3.6M</div>
-          <div class="card-subs-label">TikTok Followers</div>
-          <div class="card-dot-row"><span class="card-dot"></span></div>
+          <div class="card-subs" id="hero-mpmd-subs">2.05M</div>
+          <div class="card-subs-label">Subscribers</div>
+          <div class="card-dot-row"><span class="card-dot" id="dot-mpmd"></span></div>
         </div>
       </div>
-      <p class="card-strategy">Hypertrophy coaching and exercise technique on TikTok.</p>
+      <p class="card-strategy">PED cycles, hormones, and supplement analysis. Runs Gorilla Mind and Marek Health.</p>
       <span class="card-cta">View Profile →</span>
     </a>
 
@@ -377,7 +377,7 @@
   /* LIVE DATA */
   document.addEventListener('liveDataReady', () => {
     const L = window.LIVE;
-    ['jeff','togi','bro','jpg'].forEach(k => {
+    ['jeff','togi','bro','mpmd'].forEach(k => {
       const sEl = document.getElementById('hero-' + k + '-subs');
       const dEl = document.getElementById('dot-' + k);
       if (sEl && L[k]) sEl.textContent = L[k].subscribers;

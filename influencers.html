@@ -12,7 +12,7 @@
     :root {
       --bg: #f7f7f5; --surface: #ffffff; --surface2: #f0efed;
       --border: #e0dfd8; --text: #111118; --muted: #6b6b7a; --dim: #c0bfba;
-      --jeff: #0369a1; --togi: #be123c; --bro: #b45309; --jpg: #7c3aed;
+      --jeff: #0369a1; --togi: #be123c; --bro: #b45309; --mpmd: #0d9488;
     }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: 'Spectral', serif; font-size: 1.05rem; line-height: 1.72; }
@@ -41,7 +41,7 @@
     .quick-nav a.jeff { color: var(--jeff); }
     .quick-nav a.togi { color: var(--togi); }
     .quick-nav a.bro  { color: var(--bro); }
-    .quick-nav a.jpg  { color: var(--jpg); }
+    .quick-nav a.mpmd { color: var(--mpmd); }
 
     .page-header { padding: 5rem 3.5rem 3rem; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 2rem; }
     .page-header-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
@@ -150,7 +150,7 @@
     .sg { display: grid; grid-template-columns: 130px repeat(4, 1fr); border: 1px solid var(--border); }
     .sg-head { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.06em; padding: 0.9rem 1rem; border-bottom: 2px solid var(--border); border-right: 1px solid var(--border); background: var(--surface); }
     .sg-head:last-child { border-right: none; }
-    .sg-head.jeff { color: var(--jeff); } .sg-head.togi { color: var(--togi); } .sg-head.bro { color: var(--bro); } .sg-head.jpg { color: var(--jpg); }
+    .sg-head.jeff { color: var(--jeff); } .sg-head.togi { color: var(--togi); } .sg-head.bro { color: var(--bro); } .sg-head.mpmd { color: var(--mpmd); }
     .sg-dim { font-family: 'DM Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); padding: 1rem; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); background: var(--surface); display: flex; align-items: flex-start; }
     .sg-cell { padding: 0.9rem 1rem; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 0.45rem; }
     .sg-cell:last-child, .sg-dim:last-child { border-right: none; }
@@ -193,7 +193,7 @@
   <a href="#jeff" class="jeff">Jeff Nippard</a>
   <a href="#togi" class="togi">Togi</a>
   <a href="#bro" class="bro">Bro Science</a>
-  <a href="#jpg" class="jpg">JPG</a>
+  <a href="#mpmd" class="mpmd">MPMD</a>
 </div>
 
 <div style="display:none"><span id="page-status-text"></span></div>
@@ -646,84 +646,52 @@
 
 
 <!-- ════════════════════════════════════════
-     JPG
+     MORE PLATES MORE DATES
 ════════════════════════════════════════ -->
-<div class="creator-section" id="jpg" style="--creator-color: var(--jpg)">
-  <div class="creator-accent-bar" style="background: var(--jpg)"></div>
+<div class="creator-section" id="mpmd" style="--creator-color: var(--mpmd)">
+  <div class="creator-accent-bar" style="background: var(--mpmd)"></div>
 
   <div class="creator-header">
     <div>
       <p class="creator-eyebrow">Creator 04</p>
 
-      <h2 class="creator-name-big">JPG</h2>
+      <h2 class="creator-name-big">More Plates More Dates</h2>
 
-      <div class="creator-handle-big">@jpgcoaching on TikTok</div>
+      <div class="creator-handle-big">Derek  @moreplatesmoredates on YouTube</div>
 
-      <p class="creator-bio">JPG Coaching is run by fitness coach and bodybuilder JP Gallardo. He became popular on TikTok through workout breakdowns exercise demonstrations and hypertrophy focused training advice. His content mainly focuses on muscle growth exercise form and gym technique. JP also runs online coaching programs and training plans through his website. Most of his audience comes from TikTok and short form fitness content.</p>
+      <p class="creator-bio">More Plates More Dates is run by Derek, a Canadian creator who built his audience through detailed analysis of performance enhancing drugs, hormones, and supplement formulations. He has no medical or academic credentials but produces some of the most cited PED content on YouTube. Derek owns Gorilla Mind supplements and co-owns Marek Health, a TRT and optimization clinic — both of which he regularly covers on his channel. His work sits at the intersection of harm reduction and undisclosed commercial conflict of interest.</p>
     </div>
 
     <div class="creator-header-right">
-      <img class="creator-avatar" id="jpg-avatar" src="https://yt3.googleusercontent.com/ytc/AIdro_lvvYPLFIgZErXGHJ0tOuIxh7k3AF10uvXK23GN9OA=s900-c-k-c0x00ffffff-no-rj" alt="JPG Coaching">
-      <div class="live-subs-big" id="jpg-subs-big">3.6M</div>
+      <img class="creator-avatar" id="mpmd-avatar" src="https://yt3.googleusercontent.com/ytc/AIdro_mfSu9MGqCbhjRP02M1y3r3QeqYpKESRrJqffq53oa4duI=s900-c-k-c0x00ffffff-no-rj" alt="More Plates More Dates">
+      <div class="live-subs-big" id="mpmd-subs-big">2.05M</div>
 
-      <div class="live-subs-label">TikTok Followers</div>
+      <div class="live-subs-label">YouTube Subscribers</div>
 
       <div class="live-badge">
-        <span class="live-badge-dot" id="jpg-dot"></span>
-        <span id="jpg-badge-text">Loading</span>
+        <span class="live-badge-dot" id="mpmd-dot"></span>
+        <span id="mpmd-badge-text">Loading</span>
       </div>
     </div>
   </div>
 
   <div class="creator-body">
     <div class="stat-grid">
-      <div class="stat-cell">
-        <div class="stat-val" id="jpg-stat-subs">3.6M</div>
-        <div class="stat-key">TikTok Followers</div>
-      </div>
-
-      <div class="stat-cell">
-        <div class="stat-val" id="jpg-stat-likes">161M+</div>
-        <div class="stat-key">Total Likes</div>
-      </div>
-
-      <div class="stat-cell">
-        <div class="stat-val" id="jpg-stat-avg-likes">—</div>
-        <div class="stat-key">Avg Likes / Video</div>
-      </div>
-
-      <div class="stat-cell">
-        <div class="stat-val" id="jpg-stat-vids">—</div>
-        <div class="stat-key">Videos Posted</div>
-      </div>
-
-      <div class="stat-cell">
-        <div class="stat-val">2021</div>
-        <div class="stat-key">TikTok Started</div>
-      </div>
-
-      <div class="stat-cell">
-        <div class="stat-val" id="jpg-stat-vpm">—</div>
-        <div class="stat-key">Videos / Month</div>
-      </div>
-
-      <div class="stat-cell">
-        <div class="stat-val">&lt; 60 sec</div>
-        <div class="stat-key">Avg Video Length</div>
-        <div class="stat-note">TikTok short form</div>
-      </div>
-
-      <div class="stat-cell">
-        <div class="stat-val" id="jpg-stat-following">—</div>
-        <div class="stat-key">Following</div>
-      </div>
+      <div class="stat-cell"><div class="stat-val" id="mpmd-stat-subs">2.05M</div><div class="stat-key">Subscribers</div></div>
+      <div class="stat-cell"><div class="stat-val" id="mpmd-stat-views">740M</div><div class="stat-key">Total Views</div></div>
+      <div class="stat-cell"><div class="stat-val" id="mpmd-stat-avg-views">—</div><div class="stat-key">Avg Views / Video</div></div>
+      <div class="stat-cell"><div class="stat-val" id="mpmd-stat-like-rate">—</div><div class="stat-key">Like Rate</div><div class="stat-note">Likes ÷ views · last 50 videos</div></div>
+      <div class="stat-cell"><div class="stat-val" id="mpmd-stat-vids">1994</div><div class="stat-key">Videos Published</div></div>
+      <div class="stat-cell"><div class="stat-val" id="mpmd-stat-started">2016</div><div class="stat-key">Channel Started</div></div>
+      <div class="stat-cell"><div class="stat-val" id="mpmd-stat-vpm">—</div><div class="stat-key">Videos / Month</div><div class="stat-note" id="mpmd-stat-consistency">—</div></div>
+      <div class="stat-cell"><div class="stat-val" id="mpmd-stat-duration">—</div><div class="stat-key">Avg Video Length</div><div class="stat-note">Last 50 videos</div></div>
     </div>
 
     <div class="xplat-row">
-      <div class="xplat-item"><div class="xplat-platform">TikTok</div><div class="xplat-handle"><a href="https://tiktok.com/@jpgcoaching" target="_blank" rel="noopener">@jpgcoaching ↗</a></div><div class="xplat-note">Primary platform · public profile</div></div>
-      <div class="xplat-item"><div class="xplat-platform">Instagram</div><div class="xplat-handle"><a href="https://instagram.com/jpgcoaching" target="_blank" rel="noopener">@jpgcoaching ↗</a></div><div class="xplat-note">Public profile</div></div>
-      <div class="xplat-item"><div class="xplat-platform">Coaching Website</div><div class="xplat-handle"><a href="https://jpgcoaching.com" target="_blank" rel="noopener">jpgcoaching.com ↗</a></div><div class="xplat-note">Programs and online coaching</div></div>
-      <div class="xplat-item"><div class="xplat-platform">Reddit Discussion</div><div class="xplat-handle"><a href="https://www.reddit.com/search/?q=JPG+Coaching&type=link" target="_blank" rel="noopener">Search Reddit ↗</a></div><div class="xplat-note">Community coverage — SIFT step F</div></div>
+      <div class="xplat-item"><div class="xplat-platform">Instagram</div><div class="xplat-handle"><a href="https://instagram.com/moreplatesmoredates" target="_blank" rel="noopener">@moreplatesmoredates ↗</a></div><div class="xplat-note">Public profile</div></div>
+      <div class="xplat-item"><div class="xplat-platform">Twitter / X</div><div class="xplat-handle"><a href="https://x.com/Derek_Fitness" target="_blank" rel="noopener">@Derek_Fitness ↗</a></div><div class="xplat-note">Public profile</div></div>
+      <div class="xplat-item"><div class="xplat-platform">Gorilla Mind</div><div class="xplat-handle"><a href="https://gorillamind.com" target="_blank" rel="noopener">gorillamind.com ↗</a></div><div class="xplat-note">Supplement company · Derek is owner</div></div>
+      <div class="xplat-item"><div class="xplat-platform">Marek Health</div><div class="xplat-handle"><a href="https://marekhealth.com" target="_blank" rel="noopener">marekhealth.com ↗</a></div><div class="xplat-note">TRT clinic · Derek is co-owner</div></div>
     </div>
 
     <div class="concept-grid">
@@ -732,34 +700,31 @@
 
         <div class="cred-row">
           <span class="cred-dim">Expertise</span>
-
-          <p class="cred-text">JP Gallardo is known for hypertrophy focused training advice and online coaching. His content often discusses exercise selection muscle targeting and workout efficiency. He does not present himself as a doctor or scientist and his website states that his advice should not replace medical guidance.</p>
+          <p class="cred-text">Derek holds no medical or academic credentials. His authority comes entirely from the depth and consistency of his research into pharmacological literature, bloodwork interpretation, and self-experimentation. His audience treats detailed knowledge as a functional substitute for formal credentials.</p>
         </div>
 
         <div class="cred-row">
           <span class="cred-dim">Trustworthiness</span>
-
-          <p class="cred-text">His content is more structured and instructional than many fitness creators on TikTok. He also publicly runs coaching services and workout programs through his business. Some criticism online has focused on debates over exercise originality and whether some training ideas closely resemble content from other fitness creators.</p>
+          <p class="cred-text">Derek owns Gorilla Mind supplements and co-owns Marek Health — both of which he promotes and reviews on his channel. These undisclosed or lightly disclosed conflicts are the central credibility problem. Viewers who do not know about these businesses cannot properly evaluate his product recommendations.</p>
         </div>
 
         <div class="cred-row">
           <span class="cred-dim">Appeal</span>
-
-          <p class="cred-text">JP became popular because his videos are short direct and focused on practical gym advice. Many viewers like the detailed explanations and exercise demonstrations. His content especially appeals to younger gym audiences interested in bodybuilding and muscle growth.</p>
+          <p class="cred-text">He has built a loyal niche audience around perceived insider access — Derek discusses things most creators will not touch. That exclusivity creates strong trust among followers who feel they are getting information others suppress. The bond is based on expertise-proximity rather than personal vulnerability.</p>
         </div>
       </div>
 
       <div class="concept-panel">
         <div class="concept-panel-title">Example Content</div>
-        <a class="vid-ex-card" href="https://www.tiktok.com/@jpgcoaching" target="_blank" rel="noopener">
-          <div class="vid-ex-tiktok-placeholder">TikTok</div>
+        <a class="vid-ex-card" id="mpmd-vid-link" href="https://youtube.com/@moreplatesmoredates" target="_blank" rel="noopener">
+          <img class="vid-ex-thumb" id="mpmd-vid-thumb" src="" alt="More Plates More Dates video">
           <div class="vid-ex-body">
-            <div class="vid-ex-title">@jpgcoaching on TikTok</div>
-            <div class="vid-ex-views" id="jpg-vid-subs">3.6M+</div>
-            <div class="vid-ex-cta">View Profile ↗</div>
+            <div class="vid-ex-title" id="mpmd-vid-title">Loading&hellip;</div>
+            <div class="vid-ex-views" id="mpmd-vid-views">—</div>
+            <div class="vid-ex-cta">Watch on YouTube ↗</div>
           </div>
         </a>
-        <p class="vid-ex-note">Short exercise demonstrations with detailed technique explanations. Practical advice for muscle growth that appeals directly to gym audiences without relying on credentials.</p>
+        <p class="vid-ex-note">Long form PED and hormone analysis. Detail-heavy content signals expertise while business conflicts behind product mentions go largely unexamined by the audience.</p>
       </div>
     </div>
 
@@ -772,8 +737,7 @@
             <div class="sift-step-letter">S</div>
             <div class="sift-step-name">Stop</div>
           </div>
-
-          <div class="sift-desc">The videos are fast paced and confident which can make advice sound highly authoritative. Viewers still need to slow down and compare advice with other reliable fitness sources.</div>
+          <div class="sift-desc">Confident delivery and technical depth can make content feel authoritative before the viewer considers whether Derek has credentials or undisclosed financial interests in the products he discusses.</div>
         </div>
 
         <div class="sift-row">
@@ -781,8 +745,7 @@
             <div class="sift-step-letter">I</div>
             <div class="sift-step-name">Investigate</div>
           </div>
-
-          <div class="sift-desc">JP Gallardo has a public coaching business social media history and online programs that viewers can verify. His identity and business are publicly connected to his content.</div>
+          <div class="sift-desc">Derek's ownership of Gorilla Mind and co-ownership of Marek Health are publicly documented but not prominently disclosed in videos. Viewers who investigate find a direct financial connection between his recommendations and his revenue.</div>
         </div>
 
         <div class="sift-row">
@@ -790,8 +753,7 @@
             <div class="sift-step-letter">F</div>
             <div class="sift-step-name">Find Coverage</div>
           </div>
-
-          <div class="sift-desc">His training methods are frequently discussed in online fitness communities. Some viewers strongly support his advice while others debate certain exercise recommendations and coaching methods.</div>
+          <div class="sift-desc">His channel is widely discussed in bodybuilding and PED communities. Medical professionals and harm reduction advocates have both cited his work — sometimes approvingly for detail, sometimes critically for promoting experimental compounds without medical oversight.</div>
         </div>
 
         <div class="sift-row">
@@ -799,8 +761,7 @@
             <div class="sift-step-letter">T</div>
             <div class="sift-step-name">Trace Claims</div>
           </div>
-
-          <div class="sift-desc">Many exercise claims can be compared with broader bodybuilding and hypertrophy research. Some advice is based on coaching experience and biomechanics discussions rather than direct scientific studies.</div>
+          <div class="sift-desc">Many pharmacological claims can be traced to published literature. However, product recommendations for Gorilla Mind and Marek Health cannot be evaluated independently because Derek is financially tied to their outcomes.</div>
         </div>
       </div>
     </div>
@@ -810,21 +771,18 @@
 
       <div class="incident-list">
         <div class="incident-item">
-          <span class="risk-tag risk-mod">Note</span>
-
-          <span class="incident-text"><strong>Exercise debates online</strong> Some fitness creators and viewers have argued that parts of his content closely resemble ideas from other coaches and bodybuilding educators. Supporters argue that he credits sources and popularizes existing methods.</span>
+          <span class="risk-tag risk-high">High Risk</span>
+          <span class="incident-text"><strong>No credentials, high influence on medical decisions</strong> Derek has no medical or academic credentials yet regularly advises on TRT protocols, peptide stacks, and experimental research chemicals. Many followers make personal health decisions based on his content.</span>
         </div>
 
         <div class="incident-item">
-          <span class="risk-tag risk-low">Low Risk</span>
-
-          <span class="incident-text"><strong>Hypertrophy focused coaching</strong> Most of his content focuses on muscle growth gym technique and workout efficiency rather than extreme challenges or risky stunts.</span>
+          <span class="risk-tag risk-high">High Risk</span>
+          <span class="incident-text"><strong>Undisclosed conflict of interest</strong> Derek owns Gorilla Mind supplements and co-owns Marek Health. Both are regularly promoted or implicitly endorsed on his channel. Most viewers are unaware that positive coverage directly benefits his businesses.</span>
         </div>
 
         <div class="incident-item">
           <span class="risk-tag risk-mod">Note</span>
-
-          <span class="incident-text"><strong>Strong influence on GymTok</strong> His exercise recommendations are heavily repeated across TikTok fitness communities which gives him major influence over workout trends and training styles online.</span>
+          <span class="incident-text"><strong>Promotion of experimental compounds</strong> Content regularly discusses research peptides and unapproved compounds as optimization tools. This sits outside standard harm reduction guidance and is directed at a general audience without medical supervision.</span>
         </div>
       </div>
     </div>
@@ -841,31 +799,31 @@
     <div class="sg-head jeff">Jeff Nippard</div>
     <div class="sg-head togi">Togi</div>
     <div class="sg-head bro">Bro Science</div>
-    <div class="sg-head jpg">JPG</div>
+    <div class="sg-head mpmd">MPMD</div>
 
     <div class="sg-dim">Expertise</div>
     <div class="sg-cell"><span class="risk-tag risk-low">High</span><span class="sg-note">Biochemistry degree. Competed in powerlifting at national level.</span></div>
     <div class="sg-cell"><span class="risk-tag risk-high">Low</span><span class="sg-note">No formal credentials. Authority comes from personal experience.</span></div>
     <div class="sg-cell"><span class="risk-tag risk-high">Low</span><span class="sg-note">Comedy character. Not presented as a fitness expert.</span></div>
-    <div class="sg-cell"><span class="risk-tag risk-mod">Med</span><span class="sg-note">Online coaching background. No academic or medical credentials.</span></div>
+    <div class="sg-cell"><span class="risk-tag risk-high">Low</span><span class="sg-note">No medical or academic credentials. Authority built on depth of research, not formal training.</span></div>
 
     <div class="sg-dim">Trustworthiness</div>
     <div class="sg-cell"><span class="risk-tag risk-low">High</span><span class="sg-note">Discloses sponsors. Has publicly updated old advice when research changed.</span></div>
     <div class="sg-cell"><span class="risk-tag risk-mod">Med</span><span class="sg-note">Emotionally open. Gambling sponsorships raise transparency concerns.</span></div>
     <div class="sg-cell"><span class="risk-tag risk-low">High</span><span class="sg-note">Parody format is openly exaggerated. Viewers understand it is not literal.</span></div>
-    <div class="sg-cell"><span class="risk-tag risk-mod">Med</span><span class="sg-note">Structured content. Some debates online over originality of advice.</span></div>
+    <div class="sg-cell"><span class="risk-tag risk-high">Low</span><span class="sg-note">Owns Gorilla Mind and Marek Health. Reviews both positively without prominent disclosure.</span></div>
 
     <div class="sg-dim">Verifiability</div>
     <div class="sg-cell"><span class="risk-tag risk-low">High</span><span class="sg-note">Research papers shown on screen. Sources linked in descriptions.</span></div>
     <div class="sg-cell"><span class="risk-tag risk-high">Low</span><span class="sg-note">Personal stories only. Nothing external to trace or confirm.</span></div>
     <div class="sg-cell"><span class="risk-tag risk-mod">Med</span><span class="sg-note">Satire is clearly labeled. Creator background is publicly documented.</span></div>
-    <div class="sg-cell"><span class="risk-tag risk-high">Low</span><span class="sg-note">Based on coaching experience. No peer reviewed sources provided.</span></div>
+    <div class="sg-cell"><span class="risk-tag risk-mod">Med</span><span class="sg-note">Pharmacological claims traceable. Product endorsements have undisclosed financial motive.</span></div>
 
     <div class="sg-dim">Risk Level</div>
     <div class="sg-cell"><span class="risk-tag risk-low">Low</span><span class="sg-note">Science backed. Conflicts of interest disclosed.</span></div>
     <div class="sg-cell"><span class="risk-tag risk-high">High</span><span class="sg-note">Steroid content and gambling promotions aimed at young audience.</span></div>
     <div class="sg-cell"><span class="risk-tag risk-low">Low</span><span class="sg-note">Humor is clearly satire. Not intended as real fitness instruction.</span></div>
-    <div class="sg-cell"><span class="risk-tag risk-low">Low</span><span class="sg-note">Practical gym advice. Limited documented red flags.</span></div>
+    <div class="sg-cell"><span class="risk-tag risk-high">High</span><span class="sg-note">No credentials, undisclosed business conflicts, promotes experimental compounds to general audience.</span></div>
   </div>
 </section>
 
@@ -928,16 +886,20 @@
           'bro-stat-duration':  'avgDurationMin',
         }
       },
-      jpg: {
-        bigId: 'jpg-subs-big', dotId: 'jpg-dot', badgeId: 'jpg-badge-text',
-        avatarId: 'jpg-avatar',
+      mpmd: {
+        bigId: 'mpmd-subs-big', dotId: 'mpmd-dot', badgeId: 'mpmd-badge-text',
+        consistencyId: 'mpmd-stat-consistency', avatarId: 'mpmd-avatar',
+        vidLinkId: 'mpmd-vid-link', vidThumbId: 'mpmd-vid-thumb',
+        vidTitleId: 'mpmd-vid-title', vidViewsId: 'mpmd-vid-views',
         cells: {
-          'jpg-stat-subs':       'subscribers',
-          'jpg-stat-likes':      'totalViews',
-          'jpg-stat-avg-likes':  'avgLikesPerVideo',
-          'jpg-stat-vids':       'videoCount',
-          'jpg-stat-vpm':        'videosPerMonth',
-          'jpg-stat-following':  'following',
+          'mpmd-stat-subs':      'subscribers',
+          'mpmd-stat-views':     'totalViews',
+          'mpmd-stat-avg-views': 'avgViewsPerVideo',
+          'mpmd-stat-like-rate': 'likeRate',
+          'mpmd-stat-vids':      'videoCount',
+          'mpmd-stat-started':   'channelStarted',
+          'mpmd-stat-vpm':       'videosPerMonth',
+          'mpmd-stat-duration':  'avgDurationMin',
         }
       },
     };
@@ -985,11 +947,6 @@
         if (views) views.textContent = tv.views;
       }
 
-      // JPG live follower count in example content panel
-      if (k === 'jpg' && d.subscribers) {
-        const jpgVidSubs = document.getElementById('jpg-vid-subs');
-        if (jpgVidSubs) jpgVidSubs.textContent = d.subscribers + ' Followers';
-      }
     });
 
     const st = document.getElementById('page-status-text');

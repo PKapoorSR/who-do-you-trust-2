@@ -12,7 +12,7 @@
     :root {
       --bg: #f7f7f5; --surface: #ffffff; --surface2: #f0efed;
       --border: #e0dfd8; --text: #111118; --muted: #6b6b7a; --dim: #c0bfba;
-      --jeff: #0369a1; --togi: #be123c; --bro: #b45309; --jpg: #7c3aed;
+      --jeff: #0369a1; --togi: #be123c; --bro: #b45309; --mpmd: #0d9488;
     }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: 'Spectral', serif; font-size: 1.05rem; line-height: 1.72; }
@@ -155,7 +155,7 @@
       <option value="jeff">Jeff Nippard</option>
       <option value="togi">Togi</option>
       <option value="bro">Bro Science</option>
-      <option value="jpg">JPG</option>
+      <option value="mpmd">MPMD</option>
     </select>
   </div>
   <div class="vs-badge"><span class="vs-text">VS</span></div>
@@ -166,7 +166,7 @@
       <option value="jeff">Jeff Nippard</option>
       <option value="togi">Togi</option>
       <option value="bro">Bro Science</option>
-      <option value="jpg">JPG</option>
+      <option value="mpmd">MPMD</option>
     </select>
   </div>
 </div>
@@ -175,7 +175,7 @@
   <div class="ss-cell" style="color:var(--jeff)"><div class="ss-dot" id="sd-jeff"></div><span class="ss-name">Jeff</span><span class="ss-subs" id="ss-jeff">8.35M</span></div>
   <div class="ss-cell" style="color:var(--togi)"><div class="ss-dot" id="sd-togi"></div><span class="ss-name">Togi</span><span class="ss-subs" id="ss-togi">1.03M</span></div>
   <div class="ss-cell" style="color:var(--bro)"><div class="ss-dot" id="sd-bro"></div><span class="ss-name">Bro Science</span><span class="ss-subs" id="ss-bro">2.5M</span></div>
-  <div class="ss-cell" style="color:var(--jpg)"><div class="ss-dot" id="sd-jpg"></div><span class="ss-name">JPG</span><span class="ss-subs" id="ss-jpg">450K+</span></div>
+  <div class="ss-cell" style="color:var(--mpmd)"><div class="ss-dot" id="sd-mpmd"></div><span class="ss-name">MPMD</span><span class="ss-subs" id="ss-mpmd">2.05M</span></div>
 </div>
 
 <div class="page-header">
@@ -204,10 +204,10 @@
           <div class="pip-dot" style="background:var(--bro)"></div>
           <span class="pip-name" style="color:var(--bro)">Bro</span>
         </div>
-        <!-- JPG ~65% -->
+        <!-- MPMD ~65% -->
         <div class="spectrum-pip" style="left:65%">
-          <div class="pip-dot" style="background:var(--jpg)"></div>
-          <span class="pip-name" style="color:var(--jpg)">JPG</span>
+          <div class="pip-dot" style="background:var(--mpmd)"></div>
+          <span class="pip-name" style="color:var(--mpmd)">MPMD</span>
         </div>
         <!-- Togi ~92% -->
         <div class="spectrum-pip" style="left:92%">
@@ -233,10 +233,10 @@
           <div class="pip-dot" style="background:var(--jeff)"></div>
           <span class="pip-name" style="color:var(--jeff)">Jeff</span>
         </div>
-        <!-- JPG ~50% -->
+        <!-- MPMD ~50% -->
         <div class="spectrum-pip" style="left:50%">
-          <div class="pip-dot" style="background:var(--jpg)"></div>
-          <span class="pip-name" style="color:var(--jpg)">JPG</span>
+          <div class="pip-dot" style="background:var(--mpmd)"></div>
+          <span class="pip-name" style="color:var(--mpmd)">MPMD</span>
         </div>
         <!-- Bro ~72% -->
         <div class="spectrum-pip" style="left:72%">
@@ -272,10 +272,10 @@
           <div class="pip-dot" style="background:var(--bro)"></div>
           <span class="pip-name" style="color:var(--bro)">Bro</span>
         </div>
-        <!-- JPG ~60% -->
+        <!-- MPMD ~60% -->
         <div class="spectrum-pip" style="left:60%">
-          <div class="pip-dot" style="background:var(--jpg)"></div>
-          <span class="pip-name" style="color:var(--jpg)">JPG</span>
+          <div class="pip-dot" style="background:var(--mpmd)"></div>
+          <span class="pip-name" style="color:var(--mpmd)">MPMD</span>
         </div>
         <!-- Togi ~85% -->
         <div class="spectrum-pip" style="left:85%">
@@ -359,23 +359,25 @@
       healthism: 'Mocks gym obsession from inside it. The joke requires the audience to already share the values.',
       platform: 'YouTube. Long form comedy and satire.'
     },
-    jpg: {
-      name: 'JPG', handle: '@jpgcoaching', platform: 'TikTok. Short form instructional. GymTok.',
-      color: 'var(--jpg)',
-      strategy: 'Confidence and Instructional Authority',
+    mpmd: {
+      name: 'More Plates More Dates', handle: '@moreplatesmoredates', platform: 'YouTube. Long form PED, hormone, and supplement analysis.',
+      color: 'var(--mpmd)',
+      strategy: 'Technical Authority and Conflict of Interest',
       signalsPos: [
-        'Public coaching business (jpgcoaching.com)',
-        'Hypertrophy content consistent with bodybuilding research',
-        'Instructional format. Exercise form and selection focus.'
+        'Highly detailed and researched content on PEDs and hormones',
+        'Consistently accurate citations of pharmacological literature',
+        'Large, loyal niche audience with high expertise overlap'
       ],
       signalsWarn: [
-        'No academic credentials cited',
-        'No source citations in content'
+        'No medical or academic credentials',
+        'Owns Gorilla Mind supplements reviewed positively on channel',
+        'Operates Marek Health TRT clinic — direct financial conflict',
+        'Promotes experimental peptides and research chemicals'
       ],
-      claimBasis: 'Coaching experience and biomechanics reasoning. No peer reviewed citations.',
-      revenue: 'JPG Coaching online programs. Legion supplement affiliate. TikTok brand deals.',
-      healthism: 'Technical body optimization. Correct exercise selection and volume as the answer.',
-      platform: 'TikTok. Short form instructional. GymTok.'
+      claimBasis: 'Pharmacological literature and self-experimentation. Detailed but unverified by credentialed sources.',
+      revenue: 'Gorilla Mind supplements (owner). Marek Health TRT clinic (co-owner). YouTube ad revenue.',
+      healthism: 'Body as a fully optimizable system. Hormones, peptides, and compounds as levers. Access is never the barrier — only knowledge.',
+      platform: 'YouTube. Long form PED, hormone, and supplement analysis.'
     }
   };
 
@@ -427,7 +429,7 @@
 
   document.addEventListener('liveDataReady', () => {
     const L = window.LIVE;
-    ['jeff','togi','bro','jpg'].forEach(k => {
+    ['jeff','togi','bro','mpmd'].forEach(k => {
       const el  = document.getElementById(`ss-${k}`);
       const dot = document.getElementById(`sd-${k}`);
       if (el) el.textContent = L[k].subscribers;

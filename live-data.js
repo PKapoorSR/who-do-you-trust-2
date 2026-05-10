@@ -7,6 +7,7 @@
     jeff: 'UC68TLK0mAEzUyHx5x5k-S1Q',
     bro:  'UCduKuJToxWPizJ7I2E6n1kA',
     togi: 'UCb2y3fAB0mt6Chk7fTko7eg',
+    mpmd: 'UCoR7CHkMETs3ByOv74OAbFw',
   };
 
   const STATIC = {
@@ -31,12 +32,12 @@
       topVideo: null, liveLoaded: false,
       raw: { subscribers: 2500000, views: 500000000, videos: 356 }
     },
-    jpg: {
-      subscribers: '3.6M+', totalViews: 'N/A', videoCount: 'N/A',
-      avgViewsPerVideo: 'N/A', likeRate: 'N/A', avgDurationMin: 'N/A',
-      videosPerMonth: 'N/A', channelStarted: '2021', postingConsistency: 'N/A',
+    mpmd: {
+      subscribers: '2.05M', totalViews: '740M', videoCount: '1994',
+      avgViewsPerVideo: '—', likeRate: '—', avgDurationMin: '—',
+      videosPerMonth: '—', channelStarted: '2016', postingConsistency: '—',
       topVideo: null, liveLoaded: false,
-      raw: { subscribers: 3600000, views: 0, videos: 0 }
+      raw: { subscribers: 2050000, views: 740000000, videos: 1994 }
     }
   };
 
@@ -180,50 +181,15 @@
     return { ...STATIC[key], ...base, topVideo };
   }
 
-  async function fetchTikTokStats() {
-    const res = await fetchWithTimeout(
-      'https://countik.com/api/userinfo/name/jpgcoaching'
-    );
-    if (!res.ok) throw new Error(`countik HTTP ${res.status}`);
-    const j = await res.json();
-    const fans      = parseInt(j.fans      || 0, 10);
-    const heart     = parseInt(j.heart     || 0, 10);
-    const video     = parseInt(j.video     || 0, 10);
-    const following = parseInt(j.following || 0, 10);
-    if (!fans) throw new Error('No follower data returned');
-    const avgLikes  = video > 0 ? fmt(Math.round(heart / video)) : '—';
-    const ageMonths = (Date.now() - new Date('2021-01-01').getTime()) / (1000 * 60 * 60 * 24 * 30.44);
-    const vpm       = video > 0 ? (video / ageMonths).toFixed(1) : '—';
-    const avatar = j.photo || j.avatar || j.avatarLarger || '';
-
-    return {
-      subscribers:      fmt(fans),
-      totalViews:       fmt(heart),
-      videoCount:       video     ? String(video)     : '—',
-      avgLikesPerVideo: avgLikes,
-      videosPerMonth:   vpm,
-      following:        following ? fmt(following)    : '—',
-      avatar,           liveLoaded: true,
-      raw: { subscribers: fans, views: heart, videos: video }
-    };
-  }
-
   async function init() {
     window.LIVE = JSON.parse(JSON.stringify(STATIC));
 
     const ytKeys = Object.keys(CHANNELS);
-    const [ytResults, [ttResult]] = await Promise.all([
-      Promise.allSettled(ytKeys.map(k => fetchCreator(k, CHANNELS[k]))),
-      Promise.allSettled([fetchTikTokStats()])
-    ]);
+    const ytResults = await Promise.allSettled(ytKeys.map(k => fetchCreator(k, CHANNELS[k])));
 
     ytResults.forEach((r, i) => {
       if (r.status === 'fulfilled') window.LIVE[ytKeys[i]] = r.value;
     });
-
-    if (ttResult.status === 'fulfilled') {
-      window.LIVE.jpg = { ...window.LIVE.jpg, ...ttResult.value };
-    }
 
     document.dispatchEvent(new Event('liveDataReady'));
   }
